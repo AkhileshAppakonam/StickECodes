@@ -13,7 +13,7 @@
 
           </ul>
 
-          <ul class="nav nav-pills">
+          <ul class="nav">
             <li class="nav-item"><a href="/" class="nav-link" aria-current="page" id="home">Home</a></li>
             <li class="nav-item"><a href="/public/index.php/about" class="nav-link" id="about">About</a></li>
             <li class="nav-item"><a href="/public/index.php/services" class="nav-link" id="services">Services</a></li>
