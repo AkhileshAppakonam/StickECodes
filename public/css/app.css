@@ -10942,3 +10942,18 @@ a.text-dark:focus {
   }
 }
 
+.dashboardCodes {
+  position: relative;
+  display: inline-block;
+}
+
+figure {
+  position: relative;
+  display: inline-block;
+}
+
+figure .image {
+  position: relative;
+  display: inline-block;
+}
+
