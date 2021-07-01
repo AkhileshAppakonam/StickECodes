@@ -17,5 +17,29 @@ figure .image{
 }
 
 .description{
+    position: relative;
+    width: auto;
+    height: auto;
+    // border: 2px solid red;
+    display: inline-block;
+}
+
+.description .codeTitles{
+    position: relative;
+    width: 100%;
+    height: auto;
     // border: 2px solid green;
+    display: inline-block;
+    padding: none;
+}
+
+.description .codeTitles h3{
+    // border: 2px solid blue;
+    display: inline-block;
+}
+
+.description .codeTitles small{
+    // border: 2px solid blue;
+    float: right;
+    margin: auto;
 }

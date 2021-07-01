@@ -10957,3 +10957,27 @@ figure .image {
   display: inline-block;
 }
 
+.description {
+  position: relative;
+  width: auto;
+  height: auto;
+  display: inline-block;
+}
+
+.description .codeTitles {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: inline-block;
+  padding: none;
+}
+
+.description .codeTitles h3 {
+  display: inline-block;
+}
+
+.description .codeTitles small {
+  float: right;
+  margin: auto;
+}
+

@@ -22,3 +22,4 @@ Route::get('/services', 'PagesController@services');
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index');
+
