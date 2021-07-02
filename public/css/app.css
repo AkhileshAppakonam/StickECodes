@@ -10961,6 +10961,7 @@ a.text-dark:focus {
   position: relative;
   width: auto;
   height: auto;
+  border: 2px solid red;
   display: inline-block;
 }
 
@@ -10968,56 +10969,23 @@ a.text-dark:focus {
   position: relative;
   width: 100%;
   height: auto;
+  border: 2px solid green;
   display: inline-block;
   padding: none;
 }
 
 .dashboardCodes .description .codeTitles h3 {
+  border: 2px solid blue;
   display: inline-block;
 }
 
 .dashboardCodes .description .codeTitles small {
-  float: right;
+  border: 2px solid blue;
+  display: inline-block;
   margin: auto;
 }
 
 #editPage .row {
-  position: relative;
-  width: 100%;
-  height: auto;
-  border: 2px solid red;
-  display: inline-block;
-}
-
-#editPage .row .code {
-  position: relative;
-  width: auto;
-  height: auto;
-  display: inline-block;
-  border: 2px solid blue;
-  padding: none;
-}
-
-#editPage .row .codeProperties {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: inline-block;
-  border: 2px solid blue;
-}
-
-#editPage .row figure {
-  position: relative;
-  width: auto;
-  height: auto;
-  border: 2px solid green;
-  display: inline-block;
-}
-
-#editPage .row figure .image {
-  position: relative;
-  width: auto;
-  height: auto;
-  display: inline-block;
+  background: white;
 }
 

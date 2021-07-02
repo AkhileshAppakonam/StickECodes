@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <header class="mb-2"><h1>Your Codes</h1></header>
+    <header class="mb-3"><h1>Your Codes</h1></header>
 
     @if (session('status'))
         <div class="alert alert-success" role="alert">
@@ -14,11 +14,11 @@
         @if (count($codes) > 0)
             @foreach ($codes as $code)
                 <div class="col-md-4 col-sm-4">
-                    <article class="dashboardCodes">
+                    <article class="shadow-lg p-3 mb-5 bg-white rounded">
                         <figure class="mb-0">
                             <div class="image"><a href="#"><img src="../images/stickecode.png"></a></div>
                         </figure>
-                        <div class="description">
+                        <div class="description px-5 pb-5">
                             <div class="codeTitles">
                                 <h3>{{$code -> code_title}}</h3>
                                 <small>{{$code -> code_name}}</small>

@@ -23,4 +23,4 @@ Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index');
 
-Route::get('/codes/{codeId}/editPage', 'CodesController@show');
+Route::get('/codes/{codeId}/editPage', 'CodesController@edit');
