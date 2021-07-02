@@ -10947,24 +10947,24 @@ a.text-dark:focus {
   display: inline-block;
 }
 
-figure {
+.dashboardCodes figure {
   position: relative;
   display: inline-block;
 }
 
-figure .image {
+.dashboardCodes figure .image {
   position: relative;
   display: inline-block;
 }
 
-.description {
+.dashboardCodes .description {
   position: relative;
   width: auto;
   height: auto;
   display: inline-block;
 }
 
-.description .codeTitles {
+.dashboardCodes .description .codeTitles {
   position: relative;
   width: 100%;
   height: auto;
@@ -10972,12 +10972,52 @@ figure .image {
   padding: none;
 }
 
-.description .codeTitles h3 {
+.dashboardCodes .description .codeTitles h3 {
   display: inline-block;
 }
 
-.description .codeTitles small {
+.dashboardCodes .description .codeTitles small {
   float: right;
   margin: auto;
+}
+
+#editPage .row {
+  position: relative;
+  width: 100%;
+  height: auto;
+  border: 2px solid red;
+  display: inline-block;
+}
+
+#editPage .row .code {
+  position: relative;
+  width: auto;
+  height: auto;
+  display: inline-block;
+  border: 2px solid blue;
+  padding: none;
+}
+
+#editPage .row .codeProperties {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  border: 2px solid blue;
+}
+
+#editPage .row figure {
+  position: relative;
+  width: auto;
+  height: auto;
+  border: 2px solid green;
+  display: inline-block;
+}
+
+#editPage .row figure .image {
+  position: relative;
+  width: auto;
+  height: auto;
+  display: inline-block;
 }
 

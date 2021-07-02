@@ -23,11 +23,11 @@
                                 <h3>{{$code -> code_title}}</h3>
                                 <small>{{$code -> code_name}}</small>
                             </div>
-                            <p>Insert Title Description of Public Page Here</p>
+                            <p>Insert Title Description for Public Page Here</p>
                             <hr>
                             <div>
                                 <a href="#" class="btn btn-outline-dark">View Page</a>
-                                <a href="#" class="btn btn-outline-dark float-right">Edit Page</a>
+                                <a href="/public/index.php/codes/{{$code -> id}}/editPage" class="btn btn-outline-dark float-right">Edit Page</a>
                             </div>
                         </div>
                     </article>
