@@ -14,16 +14,16 @@
         @if (count($codes) > 0)
             @foreach ($codes as $code)
                 <div class="col-md-4 col-sm-4">
-                    <article class="shadow-lg p-3 mb-5 bg-white rounded">
+                    <article class="dashboardCodes shadow-lg p-3 mb-5 bg-white rounded">
                         <figure class="mb-0">
                             <div class="image"><a href="#"><img src="../images/stickecode.png"></a></div>
                         </figure>
                         <div class="description px-5 pb-5">
                             <div class="codeTitles">
                                 <h3>{{$code -> code_title}}</h3>
-                                <small>{{$code -> code_name}}</small>
+                                <small class="ml-1">{{$code -> code_name}}</small>
                             </div>
-                            <p>Insert Title Description for Public Page Here</p>
+                            <p class="ml-1">Insert Title Description for Public Page Here</p>
                             <hr>
                             <div>
                                 <a href="#" class="btn btn-outline-dark">View Page</a>

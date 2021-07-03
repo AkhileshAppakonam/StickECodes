@@ -24,6 +24,22 @@
                                 <label for="pageTitle" class="col-md-0 col-form-label text-md-right">Page Title</label>
                                 <input id="pageTitle" type="text" class="form-control" placeholder="Insert Title Description for Public Page Here" required>
                             </div>
+                            <div class="form-group row mb-0">
+                                <div class="container p-0 ml-0">
+                                    <label for="chooseSP" class="col-md-0 col-form-label text-md-right">Select a Security Profile</label>
+                                    <select id="chooseSP" name="securityProfile" class="form-control">
+                                        <option value="SecurityProfile1">Security Profile 1</option>
+                                        <option value="SecurityProfile2">Security Profile 2</option>
+                                        <option value="SecurityProfile3">Security Profile 3</option>
+                                    </select>
+                                </div>
+                                <div class="or">
+                                    <p class="p-0">OR</p>
+                                </div>
+                                <div class="container p-0 mr-0 makeSP">
+                                    <a href="#" class="btn btn-outline-dark">Make a New Security Profile</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

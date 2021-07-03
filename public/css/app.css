@@ -10961,7 +10961,6 @@ a.text-dark:focus {
   position: relative;
   width: auto;
   height: auto;
-  border: 2px solid red;
   display: inline-block;
 }
 
@@ -10969,23 +10968,56 @@ a.text-dark:focus {
   position: relative;
   width: 100%;
   height: auto;
-  border: 2px solid green;
   display: inline-block;
   padding: none;
 }
 
 .dashboardCodes .description .codeTitles h3 {
-  border: 2px solid blue;
-  display: inline-block;
+  display: block;
 }
 
 .dashboardCodes .description .codeTitles small {
-  border: 2px solid blue;
-  display: inline-block;
+  display: block;
   margin: auto;
 }
 
 #editPage .row {
   background: white;
+}
+
+#editPage .row .codeProperties .container .form-group select:hover {
+  cursor: pointer;
+}
+
+#editPage .row .codeProperties .container .form-group .or {
+  display: inline-block;
+  display: flex;
+}
+
+#editPage .row .codeProperties .container .form-group .or p {
+  position: relative;
+  width: auto;
+  height: auto;
+  margin: auto;
+  margin-bottom: 5px;
+}
+
+#editPage .row .codeProperties .container .form-group .container {
+  width: 47%;
+  display: inline-block;
+}
+
+#editPage .row .codeProperties .container .form-group .container.makeSP {
+  width: auto;
+  display: flex;
+}
+
+#editPage .row .codeProperties .container .form-group .container a {
+  position: relative;
+  width: auto;
+  height: auto;
+  margin: auto;
+  margin-right: 0px;
+  margin-bottom: 0px;
 }
 
