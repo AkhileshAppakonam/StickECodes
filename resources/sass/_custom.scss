@@ -112,3 +112,28 @@
     margin-right: 0px;
     margin-bottom: 0px;
 }
+
+#editPage .row .textEntries{
+    // border: 2px solid blue;
+}
+
+#editPage .row .urlEntries{
+    // border: 2px solid blue;
+}
+
+#editPage .row .fileEntries{
+    // border: 2px solid blue;
+}
+
+#editPage .row .textEntries .row{
+    // border: 2px solid red;
+}
+
+#editPage .row .row h2{
+    width: 100%;
+    // border: 2px solid green;
+}
+
+#editPage .row .row h2:hover{
+    cursor: pointer;
+}

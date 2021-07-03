@@ -11021,3 +11021,11 @@ a.text-dark:focus {
   margin-bottom: 0px;
 }
 
+#editPage .row .row h2 {
+  width: 100%;
+}
+
+#editPage .row .row h2:hover {
+  cursor: pointer;
+}
+

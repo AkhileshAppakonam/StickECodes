@@ -42,6 +42,38 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group col-12 textEntries">
+                        <div class="row ml-4">
+                            <h2 data-toggle="collapse" data-target="#textCollapse" aria-expanded="false" aria-controls="collapseExample">Text Entries</h2>
+                            <div class="collapse" id="textCollapse">
+                                <div class="card card-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-12 urlEntries">
+                        <div class="row ml-4">
+                            <h2 data-toggle="collapse" data-target="#urlCollapse" aria-expanded="false" aria-controls="collapseExample">URLs</h2>
+                            <div class="collapse" id="urlCollapse">
+                                <div class="card card-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-12 fileEntries">
+                        <div class="row ml-4">
+                            <h2 data-toggle="collapse" data-target="#fileCollapse" aria-expanded="false" aria-controls="collapseExample">Files</h2>
+                            <div class="collapse" id="fileCollapse">
+                                <div class="card card-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>
