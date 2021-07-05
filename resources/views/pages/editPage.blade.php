@@ -44,29 +44,35 @@
                     </div>
                     <div class="form-group col-12 textEntries">
                         <div class="row ml-4">
-                            <h2 data-toggle="collapse" data-target="#textCollapse" aria-expanded="false" aria-controls="collapseExample">Text Entries</h2>
+                            <h2 class="pb-3 m-0" data-toggle="collapse" data-target="#textCollapse" aria-expanded="false" aria-controls="collapseExample" onclick="textEntriesDropdown()">Text Entries <i id="textEntries" class="far fa-plus-square ml-2 float-right mr-5 mt-2"></i></h2>
                             <div class="collapse" id="textCollapse">
                                 <div class="card card-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
                                     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
                                 </div>
                             </div>
                         </div>
+                        <hr class="ml-4 mt-0">
                     </div>
 
                     <div class="form-group col-12 urlEntries">
                         <div class="row ml-4">
-                            <h2 data-toggle="collapse" data-target="#urlCollapse" aria-expanded="false" aria-controls="collapseExample">URLs</h2>
+                            <h2 class="pb-3 m-0" data-toggle="collapse" data-target="#urlCollapse" aria-expanded="false" aria-controls="collapseExample" onclick="urlEntriesDropdown()">URLs <i id="urlEntries" class="far fa-plus-square ml-2 float-right mr-5 mt-2"></i></h2>
                             <div class="collapse" id="urlCollapse">
                                 <div class="card card-body">
                                     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
                                 </div>
                             </div>
                         </div>
+                        <hr class="ml-4 mt-0">
                     </div>
 
                     <div class="form-group col-12 fileEntries">
                         <div class="row ml-4">
-                            <h2 data-toggle="collapse" data-target="#fileCollapse" aria-expanded="false" aria-controls="collapseExample">Files</h2>
+                            <h2 class="pb-3 m-0" data-toggle="collapse" data-target="#fileCollapse" aria-expanded="false" aria-controls="collapseExample" onclick="fileEntriesDropdown()">Files <i id="fileEntries" class="far fa-plus-square ml-2 float-right mr-5 mt-2"></i></h2>
                             <div class="collapse" id="fileCollapse">
                                 <div class="card card-body">
                                     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
@@ -78,4 +84,57 @@
             </div>
         </form>
     </section>
+
+    <script type="text/javascript">
+        var isclick = true;
+        function textEntriesDropdown(){
+            if(isclick){
+                isclick = false;
+                    if ($('#textEntries').hasClass("far fa-plus-square")) {
+                        $('#textEntries').removeClass("far fa-plus-square");
+                        $('#textEntries').addClass("far fa-minus-square");
+                    } else{
+                        $('#textEntries').removeClass("far fa-minus-square");
+                        $('#textEntries').addClass("far fa-plus-square");
+                    }                
+                setTimeout(function(){
+                    isclick = true;
+                }, 350)
+            }
+        }
+
+        var isclick2 = true;
+        function urlEntriesDropdown(){
+            if(isclick2){
+                isclick2 = false;
+                    if ($('#urlEntries').hasClass("far fa-plus-square")) {
+                        $('#urlEntries').removeClass("far fa-plus-square");
+                        $('#urlEntries').addClass("far fa-minus-square");
+                    } else{
+                        $('#urlEntries').removeClass("far fa-minus-square");
+                        $('#urlEntries').addClass("far fa-plus-square");
+                    }                
+                setTimeout(function(){
+                    isclick2 = true;
+                }, 350)
+            }
+        }
+
+        var isclick3 = true;
+        function fileEntriesDropdown(){
+            if(isclick3){
+                isclick3 = false;
+                    if ($('#fileEntries').hasClass("far fa-plus-square")) {
+                        $('#fileEntries').removeClass("far fa-plus-square");
+                        $('#fileEntries').addClass("far fa-minus-square");
+                    } else{
+                        $('#fileEntries').removeClass("far fa-minus-square");
+                        $('#fileEntries').addClass("far fa-plus-square");
+                    }                
+                setTimeout(function(){
+                    isclick3 = true;
+                }, 350)
+            }
+        }
+    </script>
 @endsection

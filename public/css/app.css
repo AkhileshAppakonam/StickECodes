@@ -11029,3 +11029,7 @@ a.text-dark:focus {
   cursor: pointer;
 }
 
+#editPage .row .row h2 i {
+  font-size: 25px;
+}
+

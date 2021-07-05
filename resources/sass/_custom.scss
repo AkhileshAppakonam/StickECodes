@@ -125,7 +125,7 @@
     // border: 2px solid blue;
 }
 
-#editPage .row .textEntries .row{
+#editPage .row .row{
     // border: 2px solid red;
 }
 
@@ -136,4 +136,13 @@
 
 #editPage .row .row h2:hover{
     cursor: pointer;
+}
+
+#editPage .row .row h2 i{
+    // border: 2px solid green;
+    font-size: 25px;
+}
+
+#editPage .row .form-group hr{
+    // border: 2px solid red;
 }
