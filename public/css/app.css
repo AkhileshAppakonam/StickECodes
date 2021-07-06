@@ -11033,3 +11033,50 @@ a.text-dark:focus {
   font-size: 25px;
 }
 
+#editPage .row .form-group .collapse {
+  position: relative;
+  width: 100%;
+}
+
+#editPage .row .form-group .collapse .form-group {
+  position: relative;
+  width: 100%;
+}
+
+#editPage .row .form-group .collapse .form-group .containerHeader {
+  position: relative;
+  width: 100%;
+}
+
+#editPage .row .form-group .collapse .form-group .containerHeader h5 {
+  position: relative;
+  width: 30%;
+  margin: 0px;
+  display: inline-block;
+}
+
+#editPage .row .form-group .collapse .form-group .containerInput {
+  position: relative;
+  width: 100%;
+}
+
+#editPage .row .form-group .collapse .form-group .containerInput input {
+  position: relative;
+  width: 30%;
+  display: inline-block;
+}
+
+#editPage .row .form-group .collapse .form-group .containerInput textarea {
+  position: relative;
+  width: 30%;
+  display: inline-block;
+  min-height: 50px;
+  max-height: 100px;
+}
+
+#editPage .row .form-group .collapse .form-group .containerInput button {
+  position: relative;
+  width: auto;
+  display: inline-block;
+}
+
