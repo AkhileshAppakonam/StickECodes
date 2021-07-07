@@ -11038,45 +11038,72 @@ a.text-dark:focus {
   width: 100%;
 }
 
-#editPage .row .form-group .collapse .form-group {
+#editPage .row .form-group .collapse table {
   position: relative;
-  width: 100%;
+  display: table;
+  width: 90%;
+  height: auto;
 }
 
-#editPage .row .form-group .collapse .form-group .containerHeader {
+#editPage .row .form-group .collapse table tr {
   position: relative;
   width: 100%;
+  height: auto;
+  display: flex;
 }
 
-#editPage .row .form-group .collapse .form-group .containerHeader h5 {
+#editPage .row .form-group .collapse table tr th {
   position: relative;
-  width: 30%;
-  margin: 0px;
+  width: 33.33%;
+  height: auto;
   display: inline-block;
 }
 
-#editPage .row .form-group .collapse .form-group .containerInput {
-  position: relative;
-  width: 100%;
+#editPage .row .form-group .collapse table tr th.textBody {
+  width: 46.66%;
 }
 
-#editPage .row .form-group .collapse .form-group .containerInput input {
+#editPage .row .form-group .collapse table tr th.rowInput {
+  width: 20%;
+  text-align: left;
+}
+
+#editPage .row .form-group .collapse table tr td {
   position: relative;
-  width: 30%;
+  width: 33.33%;
+  height: auto;
   display: inline-block;
 }
 
-#editPage .row .form-group .collapse .form-group .containerInput textarea {
+#editPage .row .form-group .collapse table tr td.textBody {
+  width: 46.66%;
+}
+
+#editPage .row .form-group .collapse table tr td.rowInput {
+  width: 20%;
+  text-align: left;
+}
+
+#editPage .row .form-group .collapse table tr td input {
   position: relative;
-  width: 30%;
+  width: 93%;
+  height: auto;
+  display: inline-block;
+}
+
+#editPage .row .form-group .collapse table tr td textarea {
+  position: relative;
+  width: 93%;
+  height: auto;
   display: inline-block;
   min-height: 50px;
   max-height: 100px;
 }
 
-#editPage .row .form-group .collapse .form-group .containerInput button {
+#editPage .row .form-group .collapse table tr td a {
   position: relative;
   width: auto;
+  height: auto;
   display: inline-block;
 }
 

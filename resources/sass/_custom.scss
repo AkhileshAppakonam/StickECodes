@@ -153,52 +153,75 @@
     // border: 2px solid green;
 }
 
-#editPage .row .form-group .collapse .form-group{
+#editPage .row .form-group .collapse table{
+    position: relative;
+    display: table;
+    width: 90%;
+    height: auto;
+    // border: 2px solid red;
+}
+
+#editPage .row .form-group .collapse table tr{
     position: relative;
     width: 100%;
+    height: auto;
+    display: flex;
+    // border: 2px solid blue;
+}
+
+#editPage .row .form-group .collapse table tr th{
+    position: relative;
+    width: 33.33%;
+    height: auto;
+    display: inline-block;
     // border: 2px solid yellow;
 }
 
-#editPage .row .form-group .collapse .form-group .containerHeader{
-    position: relative;
-    width: 100%;
-    // border: 2px solid red;
+#editPage .row .form-group .collapse table tr th.textBody{
+    width: 46.66%;
 }
 
-#editPage .row .form-group .collapse .form-group .containerHeader h5{
+#editPage .row .form-group .collapse table tr th.rowInput{
+    width: 20%;
+    text-align: left;
+}
+
+#editPage .row .form-group .collapse table tr td{
     position: relative;
-    width: 30%;
-    margin: 0px;
+    width: 33.33%;
+    height: auto;
     display: inline-block;
     // border: 2px solid green;
 }
 
-#editPage .row .form-group .collapse .form-group .containerInput{
-    position: relative;
-    width: 100%;
-    // border: 2px solid red;
+#editPage .row .form-group .collapse table tr td.textBody{
+    width: 46.66%;
 }
 
-#editPage .row .form-group .collapse .form-group .containerInput input{
+#editPage .row .form-group .collapse table tr td.rowInput{
+    width: 20%;
+    text-align: left;
+}
+
+#editPage .row .form-group .collapse table tr td input{
     position: relative;
-    width: 30%;
+    width: 93%;
+    height: auto;
     display: inline-block;
-    // border: 2px solid green;
 }
 
-#editPage .row .form-group .collapse .form-group .containerInput textarea{
+#editPage .row .form-group .collapse table tr td textarea{
     position: relative;
-    width: 30%;
+    width: 93%;
+    height: auto;
     display: inline-block;
     min-height: 50px;
     max-height: 100px;
-    // border: 2px solid green;
 }
 
-
-#editPage .row .form-group .collapse .form-group .containerInput button{
+#editPage .row .form-group .collapse table tr td a{
     position: relative;
     width: auto;
+    height: auto;
     display: inline-block;
-    // border: 2px solid green;
 }

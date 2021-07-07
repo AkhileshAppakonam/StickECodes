@@ -47,19 +47,20 @@
                             <h2 class="pb-3 m-0" data-toggle="collapse" data-target="#textCollapse" aria-expanded="false" aria-controls="collapseExample" onclick="textEntriesDropdown()">Text Entries <i id="textEntries" class="far fa-plus-square ml-2 float-right mr-5 mt-2"></i></h2>
                             <div class="collapse" id="textCollapse">
                                 <hr class="mt-0 mr-5">
-                                <div class="form-group pl-5">
-                                    <div class="containerHeader">
-                                        <h5>Text Title</h5>
-                                        <h5 class="ml-3">Text</h5>
-                                        <h5 class="ml-3">Remove Row</h5>
-                                    </div>
-                                    <hr class="mr-5">
-                                    <div class="row align-items-start containerInput">
-                                        <input id="textTitle" type="text" class="form-control ml-3" placeholder="Insert Text Title Here">
-                                        <textarea name="textBody" placeholder="Insert Text Body Here" class="form-control ml-3"></textarea>
-                                        <a href="#" class="btn btn-outline-dark ml-5">Remove</a>
-                                    </div>
-                                </div>
+                                
+                                <table class="mx-5">
+                                    <tr class="mb-3 pb-2 border-bottom">
+                                        <th>Text Title</th>
+                                        <th class="textBody">Text</th>
+                                        <th class="rowInput">Remove Row</th>
+                                    </tr>
+                                    <tr>
+                                        <td><input id="textTitle" type="text" class="form-control" placeholder="Insert Text Title Here"></td>
+                                        <td class="textBody"><textarea name="textBody" placeholder="Insert Text Body Here" class="form-control"></textarea></td>
+                                        <td class="rowInput"><a href="#" class="btn btn-outline-dark">Remove</a></td>
+                                    </tr>
+                                </table>
+
                             </div>
                         </div>
                         <hr class="ml-4 mt-0">
