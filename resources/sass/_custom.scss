@@ -219,9 +219,21 @@
     max-height: 100px;
 }
 
-#editPage .row .form-group .collapse table tr td a{
+#editPage .row .form-group .collapse table tr td input.remove{
     position: relative;
     width: auto;
     height: auto;
     display: inline-block;
+}
+
+#editPage .row .form-group .collapse div{
+    position: relative;
+    display: flex;
+    height: auto;
+    // justify-content: center;
+    // border: 2px solid red;
+}
+
+#editPage .row .form-group .collapse div input{
+    // border: 2px solid green;
 }

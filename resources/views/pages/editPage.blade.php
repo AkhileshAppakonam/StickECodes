@@ -37,7 +37,7 @@
                                     <p class="p-0">OR</p>
                                 </div>
                                 <div class="container p-0 mr-0 makeSP">
-                                    <a href="#" class="btn btn-outline-dark">Make a New Security Profile</a>
+                                    <a href="#" class="btn btn-primary">Make a New Security Profile</a>
                                 </div>
                             </div>
                         </div>
@@ -54,12 +54,16 @@
                                         <th class="textBody">Text</th>
                                         <th class="rowInput">Remove Row</th>
                                     </tr>
-                                    <tr>
-                                        <td><input id="textTitle" type="text" class="form-control" placeholder="Insert Text Title Here"></td>
+                                    <tr class="mb-2 pb-2 border-bottom">
+                                        <td><input type="text" class="form-control" placeholder="Insert Text Title Here"></td>
                                         <td class="textBody"><textarea name="textBody" placeholder="Insert Text Body Here" class="form-control"></textarea></td>
-                                        <td class="rowInput"><a href="#" class="btn btn-outline-dark">Remove</a></td>
+                                        <td class="rowInput"><input type="button" value="Remove" class="remove btn btn-outline-dark" onclick="remove(this)"></td>
                                     </tr>
                                 </table>
+
+                                <div class="mx-5 py-2 mb-4">
+                                    <input type="button" value="Add More Text" class="add btn btn-primary" onclick="add()">
+                                </div>
 
                             </div>
                         </div>
@@ -143,6 +147,20 @@
                     isclick3 = true;
                 }, 350)
             }
+        }
+    </script>
+
+    <script type="text/javascript">
+        function remove(e) {
+            e.parentElement.parentElement.remove();
+        }
+
+        function add() {
+            var start = $('table'),
+                newRow = $('<tr class="mb-2 py-2 border-bottom"><td><input type="text" class="form-control" placeholder="Insert Text Title Here"></td>' +
+                        '<td class="textBody"><textarea name="textBody" placeholder="Insert Text Body Here" class="form-control"></textarea></td>' +
+                        '<td class="rowInput"><input type="button" value="Remove" class="remove btn btn-outline-dark" onclick="remove(this)"></td></tr>');
+            $(start).append(newRow);
         }
     </script>
 @endsection
