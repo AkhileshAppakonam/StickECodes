@@ -131,13 +131,14 @@
 
 #editPage .row .row h2{
     width: 100%;
-    color: black;
+    color: grey;
     display: inline-block;
     // border: 2px solid green;
 }
 
 #editPage .row .row h2:hover{
     cursor: pointer;
+    color: black;
 }
 
 #editPage .row .row h2:after{
@@ -259,4 +260,16 @@
 
 #editPage .row .form-group .collapse div input{
     // border: 2px solid green;
+}
+
+#editPage .row .saveChanges{
+    // border: 2px solid blue;
+    text-align: right;
+}
+
+#editPage .row .saveChanges input{
+    position: relative;
+    width: auto;
+    margin: 0px;
+    // border: 2px solid red;
 }

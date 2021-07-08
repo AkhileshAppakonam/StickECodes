@@ -42,6 +42,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="form-group col-12 textEntries">
                         <div class="row ml-4">
                             <h2 class="fromLeft pb-3 m-0" data-toggle="collapse" data-target="#textCollapse" aria-expanded="false" aria-controls="collapseExample" onclick="textEntriesDropdown()">Text Entries <i id="textEntries" class="far fa-plus-square ml-2 float-right mr-5 mt-2"></i></h2>
@@ -122,6 +123,10 @@
                         </div>
                         <hr class="ml-4 mt-0">
                     </div>
+
+                    <div class="form-group col-12 saveChanges">
+                        <input type="submit" class="form-control btn btn-primary" value="Save Changes">
+                    </div>
                 </div>
             </div>
         </form>
@@ -135,9 +140,11 @@
                     if ($('#textEntries').hasClass("far fa-plus-square")) {
                         $('#textEntries').removeClass("far fa-plus-square");
                         $('#textEntries').addClass("far fa-minus-square");
+                        $('#textEntries').parent().css("color", "black");
                     } else{
                         $('#textEntries').removeClass("far fa-minus-square");
                         $('#textEntries').addClass("far fa-plus-square");
+                        $('#textEntries').parent().removeAttr('style');
                     }                
                 setTimeout(function(){
                     isclick = true;
@@ -152,9 +159,11 @@
                     if ($('#urlEntries').hasClass("far fa-plus-square")) {
                         $('#urlEntries').removeClass("far fa-plus-square");
                         $('#urlEntries').addClass("far fa-minus-square");
+                        $('#urlEntries').parent().css("color", "black");
                     } else{
                         $('#urlEntries').removeClass("far fa-minus-square");
                         $('#urlEntries').addClass("far fa-plus-square");
+                        $('#urlEntries').parent().removeAttr('style');
                     }                
                 setTimeout(function(){
                     isclick2 = true;
@@ -169,9 +178,11 @@
                     if ($('#fileEntries').hasClass("far fa-plus-square")) {
                         $('#fileEntries').removeClass("far fa-plus-square");
                         $('#fileEntries').addClass("far fa-minus-square");
+                        $('#fileEntries').parent().css("color", "black");
                     } else{
                         $('#fileEntries').removeClass("far fa-minus-square");
                         $('#fileEntries').addClass("far fa-plus-square");
+                        $('#fileEntries').parent().removeAttr('style');
                     }                
                 setTimeout(function(){
                     isclick3 = true;
@@ -187,7 +198,7 @@
 
         function addText() {
             var start = $('#textTable'),
-                newRow = $('<tr class="mb-2 py-2 border-bottom"><td><input type="text" class="form-control" placeholder="Insert Text Title Here"></td>' +
+                newRow = $('<tr class="mb-2 pb-2 pt-2 border-bottom"><td><input type="text" class="form-control" placeholder="Insert Text Title Here"></td>' +
                         '<td class="textBody"><textarea name="textBody" placeholder="Insert Text Body Here" class="form-control"></textarea></td>' +
                         '<td class="rowInput"><input type="button" value="Remove" class="remove btn btn-outline-dark" onclick="remove(this)"></td></tr>');
             $(start).append(newRow);
@@ -195,7 +206,7 @@
 
         function addURL() {
             var start = $('#urlTable'),
-                newRow = $('<tr class="mb-2 py-3 border-bottom"><td><input type="text" class="form-control" placeholder="Insert URL Description Here"></td>' +
+                newRow = $('<tr class="mb-2 pb-3 pt-2 border-bottom"><td><input type="text" class="form-control" placeholder="Insert URL Description Here"></td>' +
                         '<td class="textBody"><input type="text" class="form-control" placeholder="Insert URL Here"></td>' +
                         '<td class="rowInput"><input type="button" value="Remove" class="remove btn btn-outline-dark" onclick="remove(this)"></td></tr>');
             $(start).append(newRow);
@@ -203,7 +214,7 @@
 
         function addFile() {
             var start = $('#fileTable'),
-                newRow = $('<tr class="mb-2 py-3 border-bottom"><td><input type="text" class="form-control" placeholder="Insert File Title Here"></td>' +
+                newRow = $('<tr class="mb-2 pb-3 pt-2 border-bottom"><td><input type="text" class="form-control" placeholder="Insert File Title Here"></td>' +
                         '<td class="textBody"><input type="file" class="form-control"></td>' +
                         '<td class="rowInput"><input type="button" value="Remove" class="remove btn btn-outline-dark" onclick="remove(this)"></td></tr>');
             $(start).append(newRow);

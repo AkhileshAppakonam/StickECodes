@@ -11023,12 +11023,13 @@ a.text-dark:focus {
 
 #editPage .row .row h2 {
   width: 100%;
-  color: black;
+  color: grey;
   display: inline-block;
 }
 
 #editPage .row .row h2:hover {
   cursor: pointer;
+  color: black;
 }
 
 #editPage .row .row h2:after {
@@ -11140,5 +11141,15 @@ a.text-dark:focus {
   position: relative;
   display: flex;
   height: auto;
+}
+
+#editPage .row .saveChanges {
+  text-align: right;
+}
+
+#editPage .row .saveChanges input {
+  position: relative;
+  width: auto;
+  margin: 0px;
 }
 
