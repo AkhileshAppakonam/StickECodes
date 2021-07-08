@@ -44,11 +44,11 @@
                     </div>
                     <div class="form-group col-12 textEntries">
                         <div class="row ml-4">
-                            <h2 class="pb-3 m-0" data-toggle="collapse" data-target="#textCollapse" aria-expanded="false" aria-controls="collapseExample" onclick="textEntriesDropdown()">Text Entries <i id="textEntries" class="far fa-plus-square ml-2 float-right mr-5 mt-2"></i></h2>
+                            <h2 class="fromLeft pb-3 m-0" data-toggle="collapse" data-target="#textCollapse" aria-expanded="false" aria-controls="collapseExample" onclick="textEntriesDropdown()">Text Entries <i id="textEntries" class="far fa-plus-square ml-2 float-right mr-5 mt-2"></i></h2>
                             <div class="collapse" id="textCollapse">
-                                <hr class="mt-0 mr-5">
+                                <hr class="mt-0">
                                 
-                                <table class="mx-5">
+                                <table class="mx-5" id="textTable">
                                     <tr class="mb-3 pb-2 border-bottom">
                                         <th>Text Title</th>
                                         <th class="textBody">Text</th>
@@ -62,9 +62,8 @@
                                 </table>
 
                                 <div class="mx-5 py-2 mb-4">
-                                    <input type="button" value="Add More Text" class="add btn btn-primary" onclick="add()">
+                                    <input type="button" value="Add More Text" class="add btn btn-primary" onclick="addText()">
                                 </div>
-
                             </div>
                         </div>
                         <hr class="ml-4 mt-0">
@@ -72,10 +71,25 @@
 
                     <div class="form-group col-12 urlEntries">
                         <div class="row ml-4">
-                            <h2 class="pb-3 m-0" data-toggle="collapse" data-target="#urlCollapse" aria-expanded="false" aria-controls="collapseExample" onclick="urlEntriesDropdown()">URLs <i id="urlEntries" class="far fa-plus-square ml-2 float-right mr-5 mt-2"></i></h2>
+                            <h2 class="fromLeft pb-3 m-0" data-toggle="collapse" data-target="#urlCollapse" aria-expanded="false" aria-controls="collapseExample" onclick="urlEntriesDropdown()">URLs <i id="urlEntries" class="far fa-plus-square ml-2 float-right mr-5 mt-2"></i></h2>
                             <div class="collapse" id="urlCollapse">
-                                <div class="card card-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                                <hr class="mt-0">
+                                
+                                <table class="mx-5" id="urlTable">
+                                    <tr class="mb-3 pb-2 border-bottom">
+                                        <th>URL Description</th>
+                                        <th class="textBody">URL</th>
+                                        <th class="rowInput">Remove Row</th>
+                                    </tr>
+                                    <tr class="mb-2 pb-3 border-bottom">
+                                        <td><input type="text" class="form-control" placeholder="Insert URL Description Here"></td>
+                                        <td class="textBody"><input type="text" class="form-control" placeholder="Insert URL Here"></td>
+                                        <td class="rowInput"><input type="button" value="Remove" class="remove btn btn-outline-dark" onclick="remove(this)"></td>
+                                    </tr>
+                                </table>
+
+                                <div class="mx-5 py-2 mb-4">
+                                    <input type="button" value="Add Another URL" class="add btn btn-primary" onclick="addURL()">
                                 </div>
                             </div>
                         </div>
@@ -84,13 +98,29 @@
 
                     <div class="form-group col-12 fileEntries">
                         <div class="row ml-4">
-                            <h2 class="pb-3 m-0" data-toggle="collapse" data-target="#fileCollapse" aria-expanded="false" aria-controls="collapseExample" onclick="fileEntriesDropdown()">Files <i id="fileEntries" class="far fa-plus-square ml-2 float-right mr-5 mt-2"></i></h2>
+                            <h2 class="fromLeft pb-3 m-0" data-toggle="collapse" data-target="#fileCollapse" aria-expanded="false" aria-controls="collapseExample" onclick="fileEntriesDropdown()">Files <i id="fileEntries" class="far fa-plus-square ml-2 float-right mr-5 mt-2"></i></h2>
                             <div class="collapse" id="fileCollapse">
-                                <div class="card card-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                                <hr class="mt-0">
+                                
+                                <table class="mx-5" id="fileTable">
+                                    <tr class="mb-3 pb-2 border-bottom">
+                                        <th>File Title</th>
+                                        <th class="textBody">File</th>
+                                        <th class="rowInput">Remove Row</th>
+                                    </tr>
+                                    <tr class="mb-2 pb-3 border-bottom">
+                                        <td><input type="text" class="form-control" placeholder="Insert File Title Here"></td>
+                                        <td class="textBody"><input type="file" class="form-control"></td>
+                                        <td class="rowInput"><input type="button" value="Remove" class="remove btn btn-outline-dark" onclick="remove(this)"></td>
+                                    </tr>
+                                </table>
+
+                                <div class="mx-5 py-2 mb-4">
+                                    <input type="button" value="Add Another File" class="add btn btn-primary" onclick="addFile()">
                                 </div>
                             </div>
                         </div>
+                        <hr class="ml-4 mt-0">
                     </div>
                 </div>
             </div>
@@ -155,10 +185,26 @@
             e.parentElement.parentElement.remove();
         }
 
-        function add() {
-            var start = $('table'),
+        function addText() {
+            var start = $('#textTable'),
                 newRow = $('<tr class="mb-2 py-2 border-bottom"><td><input type="text" class="form-control" placeholder="Insert Text Title Here"></td>' +
                         '<td class="textBody"><textarea name="textBody" placeholder="Insert Text Body Here" class="form-control"></textarea></td>' +
+                        '<td class="rowInput"><input type="button" value="Remove" class="remove btn btn-outline-dark" onclick="remove(this)"></td></tr>');
+            $(start).append(newRow);
+        }
+
+        function addURL() {
+            var start = $('#urlTable'),
+                newRow = $('<tr class="mb-2 py-3 border-bottom"><td><input type="text" class="form-control" placeholder="Insert URL Description Here"></td>' +
+                        '<td class="textBody"><input type="text" class="form-control" placeholder="Insert URL Here"></td>' +
+                        '<td class="rowInput"><input type="button" value="Remove" class="remove btn btn-outline-dark" onclick="remove(this)"></td></tr>');
+            $(start).append(newRow);
+        }
+
+        function addFile() {
+            var start = $('#fileTable'),
+                newRow = $('<tr class="mb-2 py-3 border-bottom"><td><input type="text" class="form-control" placeholder="Insert File Title Here"></td>' +
+                        '<td class="textBody"><input type="file" class="form-control"></td>' +
                         '<td class="rowInput"><input type="button" value="Remove" class="remove btn btn-outline-dark" onclick="remove(this)"></td></tr>');
             $(start).append(newRow);
         }
