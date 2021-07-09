@@ -11153,3 +11153,29 @@ a.text-dark:focus {
   margin: 0px;
 }
 
+#securityProfiles {
+  border: 2px solid red;
+}
+
+#securityProfiles .container {
+  border: 2px solid blue;
+}
+
+#securityProfiles .container header {
+  border: 2px solid green;
+}
+
+#securityProfiles .container header h1 {
+  border: 2px solid red;
+}
+
+#securityProfiles .container .securityProfiles {
+  padding: 0px;
+  border: 2px solid green;
+}
+
+#securityProfiles .container .securityProfiles h3 {
+  margin: 0px;
+  border: 2px solid blue;
+}
+
