@@ -280,11 +280,11 @@
 
 // Security Profiles Page
 #securityProfiles{
-    border: 2px solid red;
+    // border: 2px solid red;
 }
 
 #securityProfiles .container{
-    border: 2px solid blue;
+    // border: 2px solid blue;
 }
 
 #securityProfiles .container header{
@@ -296,13 +296,13 @@
 }
 
 #securityProfiles .container .row{
-    border: 2px solid red;
+    // border: 2px solid red;
     background: white;
 }
 
 #securityProfiles .container .securityProfiles{
     padding: 0px;
-    border: 2px solid green;
+    // border: 2px solid green;
 }
 
 #securityProfiles .container .securityProfiles .container{
@@ -311,7 +311,7 @@
     height: auto;
     display: flex;
     align-items: center;
-    border: 2px solid blue;
+    // border: 2px solid blue;
 }
 
 #securityProfiles .container .securityProfiles .container:hover{
@@ -338,30 +338,72 @@
 }
 
 #securityProfiles .container .securityProfiles .collapse{
-    border: 2px solid blue;
+    // border: 2px solid blue;
 }
 
 #securityProfiles .container .securityProfiles .collapse .securityProfileCode{
     height: auto;
-    border: 2px solid red;
+    // border: 2px solid red;
+}
+
+#securityProfiles .container .securityProfiles .collapse .securityProfileCode article{
+    // border: 1px dashed black;
 }
 
 #securityProfiles .container .securityProfiles .collapse .securityProfileCode figure{
     position: relative;
     height: auto;
     width: auto;
-    border: 2px solid green;
+    // border: 2px solid green;
 }
 
 #securityProfiles .container .securityProfiles .collapse .securityProfileCode figure div{
     position: relative;
     height: auto;
     width: auto;
-    border: 2px solid yellow;
+    // border: 2px solid yellow;
     display: flex;
     justify-content: center;
 }
 
 #securityProfiles .container .securityProfiles .collapse .securityProfileCode figure div img{
-    border: 2px solid blue;
+    // border: 2px solid blue;
+}
+
+#securityProfiles .container .securityProfiles .collapse .securityProfileCode .description{
+    position: relative;
+    width: 100%;
+    height: auto;
+    // border: 2px solid green;
+    padding: 0px;
+}
+
+#securityProfiles .container .securityProfiles .collapse .securityProfileCode .description .codeTitles{
+    position: relative;
+    width: 100%;
+    height: auto;
+    // border: 2px solid blue;
+    padding: none;
+}
+
+#securityProfiles .container .securityProfiles .collapse .securityProfileCode .description .codeTitles h3{
+    position: relative;
+    width: auto;
+    height: auto;
+    // border: 2px solid red;
+    margin: 0px;
+}
+
+#securityProfiles .container .securityProfiles .collapse .securityProfileCode .description .codeTitles small{
+    position: relative;
+    height: auto;
+    width: auto;
+    // border: 2px solid red;
+}
+
+#securityProfiles .container .securityProfiles .collapse .securityProfileCode .description p{
+    position: relative;
+    height: auto;
+    width: auto;
+    // border: 2px solid blue;
 }

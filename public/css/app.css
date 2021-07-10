@@ -11153,22 +11153,12 @@ a.text-dark:focus {
   margin: 0px;
 }
 
-#securityProfiles {
-  border: 2px solid red;
-}
-
-#securityProfiles .container {
-  border: 2px solid blue;
-}
-
 #securityProfiles .container .row {
-  border: 2px solid red;
   background: white;
 }
 
 #securityProfiles .container .securityProfiles {
   padding: 0px;
-  border: 2px solid green;
 }
 
 #securityProfiles .container .securityProfiles .container {
@@ -11177,7 +11167,6 @@ a.text-dark:focus {
   height: auto;
   display: flex;
   align-items: center;
-  border: 2px solid blue;
 }
 
 #securityProfiles .container .securityProfiles .container:hover {
@@ -11200,32 +11189,54 @@ a.text-dark:focus {
   margin-right: 0px;
 }
 
-#securityProfiles .container .securityProfiles .collapse {
-  border: 2px solid blue;
-}
-
 #securityProfiles .container .securityProfiles .collapse .securityProfileCode {
   height: auto;
-  border: 2px solid red;
 }
 
 #securityProfiles .container .securityProfiles .collapse .securityProfileCode figure {
   position: relative;
   height: auto;
   width: auto;
-  border: 2px solid green;
 }
 
 #securityProfiles .container .securityProfiles .collapse .securityProfileCode figure div {
   position: relative;
   height: auto;
   width: auto;
-  border: 2px solid yellow;
   display: flex;
   justify-content: center;
 }
 
-#securityProfiles .container .securityProfiles .collapse .securityProfileCode figure div img {
-  border: 2px solid blue;
+#securityProfiles .container .securityProfiles .collapse .securityProfileCode .description {
+  position: relative;
+  width: 100%;
+  height: auto;
+  padding: 0px;
+}
+
+#securityProfiles .container .securityProfiles .collapse .securityProfileCode .description .codeTitles {
+  position: relative;
+  width: 100%;
+  height: auto;
+  padding: none;
+}
+
+#securityProfiles .container .securityProfiles .collapse .securityProfileCode .description .codeTitles h3 {
+  position: relative;
+  width: auto;
+  height: auto;
+  margin: 0px;
+}
+
+#securityProfiles .container .securityProfiles .collapse .securityProfileCode .description .codeTitles small {
+  position: relative;
+  height: auto;
+  width: auto;
+}
+
+#securityProfiles .container .securityProfiles .collapse .securityProfileCode .description p {
+  position: relative;
+  height: auto;
+  width: auto;
 }
 

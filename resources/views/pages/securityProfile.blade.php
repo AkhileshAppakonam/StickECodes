@@ -12,19 +12,61 @@
                         <a href="" class="btn btn-outline-dark">Edit Security Profile</a>
                     </div>
                     <div class="row mx-1 collapse" id="securityProfile">
-                        <div class="col-md-3 securityProfileCode">
-                            
+                        <div class="col-md-3 securityProfileCode py-4">
+                            <article>
+                                <figure class="mb-0">
+                                    <div class="image"><img src="../images/stickecode.png" height="200px" width="200px"></div>
+                                </figure>
+                                <div class="description px-5">
+                                    <div class="codeTitles">
+                                        <h3>Code Title</h3>
+                                        <small class="ml-1">XXXX</small>
+                                    </div>
+                                    <p class="ml-1">Insert Title Description for Public Page Here</p>
+                                </div>
+                            </article>
                         </div>
-                        <div class="col-md-3 securityProfileCode">
-                            <figure class="mb-0">
-                                <div class="image"><img src="../images/stickecode.png" height="200px" width="200px"></div>
-                            </figure>
+                        <div class="col-md-3 securityProfileCode py-4">
+                            <article>
+                                <figure class="mb-0">
+                                    <div class="image"><img src="../images/stickecode.png" height="200px" width="200px"></div>
+                                </figure>
+                                <div class="description px-5">
+                                    <div class="codeTitles">
+                                        <h3>Code Title</h3>
+                                        <small class="ml-1">XXXX</small>
+                                    </div>
+                                    <p class="ml-1">Insert Title Description for Public Page Here</p>
+                                </div>
+                            </article>
                         </div>
-                        <div class="col-md-3 securityProfileCode">
-                            
+                        <div class="col-md-3 securityProfileCode py-4">
+                            <article>
+                                <figure class="mb-0">
+                                    <div class="image"><img src="../images/stickecode.png" height="200px" width="200px"></div>
+                                </figure>
+                                <div class="description px-5">
+                                    <div class="codeTitles">
+                                        <h3>Code Title</h3>
+                                        <small class="ml-1">XXXX</small>
+                                    </div>
+                                    <p class="ml-1">Insert Title Description for Public Page Here</p>
+                                </div>
+                            </article>
                         </div>
-                        <div class="col-md-3 securityProfileCode">
-                            
+                        <div class="col-md-3 securityProfileCode py-4">
+                            <article>
+                                <figure class="mb-0">
+                                    <div class="image"><img src="../images/stickecode.png" height="200px" width="200px"></div>
+                                </figure>
+                                <div class="description px-5">
+                                    <div class="codeTitles">
+                                        <h3>Code Title</h3>
+                                        <small class="ml-1">XXXX</small>
+                                    </div>
+                                    <p class="ml-1">Insert Title Description for Public Page Here</p>
+                                </div>
+                            </article>
                         </div>
                     </div>
                 </div>
@@ -34,8 +76,15 @@
     </section>
 
     <script type="text/javascript">
+        var isclick = true;
         function securityProfileHeader(e) {
-            e.classList.toggle("card-header");
+            if(isclick){
+                isclick = false;
+                e.classList.toggle("card-header");
+                setTimeout(function(){
+                    isclick = true;
+                }, 350)
+            }
         }
     </script>
 @endsection
