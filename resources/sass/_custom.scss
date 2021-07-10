@@ -288,11 +288,16 @@
 }
 
 #securityProfiles .container header{
-    border: 2px solid green;
+    // border: 2px solid green;
 }
 
 #securityProfiles .container header h1{
+    // border: 2px solid red;
+}
+
+#securityProfiles .container .row{
     border: 2px solid red;
+    background: white;
 }
 
 #securityProfiles .container .securityProfiles{
@@ -300,7 +305,63 @@
     border: 2px solid green;
 }
 
-#securityProfiles .container .securityProfiles h3{
-    margin: 0px;
+#securityProfiles .container .securityProfiles .container{
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    border: 2px solid blue;
+}
+
+#securityProfiles .container .securityProfiles .container:hover{
+    cursor: pointer;
+    // box-shadow: 5px 10px 18px lightblue;
+}
+
+#securityProfiles .container .securityProfiles .container h3{
+    position: relative;
+    width: auto;
+    height: auto;
+    margin: auto;
+    margin-left: 0px;
+    // border: 2px solid green;
+}
+
+#securityProfiles .container .securityProfiles .container a{
+    position: relative;
+    width: auto;
+    height: auto;
+    margin: auto;
+    margin-right: 0px;
+    // border: 2px solid green;
+}
+
+#securityProfiles .container .securityProfiles .collapse{
+    border: 2px solid blue;
+}
+
+#securityProfiles .container .securityProfiles .collapse .securityProfileCode{
+    height: auto;
+    border: 2px solid red;
+}
+
+#securityProfiles .container .securityProfiles .collapse .securityProfileCode figure{
+    position: relative;
+    height: auto;
+    width: auto;
+    border: 2px solid green;
+}
+
+#securityProfiles .container .securityProfiles .collapse .securityProfileCode figure div{
+    position: relative;
+    height: auto;
+    width: auto;
+    border: 2px solid yellow;
+    display: flex;
+    justify-content: center;
+}
+
+#securityProfiles .container .securityProfiles .collapse .securityProfileCode figure div img{
     border: 2px solid blue;
 }
