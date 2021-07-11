@@ -12,62 +12,71 @@
                         <a href="" class="btn btn-primary" onclick="stopProp(this)">Edit Security Profile</a>
                     </div>
                     <div class="row mx-1 collapse" id="securityProfile">
-                        <div class="card-container">
-                            <div class="card">
-                                <article>
-                                    <figure class="mb-0">
-                                        <div class="image"><img src="../images/stickecode.png" height="200px" width="200px"></div>
-                                    </figure>
-                                    <div class="description">
-                                        <div class="codeTitles">
-                                            <h3>Code Title</h3>
-                                            <small class="ml-1">XXXX</small>
+                        <div class="col-md-12 px-0 linkedCodesHeader">
+                            <h4>Linked Codes</h4>
+                            <h4>Permissions</h4>
+                        </div>
+                        <div class="col-md-12 px-0 profileDetails">
+                            <div class="card-container">
+                                <div class="card">
+                                    <article>
+                                        <figure class="mb-0">
+                                            <div class="image"><img src="../images/stickecode.png" height="200px" width="200px"></div>
+                                        </figure>
+                                        <div class="description">
+                                            <div class="codeTitles">
+                                                <h3>Code Title</h3>
+                                                <small class="ml-1">XXXX</small>
+                                            </div>
+                                            <p class="ml-1">Insert Title Description for Public Page Here</p>
                                         </div>
-                                        <p class="ml-1">Insert Title Description for Public Page Here</p>
-                                    </div>
-                                </article>
+                                    </article>
+                                </div>
+                                <div class="card">
+                                    <article>
+                                        <figure class="mb-0">
+                                            <div class="image"><img src="../images/stickecode.png" height="200px" width="200px"></div>
+                                        </figure>
+                                        <div class="description">
+                                            <div class="codeTitles">
+                                                <h3>Code Title</h3>
+                                                <small class="ml-1">XXXX</small>
+                                            </div>
+                                            <p class="ml-1">Insert Title Description for Public Page Here</p>
+                                        </div>
+                                    </article>
+                                </div>
+                                <div class="card">
+                                    <article>
+                                        <figure class="mb-0">
+                                            <div class="image"><img src="../images/stickecode.png" height="200px" width="200px"></div>
+                                        </figure>
+                                        <div class="description">
+                                            <div class="codeTitles">
+                                                <h3>Code Title</h3>
+                                                <small class="ml-1">XXXX</small>
+                                            </div>
+                                            <p class="ml-1">Insert Title Description for Public Page Here</p>
+                                        </div>
+                                    </article>
+                                </div>
+                                <div class="card">
+                                    <article>
+                                        <figure class="mb-0">
+                                            <div class="image"><img src="../images/stickecode.png" height="200px" width="200px"></div>
+                                        </figure>
+                                        <div class="description">
+                                            <div class="codeTitles">
+                                                <h3>Code Title</h3>
+                                                <small class="ml-1">XXXX</small>
+                                            </div>
+                                            <p class="ml-1">Insert Title Description for Public Page Here</p>
+                                        </div>
+                                    </article>
+                                </div>
                             </div>
-                            <div class="card">
-                                <article>
-                                    <figure class="mb-0">
-                                        <div class="image"><img src="../images/stickecode.png" height="200px" width="200px"></div>
-                                    </figure>
-                                    <div class="description">
-                                        <div class="codeTitles">
-                                            <h3>Code Title</h3>
-                                            <small class="ml-1">XXXX</small>
-                                        </div>
-                                        <p class="ml-1">Insert Title Description for Public Page Here</p>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="card">
-                                <article>
-                                    <figure class="mb-0">
-                                        <div class="image"><img src="../images/stickecode.png" height="200px" width="200px"></div>
-                                    </figure>
-                                    <div class="description">
-                                        <div class="codeTitles">
-                                            <h3>Code Title</h3>
-                                            <small class="ml-1">XXXX</small>
-                                        </div>
-                                        <p class="ml-1">Insert Title Description for Public Page Here</p>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="card">
-                                <article>
-                                    <figure class="mb-0">
-                                        <div class="image"><img src="../images/stickecode.png" height="200px" width="200px"></div>
-                                    </figure>
-                                    <div class="description">
-                                        <div class="codeTitles">
-                                            <h3>Code Title</h3>
-                                            <small class="ml-1">XXXX</small>
-                                        </div>
-                                        <p class="ml-1">Insert Title Description for Public Page Here</p>
-                                    </div>
-                                </article>
+                            <div class="permissions">
+
                             </div>
                         </div>
                     </div>

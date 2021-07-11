@@ -10985,16 +10985,16 @@ a.text-dark:focus {
   background: white;
 }
 
-#editPage .row .codeProperties .container .form-group select:hover {
+#editPage select:hover {
   cursor: pointer;
 }
 
-#editPage .row .codeProperties .container .form-group .or {
+#editPage .or {
   display: inline-block;
   display: flex;
 }
 
-#editPage .row .codeProperties .container .form-group .or p {
+#editPage .or p {
   position: relative;
   width: auto;
   height: auto;
@@ -11021,18 +11021,18 @@ a.text-dark:focus {
   margin-bottom: 0px;
 }
 
-#editPage .row .row h2 {
+#editPage h2 {
   width: 100%;
   color: grey;
   display: inline-block;
 }
 
-#editPage .row .row h2:hover {
+#editPage h2:hover {
   cursor: pointer;
   color: black;
 }
 
-#editPage .row .row h2:after {
+#editPage h2:after {
   position: relative;
   top: 17px;
   display: block;
@@ -11042,20 +11042,20 @@ a.text-dark:focus {
   transition: transform 500ms ease-in-out;
 }
 
-#editPage .row .row h2.fromLeft:after {
+#editPage h2.fromLeft:after {
   transform-origin: 100% 50%;
 }
 
-#editPage .row .row h2.fromLeft:hover:after {
+#editPage h2.fromLeft:hover:after {
   transform: scaleX(1);
   transform-origin: 0% 50%;
 }
 
-#editPage .row .row h2 i {
+#editPage h2 i {
   font-size: 25px;
 }
 
-#editPage .row .form-group .collapse {
+#editPage .collapse {
   position: relative;
   width: 100%;
 }
@@ -11064,64 +11064,64 @@ a.text-dark:focus {
   background: black;
 }
 
-#editPage .row .form-group .collapse table {
+#editPage table {
   position: relative;
   display: table;
   width: 90%;
   height: auto;
 }
 
-#editPage .row .form-group .collapse table tr {
+#editPage table tr {
   position: relative;
   width: 100%;
   height: auto;
   display: flex;
 }
 
-#editPage .row .form-group .collapse table tr th {
+#editPage table tr th {
   position: relative;
   width: 33.33%;
   height: auto;
   display: inline-block;
 }
 
-#editPage .row .form-group .collapse table tr th.textBody {
+#editPage table tr th.textBody {
   width: 46.66%;
 }
 
-#editPage .row .form-group .collapse table tr th.rowInput {
+#editPage table tr th.rowInput {
   width: 20%;
   text-align: left;
 }
 
-#editPage .row .form-group .collapse table tr td {
+#editPage table tr td {
   position: relative;
   width: 33.33%;
   height: auto;
   display: inline-block;
 }
 
-#editPage .row .form-group .collapse table tr td.textBody {
+#editPage table tr td.textBody {
   width: 46.66%;
 }
 
-#editPage .row .form-group .collapse table tr td.rowInput {
+#editPage table tr td.rowInput {
   width: 20%;
   text-align: left;
 }
 
-#editPage .row .form-group .collapse table tr td input {
+#editPage table tr td input {
   position: relative;
   width: 93%;
   height: auto;
   display: inline-block;
 }
 
-#editPage .row .form-group .collapse table tr td input[type=file]:hover {
+#editPage table tr td input[type=file]:hover {
   cursor: pointer;
 }
 
-#editPage .row .form-group .collapse table tr td textarea {
+#editPage table tr td textarea {
   position: relative;
   width: 93%;
   height: auto;
@@ -11130,24 +11130,24 @@ a.text-dark:focus {
   max-height: 100px;
 }
 
-#editPage .row .form-group .collapse table tr td input.remove {
+#editPage table tr td input.remove {
   position: relative;
   width: auto;
   height: auto;
   display: inline-block;
 }
 
-#editPage .row .form-group .collapse div {
+#editPage .collapse div {
   position: relative;
   display: flex;
   height: auto;
 }
 
-#editPage .row .saveChanges {
+#editPage .saveChanges {
   text-align: right;
 }
 
-#editPage .row .saveChanges input {
+#editPage .saveChanges input {
   position: relative;
   width: auto;
   margin: 0px;
@@ -11179,6 +11179,7 @@ a.text-dark:focus {
   height: auto;
   margin: auto;
   margin-left: 0px;
+  font-weight: bold;
 }
 
 #securityProfiles .container .securityProfiles .container a {
@@ -11189,60 +11190,80 @@ a.text-dark:focus {
   margin-right: 0px;
 }
 
-.card-container {
+#securityProfiles .linkedCodesHeader {
+  display: flex;
+}
+
+#securityProfiles .linkedCodesHeader h4 {
+  width: 50%;
+  margin: 0px;
+  text-align: center;
+  padding: 1.5rem 0;
+}
+
+#securityProfiles .profileDetails {
+  display: flex;
+}
+
+#securityProfiles .card-container {
   width: 50%;
   display: flex;
   padding: 3rem;
+  padding-top: 1rem;
 }
 
-.card {
+#securityProfiles .card {
   width: auto;
   height: auto;
   border-radius: 16px;
   background-color: white;
-  box-shadow: -5px 0 2rem lightgrey;
+  box-shadow: -5px 0 2rem #eeeded;
   flex-direction: column;
   padding: 1.5rem;
   transition: 0.2s;
   display: flex;
 }
 
-.card:hover {
+#securityProfiles .card:hover {
   cursor: pointer;
 }
 
-.card article {
+#securityProfiles .card article {
   width: auto;
   display: inline-block;
 }
 
-.card article figure {
+#securityProfiles .card article figure {
   width: auto;
   display: flex;
   justify-content: center;
 }
 
-.card article figure .image {
+#securityProfiles .card article figure .image {
   display: inline-block;
 }
 
-.card article figure .image img {
+#securityProfiles .card article figure .image img {
   display: inline-block;
 }
 
-.card article .description {
+#securityProfiles .card article .description {
   width: auto;
 }
 
-.card:not(:first-child) {
+#securityProfiles .card:not(:first-child) {
   margin-left: -225px;
 }
 
-.card:hover {
+#securityProfiles .card:hover {
   transform: translateY(-1rem);
 }
 
-.card:hover ~ .card {
+#securityProfiles .card:hover ~ .card {
   transform: translateX(225px);
+}
+
+#securityProfiles .permissions {
+  width: 50%;
 }
 
