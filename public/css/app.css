@@ -11189,54 +11189,60 @@ a.text-dark:focus {
   margin-right: 0px;
 }
 
-#securityProfiles .container .securityProfiles .collapse .securityProfileCode {
-  height: auto;
+.card-container {
+  width: 50%;
+  display: flex;
+  padding: 3rem;
 }
 
-#securityProfiles .container .securityProfiles .collapse .securityProfileCode figure {
-  position: relative;
-  height: auto;
+.card {
   width: auto;
+  height: auto;
+  border-radius: 16px;
+  background-color: white;
+  box-shadow: -5px 0 2rem lightgrey;
+  flex-direction: column;
+  padding: 1.5rem;
+  transition: 0.2s;
+  display: flex;
 }
 
-#securityProfiles .container .securityProfiles .collapse .securityProfileCode figure div {
-  position: relative;
-  height: auto;
+.card:hover {
+  cursor: pointer;
+}
+
+.card article {
+  width: auto;
+  display: inline-block;
+}
+
+.card article figure {
   width: auto;
   display: flex;
   justify-content: center;
 }
 
-#securityProfiles .container .securityProfiles .collapse .securityProfileCode .description {
-  position: relative;
-  width: 100%;
-  height: auto;
-  padding: 0px;
+.card article figure .image {
+  display: inline-block;
 }
 
-#securityProfiles .container .securityProfiles .collapse .securityProfileCode .description .codeTitles {
-  position: relative;
-  width: 100%;
-  height: auto;
-  padding: none;
+.card article figure .image img {
+  display: inline-block;
 }
 
-#securityProfiles .container .securityProfiles .collapse .securityProfileCode .description .codeTitles h3 {
-  position: relative;
-  width: auto;
-  height: auto;
-  margin: 0px;
-}
-
-#securityProfiles .container .securityProfiles .collapse .securityProfileCode .description .codeTitles small {
-  position: relative;
-  height: auto;
+.card article .description {
   width: auto;
 }
 
-#securityProfiles .container .securityProfiles .collapse .securityProfileCode .description p {
-  position: relative;
-  height: auto;
-  width: auto;
+.card:not(:first-child) {
+  margin-left: -225px;
+}
+
+.card:hover {
+  transform: translateY(-1rem);
+}
+
+.card:hover ~ .card {
+  transform: translateX(225px);
 }
 
