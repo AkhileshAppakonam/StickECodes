@@ -354,6 +354,7 @@
     margin: 0px;
     text-align: center;
     padding: 1.5rem 0;
+    text-decoration: underline;
 }
 
 #securityProfiles .profileDetails {
@@ -366,6 +367,7 @@
     display: flex;
     padding: 3rem;
     padding-top: 1rem;
+    padding-right: 1rem;
     // border: 2px solid red;
 }
 
@@ -440,10 +442,58 @@
 
 #securityProfiles .card:hover~.card{
     transform: translateX(225px);
-    // opacity: 0;
+    opacity: 0;
 }
 
 #securityProfiles .permissions {
     width: 50%;
     // border: 2px solid red;
+    display: flex;
+    overflow-y: scroll;
+    height: 400px;
+}
+
+#securityProfiles .permissions::-webkit-scrollbar{
+    position: absolute;
+    width: 15px;
+	border-radius: 20px;
+}
+
+#securityProfiles .permissions::-webkit-scrollbar-track{
+    background: white;
+	border-radius: 20px;
+	margin: 10px 0px;
+	margin-bottom: 0px;
+}
+
+#securityProfiles .permissions::-webkit-scrollbar-thumb{
+    width: 24px;
+	background: grey;
+	border: 5px double white;
+	border-radius: 15px;
+}
+
+#securityProfiles table{
+    position: relative;
+    display: table;
+    width: 100%;
+    // border: 2px solid blue;
+}
+
+#securityProfiles table tr{
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: auto;
+    // border: 2px solid green;
+    padding: 1rem 0;
+}
+
+#securityProfiles table tr th{
+    position: relative;
+    display: inline-block;
+    width: 33.33%;
+    height: auto;
+    // border: 2px solid red;
+    text-align: center;
 }

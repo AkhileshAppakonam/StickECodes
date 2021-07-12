@@ -13,10 +13,10 @@
                     </div>
                     <div class="row mx-1 collapse" id="securityProfile">
                         <div class="col-md-12 px-0 linkedCodesHeader">
-                            <h4>Linked Codes</h4>
-                            <h4>Permissions</h4>
+                            <h4>Linked Codes (4)</h4>
+                            <h4>Permissions (5)</h4>
                         </div>
-                        <div class="col-md-12 px-0 profileDetails">
+                        <div class="col-md-12 px-0 pr-2 profileDetails">
                             <div class="card-container">
                                 <div class="card">
                                     <article>
@@ -75,8 +75,59 @@
                                     </article>
                                 </div>
                             </div>
-                            <div class="permissions">
-
+                            <div class="permissions py-2 pr-5">
+                                <table>
+                                    <tr>
+                                        <th>1.</th>
+                                        <th>User 1</th>
+                                        <th>Full Control</th>
+                                    </tr>
+                                    <tr>
+                                        <th>2.</th>
+                                        <th>User 2</th>
+                                        <th>View and Update</th>
+                                    </tr>
+                                    <tr>
+                                        <th>3.</th>
+                                        <th>User 3</th>
+                                        <th>View Only</th>
+                                    </tr>
+                                    <tr>
+                                        <th>4.</th>
+                                        <th>User 4</th>
+                                        <th>View and Update</th>
+                                    </tr>
+                                    <tr>
+                                        <th>5.</th>
+                                        <th>User 5</th>
+                                        <th>Full Control</th>
+                                    </tr>
+                                    <tr>
+                                        <th>1.</th>
+                                        <th>User 1</th>
+                                        <th>Full Control</th>
+                                    </tr>
+                                    <tr>
+                                        <th>2.</th>
+                                        <th>User 2</th>
+                                        <th>View and Update</th>
+                                    </tr>
+                                    <tr>
+                                        <th>3.</th>
+                                        <th>User 3</th>
+                                        <th>View Only</th>
+                                    </tr>
+                                    <tr>
+                                        <th>4.</th>
+                                        <th>User 4</th>
+                                        <th>View and Update</th>
+                                    </tr>
+                                    <tr>
+                                        <th>5.</th>
+                                        <th>User 5</th>
+                                        <th>Full Control</th>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>
