@@ -11315,3 +11315,70 @@ a.text-dark:focus {
   text-align: center;
 }
 
+#editSecurityProfile input {
+  width: 50%;
+}
+
+#editSecurityProfileTable {
+  position: relative;
+  width: 100%;
+  display: table;
+  height: auto;
+}
+
+#editSecurityProfileTable tr {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: flex;
+}
+
+#editSecurityProfileTable tr th {
+  position: relative;
+  width: 25%;
+  height: auto;
+  display: inline-block;
+}
+
+#editSecurityProfileTable tr th:first-child {
+  width: 10%;
+  text-align: center;
+}
+
+#editSecurityProfileTable tr th:last-child {
+  width: 15%;
+}
+
+#editSecurityProfileTable tr td {
+  position: relative;
+  width: 25%;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+
+#editSecurityProfileTable tr td:first-child {
+  width: 10%;
+}
+
+#editSecurityProfileTable tr td:last-child {
+  width: 15%;
+}
+
+#editSecurityProfileTable tr td p {
+  margin: auto;
+}
+
+#editSecurityProfileTable tr td input {
+  width: 90%;
+}
+
+#editSecurityProfileTable tr td input[type=button] {
+  width: auto;
+}
+
+#editSecurityProfileTable tr td select {
+  cursor: pointer;
+  width: 85%;
+}
+

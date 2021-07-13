@@ -280,21 +280,22 @@
 
 
 // Security Profiles Page
-#securityProfiles{
-    // border: 2px solid red;
-}
 
-#securityProfiles .container{
-    // border: 2px solid blue;
-}
+// #securityProfiles{
+//     // border: 2px solid red;
+// }
 
-#securityProfiles .container header{
-    // border: 2px solid green;
-}
+// #securityProfiles .container{
+//     // border: 2px solid blue;
+// }
 
-#securityProfiles .container header h1{
-    // border: 2px solid red;
-}
+// #securityProfiles .container header{
+//     // border: 2px solid green;
+// }
+
+// #securityProfiles .container header h1{
+//     // border: 2px solid red;
+// }
 
 #securityProfiles .container .row{
     // border: 2px solid red;
@@ -339,9 +340,9 @@
     // border: 2px solid green;
 }
 
-#securityProfiles .collapse{
-    // border: 2px solid blue;
-}
+// #securityProfiles .collapse{
+//     // border: 2px solid blue;
+// }
 
 #securityProfiles .linkedCodesHeader{
     display: flex;
@@ -416,21 +417,21 @@
     // border: 2px solid blue;
 }
 
-#securityProfiles .card article .description .codeTitles{
-    // border: 2px solid red;
-}
+// #securityProfiles .card article .description .codeTitles{
+//     // border: 2px solid red;
+// }
 
-#securityProfiles .card article .description .codeTitles h3{
-    // border: 2px solid green;
-}
+// #securityProfiles .card article .description .codeTitles h3{
+//     // border: 2px solid green;
+// }
 
-#securityProfiles .card article .description .codeTitles small{
-    // border: 2px solid green;
-}
+// #securityProfiles .card article .description .codeTitles small{
+//     // border: 2px solid green;
+// }
 
-#securityProfiles .card article .description p{
-    // border: 2px solid red;
-}
+// #securityProfiles .card article .description p{
+//     // border: 2px solid red;
+// }
 
 #securityProfiles .card:not(:first-child) {
     margin-left: -225px;
@@ -496,4 +497,114 @@
     height: auto;
     // border: 2px solid red;
     text-align: center;
+}
+
+// Edit Security Profiles Page
+#editSecurityProfile{
+    // border: 2px solid red;
+}
+
+#editSecurityProfile form{
+    // border: 2px solid yellow;
+}
+
+#editSecurityProfile .container{
+    // border: 2px solid red;
+}
+
+#editSecurityProfile .container header{
+    // border: 2px solid blue;
+}
+
+#editSecurityProfile .container header h1{
+    // border: 2px solid green;
+}
+
+#editSecurityProfile .row{
+    // border: 2px solid blue;
+}
+
+#editSecurityProfile .form-group{
+    // border: 2px solid red;
+}
+
+#editSecurityProfile label{
+    // border: 2px solid green;
+}
+
+#editSecurityProfile input{
+    width: 50%;
+    // border: 2px solid green;
+}
+
+#editSecurityProfile h2{
+    // border: 2px solid green;
+}
+
+#editSecurityProfileTable{
+    position: relative;
+    width: 100%;
+    display: table;
+    height: auto;
+    // border: 2px solid green;
+}
+
+#editSecurityProfileTable tr{
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    // border: 2px solid blue;
+}
+
+#editSecurityProfileTable tr th{
+    position: relative;
+    width: 25%;
+    height: auto;
+    display: inline-block;
+    // border: 2px solid red;
+}
+
+#editSecurityProfileTable tr th:first-child{
+    width: 10%;
+    text-align: center;
+}
+
+#editSecurityProfileTable tr th:last-child{
+    width: 15%;
+}
+
+#editSecurityProfileTable tr td{
+    position: relative;
+    width: 25%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    // border: 2px solid red;
+}
+
+#editSecurityProfileTable tr td:first-child{
+    width: 10%;
+}
+
+#editSecurityProfileTable tr td:last-child{
+    width: 15%;
+}
+
+#editSecurityProfileTable tr td p{
+    // border: 2px solid green;
+    margin: auto;
+}
+
+#editSecurityProfileTable tr td input{
+    width: 90%;
+}
+
+#editSecurityProfileTable tr td input[type="button"]{
+    width: auto;
+}
+
+#editSecurityProfileTable tr td select{
+    cursor: pointer;
+    width: 85%;
 }

@@ -10,4 +10,9 @@ class SecurityProfilesController extends Controller
     {
         return view('pages.securityProfile');
     }
+
+    public function edit()
+    {
+        return view('pages.editSecurityProfile');
+    }
 }

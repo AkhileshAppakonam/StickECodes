@@ -9,7 +9,7 @@
                 <div class="col-md-12 securityProfiles">
                     <div class="container py-3 px-4" data-toggle="collapse" data-target="#securityProfile" aria-expanded="false" aria-controls="collapseExample" onclick="securityProfileHeader(this)">
                         <h3>Security Profile 1</h3>
-                        <a href="" class="btn btn-primary" onclick="stopProp(this)">Edit Security Profile</a>
+                        <a href="/public/index.php/securityProfilePage/edit" class="btn btn-primary" onclick="stopProp(this)">Edit Security Profile</a>
                     </div>
                     <div class="row mx-1 collapse" id="securityProfile">
                         <div class="col-md-12 px-0 linkedCodesHeader">
@@ -77,31 +77,6 @@
                             </div>
                             <div class="permissions py-2 pr-5">
                                 <table>
-                                    <tr>
-                                        <th>1.</th>
-                                        <th>User 1</th>
-                                        <th>Full Control</th>
-                                    </tr>
-                                    <tr>
-                                        <th>2.</th>
-                                        <th>User 2</th>
-                                        <th>View and Update</th>
-                                    </tr>
-                                    <tr>
-                                        <th>3.</th>
-                                        <th>User 3</th>
-                                        <th>View Only</th>
-                                    </tr>
-                                    <tr>
-                                        <th>4.</th>
-                                        <th>User 4</th>
-                                        <th>View and Update</th>
-                                    </tr>
-                                    <tr>
-                                        <th>5.</th>
-                                        <th>User 5</th>
-                                        <th>Full Control</th>
-                                    </tr>
                                     <tr>
                                         <th>1.</th>
                                         <th>User 1</th>
