@@ -11339,6 +11339,7 @@ a.text-dark:focus {
   width: 100%;
   display: table;
   height: auto;
+  counter-reset: row-num -1;
 }
 
 #editSecurityProfileTable tr {
@@ -11346,6 +11347,12 @@ a.text-dark:focus {
   width: 100%;
   height: auto;
   display: flex;
+  counter-increment: row-num;
+}
+
+#editSecurityProfileTable tr td:first-child::before {
+  margin-left: 3rem;
+  content: counter(row-num) ". ";
 }
 
 #editSecurityProfileTable tr th {
@@ -11388,12 +11395,23 @@ a.text-dark:focus {
   width: 90%;
 }
 
-#editSecurityProfileTable tr td input[type=button] {
+#editSecurityProfileTable tr td input.remove {
   width: auto;
 }
 
 #editSecurityProfileTable tr td select {
   cursor: pointer;
   width: 85%;
+}
+
+#editSecurityProfile .submitContainer {
+  width: auto;
+  display: flex;
+}
+
+#editSecurityProfile input[type=submit] {
+  width: auto;
+  margin: auto;
+  margin-right: 0px;
 }
 

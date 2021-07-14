@@ -565,6 +565,7 @@
     display: table;
     height: auto;
     // border: 2px solid green;
+    counter-reset: row-num -1;
 }
 
 #editSecurityProfileTable tr{
@@ -573,6 +574,12 @@
     height: auto;
     display: flex;
     // border: 2px solid blue;
+    counter-increment: row-num;
+}
+
+#editSecurityProfileTable tr td:first-child::before {
+    margin-left: 3rem;
+    content: counter(row-num) ". ";
 }
 
 #editSecurityProfileTable tr th{
@@ -618,11 +625,23 @@
     width: 90%;
 }
 
-#editSecurityProfileTable tr td input[type="button"]{
+#editSecurityProfileTable tr td input.remove{
     width: auto;
 }
 
 #editSecurityProfileTable tr td select{
     cursor: pointer;
     width: 85%;
+}
+
+#editSecurityProfile .submitContainer{
+    width: auto;
+    display: flex;
+    // border: 2px solid green;
+}
+
+#editSecurityProfile input[type="submit"]{
+    width: auto;
+    margin: auto;
+    margin-right: 0px;
 }
