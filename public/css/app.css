@@ -11319,6 +11319,21 @@ a.text-dark:focus {
   width: 50%;
 }
 
+#editSecurityProfile .form-group .container {
+  display: flex;
+  align-items: center;
+}
+
+#editSecurityProfile h2 {
+  width: 100%;
+}
+
+#editSecurityProfile .addRow {
+  position: relative;
+  width: auto;
+  height: auto;
+}
+
 #editSecurityProfileTable {
   position: relative;
   width: 100%;

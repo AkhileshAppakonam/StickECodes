@@ -537,7 +537,25 @@
     // border: 2px solid green;
 }
 
+#editSecurityProfile .form-group .container{
+    display: flex;
+    align-items: center;
+    // border: 2px solid blue;
+}
+
 #editSecurityProfile h2{
+    width: 100%;
+    // border: 2px solid green;
+}
+
+#editSecurityProfile .form-group .container div{
+    // border: 2px solid green;
+}
+
+#editSecurityProfile .addRow{
+    position: relative;
+    width: auto;
+    height: auto;
     // border: 2px solid green;
 }
 
