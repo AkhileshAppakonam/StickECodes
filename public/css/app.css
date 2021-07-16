@@ -11173,13 +11173,29 @@ a.text-dark:focus {
   cursor: pointer;
 }
 
+#securityProfiles .container .securityProfiles .container:hover h3 {
+  text-decoration: underline;
+}
+
 #securityProfiles .container .securityProfiles .container h3 {
   position: relative;
   width: auto;
   height: auto;
   margin: auto;
   margin-left: 0px;
+  margin-right: 0px;
   font-weight: bold;
+}
+
+#securityProfiles .container .securityProfiles .container p {
+  position: relative;
+  width: auto;
+  height: auto;
+  margin: auto;
+  text-decoration: underline;
+  -webkit-text-decoration-style: dashed;
+          text-decoration-style: dashed;
+  text-underline-offset: 5px;
 }
 
 #securityProfiles .container .securityProfiles .container a {
@@ -11188,6 +11204,7 @@ a.text-dark:focus {
   height: auto;
   margin: auto;
   margin-right: 0px;
+  margin-left: 0px;
 }
 
 #securityProfiles .linkedCodesHeader {

@@ -321,14 +321,30 @@
     // box-shadow: 5px 10px 18px lightblue;
 }
 
+#securityProfiles .container .securityProfiles .container:hover h3{
+    text-decoration: underline;
+}
+
 #securityProfiles .container .securityProfiles .container h3{
     position: relative;
     width: auto;
     height: auto;
     margin: auto;
     margin-left: 0px;
+    margin-right: 0px;
     // border: 2px solid green;
     font-weight: bold;
+}
+
+#securityProfiles .container .securityProfiles .container p{
+    position: relative;
+    width: auto;
+    height: auto;
+    margin: auto;
+    // border: 2px solid green;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-underline-offset: 5px;
 }
 
 #securityProfiles .container .securityProfiles .container a{
@@ -337,6 +353,7 @@
     height: auto;
     margin: auto;
     margin-right: 0px;
+    margin-left: 0px;
     // border: 2px solid green;
 }
 

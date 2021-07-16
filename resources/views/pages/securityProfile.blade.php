@@ -8,7 +8,8 @@
             <div class="row shadow-lg ml-5 mr-3 mb-5 bg-white rounded">
                 <div class="col-md-12 securityProfiles">
                     <div class="container py-3 px-4" data-toggle="collapse" data-target="#securityProfile" aria-expanded="false" aria-controls="collapseExample" onclick="securityProfileHeader(this)">
-                        <h3>Security Profile 1</h3>
+                        <h3>Security Profile 1:</h3>
+                        <p>4 linked codes with 5 User Permissions</p>
                         <a href="/public/index.php/securityProfilePage/edit" class="btn btn-primary" onclick="stopProp(this)">Edit Security Profile</a>
                     </div>
                     <div class="row mx-1 collapse" id="securityProfile">

@@ -17,7 +17,7 @@
                         <div class="container px-0 border-bottom">
                             <h2 class="py-3">Profile Users</h2>
                             <div class="pr-1">
-                                <input type="button" value="Add User" class="add btn btn-dark addRow" onclick="addUser()">
+                                <input type="button" value="Add Row" class="btn btn-dark addRow" onclick="addUser()">
                             </div>
                         </div>
 
