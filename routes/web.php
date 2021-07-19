@@ -23,6 +23,9 @@ Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index');
 
-Route::get('/codes/{codeId}/editPage', 'CodesController@edit');
+Route::get('/codes/{codeId}/editPage', 'CodesController@show');
 Route::get('/securityProfilePage', 'SecurityProfilesController@index');
 Route::get('/securityProfilePage/edit', 'SecurityProfilesController@edit');
+
+// Form Requests
+Route::post('/codes/{codeId}/editPage', 'CodesController@edit');
