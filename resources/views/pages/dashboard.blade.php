@@ -10,7 +10,9 @@
         </div>
     @endif
 
-    <div class="row justify-content-center">
+    @include('inc.messages')
+
+    <div class="row justify-content-left ml-2">
         @if (count($codes) > 0)
             @foreach ($codes as $code)
                 <div class="col-md-4 col-sm-4">
@@ -23,7 +25,7 @@
                                 <h3>{{$code -> code_title}}</h3>
                                 <small class="ml-1">{{$code -> code_name}}</small>
                             </div>
-                            <p class="ml-1">Insert Title Description for Public Page Here</p>
+                            <p class="ml-1">{{$code -> page_title}}</p>
                             <hr>
                             <div>
                                 <a href="#" class="btn btn-outline-dark">View Page</a>

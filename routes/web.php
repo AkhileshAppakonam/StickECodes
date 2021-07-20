@@ -28,4 +28,4 @@ Route::get('/securityProfilePage', 'SecurityProfilesController@index');
 Route::get('/securityProfilePage/edit', 'SecurityProfilesController@edit');
 
 // Form Requests
-Route::post('/codes/{codeId}/editPage', 'CodesController@edit');
+Route::post('/codes/{codeId}/{pageId}/editPage', 'CodesController@edit');
