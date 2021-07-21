@@ -5,7 +5,7 @@
         <div class="container">
             <header class="mb-5"><h1>Your Security Profiles</h1></header>
 
-            <div class="row shadow-lg ml-5 mr-3 mb-5 bg-white rounded">
+            <div class="row shadow ml-5 mr-3 mb-5 bg-white rounded">
                 <div class="col-md-12 securityProfiles">
                     <div class="container py-3 px-4" data-toggle="collapse" data-target="#securityProfile" aria-expanded="false" aria-controls="collapseExample" onclick="securityProfileHeader(this)">
                         <h3>Security Profile 1:</h3>
@@ -109,6 +109,12 @@
                     </div>
                 </div>
             </div> 
+
+            <div class="row ml-5 mr-3 mb-5 createNew">
+                <div class="col-md-12 newSecurityProfiles px-1">
+                    <a href="#" class="py-3">Create New Security Profile <i class="fa fa-plus ml-2"></i></a>
+                </div>
+            </div>
         </div>
     </section>
 

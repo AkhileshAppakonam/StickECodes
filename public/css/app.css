@@ -11332,6 +11332,24 @@ a.text-dark:focus {
   text-align: center;
 }
 
+#securityProfiles .container .createNew {
+  background: none;
+}
+
+#securityProfiles .container .newSecurityProfiles {
+  padding: 0px;
+  display: flex;
+}
+
+#securityProfiles .container .newSecurityProfiles a {
+  width: 100%;
+  text-align: center;
+  border: 2px dotted;
+  font-weight: bold;
+  font-size: 18px;
+  border-radius: 5px;
+}
+
 #editSecurityProfile input {
   width: 50%;
 }

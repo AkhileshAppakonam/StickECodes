@@ -281,21 +281,21 @@
 
 // Security Profiles Page
 
-// #securityProfiles{
-//     // border: 2px solid red;
-// }
+#securityProfiles{
+    // border: 2px solid red;
+}
 
-// #securityProfiles .container{
-//     // border: 2px solid blue;
-// }
+#securityProfiles .container{
+    // border: 2px solid blue;
+}
 
-// #securityProfiles .container header{
-//     // border: 2px solid green;
-// }
+#securityProfiles .container header{
+    // border: 2px solid green;
+}
 
-// #securityProfiles .container header h1{
-//     // border: 2px solid red;
-// }
+#securityProfiles .container header h1{
+    // border: 2px solid red;
+}
 
 #securityProfiles .container .row{
     // border: 2px solid red;
@@ -516,38 +516,59 @@
     text-align: center;
 }
 
+#securityProfiles .container .createNew{
+    background: none;
+}
+
+#securityProfiles .container .newSecurityProfiles{
+    padding: 0px;
+    display: flex;
+    // border: 2px solid green;
+}
+
+#securityProfiles .container .newSecurityProfiles a{
+    width: 100%;
+    text-align: center;
+    border: 2px dotted;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+
 // Edit Security Profiles Page
-#editSecurityProfile{
-    // border: 2px solid red;
-}
 
-#editSecurityProfile form{
-    // border: 2px solid yellow;
-}
+// #editSecurityProfile{
+//     // border: 2px solid red;
+// }
 
-#editSecurityProfile .container{
-    // border: 2px solid red;
-}
+// #editSecurityProfile form{
+//     // border: 2px solid yellow;
+// }
 
-#editSecurityProfile .container header{
-    // border: 2px solid blue;
-}
+// #editSecurityProfile .container{
+//     // border: 2px solid red;
+// }
 
-#editSecurityProfile .container header h1{
-    // border: 2px solid green;
-}
+// #editSecurityProfile .container header{
+//     // border: 2px solid blue;
+// }
 
-#editSecurityProfile .row{
-    // border: 2px solid blue;
-}
+// #editSecurityProfile .container header h1{
+//     // border: 2px solid green;
+// }
 
-#editSecurityProfile .form-group{
-    // border: 2px solid red;
-}
+// #editSecurityProfile .row{
+//     // border: 2px solid blue;
+// }
 
-#editSecurityProfile label{
-    // border: 2px solid green;
-}
+// #editSecurityProfile .form-group{
+//     // border: 2px solid red;
+// }
+
+// #editSecurityProfile label{
+//     // border: 2px solid green;
+// }
 
 #editSecurityProfile input{
     width: 50%;
@@ -565,9 +586,9 @@
     // border: 2px solid green;
 }
 
-#editSecurityProfile .form-group .container div{
-    // border: 2px solid green;
-}
+// #editSecurityProfile .form-group .container div{
+//     // border: 2px solid green;
+// }
 
 #editSecurityProfile .addRow{
     position: relative;
