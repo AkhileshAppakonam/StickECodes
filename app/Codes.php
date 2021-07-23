@@ -15,4 +15,12 @@ class Codes extends Model
     protected $primaryKey = 'id';
     // Timestamps
     public $timestamps = true;
+
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
+
+    public function pages(){
+        return $this->hasMany(Pages::class, 'code_id', 'id');
+    }
 }

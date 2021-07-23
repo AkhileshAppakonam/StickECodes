@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Codes;
 use App\Pages;
+use App\User;
 
 class DashboardController extends Controller
 {
@@ -26,7 +27,9 @@ class DashboardController extends Controller
     public function index()
     {
         $authId = auth()->user()->id;
-        $codes = Codes::Join('pages', 'pages.code_id', '=', 'codes.id')->where('user_id', $authId)->select('codes.id', 'code_title', 'code_name', 'page_title')->get();
-        return view('pages.dashboard')->with('codes', $codes);
+        // $codes = Codes::Join('pages', 'pages.code_id', '=', 'codes.id')->where('user_id', $authId)->select('codes.id', 'code_title', 'code_name', 'page_title')->get();
+        // return view('pages.dashboard')->with('codes', $codes);
+        $user = User::find($authId);
+        return view('pages.dashboard')->with('codes', $user->codes);
     }
 }

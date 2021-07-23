@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\SecurityProfiles;
+use App\Pages;
+use App\Codes;
 
 class SecurityProfilesController extends Controller
 {
@@ -21,6 +23,7 @@ class SecurityProfilesController extends Controller
     {
         $authId = auth()->user()->id;
         $securityProfiles = SecurityProfiles::where('user_id', $authId)->get();
+        
         return view('pages.securityProfile')->with('securityProfiles', $securityProfiles);
     }
 
