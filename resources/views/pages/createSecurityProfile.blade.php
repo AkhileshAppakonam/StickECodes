@@ -1,28 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-    <section id="editSecurityProfile">
-        <form id="editSecurityProfileForm" name="editSecurityProfileForm" enctype="multipart/form-data" action="" method="POST">
+    <section id="createSecurityProfile">
+        <form id="createSecurityProfileForm" name="createSecurityProfileForm" enctype="multipart/form-data" action="" method="POST">
             @csrf
 
             <div class="container">
-                <header class="mb-4"><h1>Edit Security Profile</h1></header>
+                <header class="mb-4"><h1>New Security Profile</h1></header>
 
                 <div class="row m-2">
                     <div class="form-group col-12 headerDetails">
                         <div class="form-group col-6 px-0">
                             <label for="securityProfileTitle" class="col-form-label">Profile Name</label>
-                            <input id="securityProfileTitle" type="text" class="form-control" placeholder="Insert Profile Name Here" value="{{$securityProfile -> profile_name}}" required>
+                            <input id="securityProfileTitle" type="text" class="form-control" placeholder="Insert Profile Name Here" required>
                         </div>
                         <div class="form-group col-6 pl-4" >
                             <div class="container p-0">
-                                <label for="public" class="col-form-label mb-2 px-1">Public</label>
+                                <label for="public" class="col-form-label mb-2 px-1" disable>Public</label>
                             </div>
-                            <input type="checkbox" id="public" name="public" value="gpub" class="ml-3" 
-                                @if (($securityProfile -> profile_type) === "gpub")
-                                    {{"checked"}}
-                                @endif
-                            >
+                            <input type="checkbox" id="public" name="public" value="gpub" class="ml-3">
                         </div>
                     </div>
                     <div class="form-group col-12">
@@ -33,7 +29,7 @@
                             </div>
                         </div>
 
-                        <table id="editSecurityProfileTable">
+                        <table id="createSecurityProfileTable">
                             <tr class="mb-3 pb-2 pt-1 border-bottom">
                                 <th>Row</th>
                                 <th>Email Address</th>
@@ -72,7 +68,7 @@
         }
 
         function addUser() {
-            var start = $('#editSecurityProfileTable'),
+            var start = $('#createSecurityProfileTable'),
                 newRow = $('<tr class="mb-2 pb-3 border-bottom"><td><p></p></td>' +
                         '<td><input type="text" class="form-control" placeholder="Insert Email Address Here"></td>' +
                         '<td><input type="text" class="form-control" placeholder="Insert Name Here"></td>' +

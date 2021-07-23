@@ -11332,6 +11332,10 @@ a.text-dark:focus {
   text-align: center;
 }
 
+#securityProfiles .noSecProfiles p {
+  text-align: center;
+}
+
 #securityProfiles .container .createNew {
   background: none;
 }
@@ -11350,8 +11354,31 @@ a.text-dark:focus {
   border-radius: 5px;
 }
 
+#editSecurityProfile .form-group.headerDetails {
+  display: flex;
+}
+
+#editSecurityProfile .form-group .form-group {
+  display: block;
+}
+
+#editSecurityProfile label {
+  width: auto;
+}
+
 #editSecurityProfile input {
-  width: 50%;
+  width: 100%;
+}
+
+#editSecurityProfile input[type=checkbox] {
+  width: auto;
+  cursor: pointer;
+  transform: scale(1.25);
+  margin-left: 0px;
+}
+
+#editSecurityProfile label[for=public] {
+  cursor: pointer;
 }
 
 #editSecurityProfile .form-group .container {
@@ -11445,6 +11472,129 @@ a.text-dark:focus {
 }
 
 #editSecurityProfile input[type=submit] {
+  width: auto;
+  margin: auto;
+  margin-right: 0px;
+}
+
+#createSecurityProfile .form-group.headerDetails {
+  display: flex;
+}
+
+#createSecurityProfile .form-group .form-group {
+  display: block;
+}
+
+#createSecurityProfile label {
+  width: auto;
+}
+
+#createSecurityProfile input {
+  width: 100%;
+}
+
+#createSecurityProfile input[type=checkbox] {
+  width: auto;
+  cursor: pointer;
+  transform: scale(1.25);
+  margin-left: 0px;
+}
+
+#createSecurityProfile label[for=public] {
+  cursor: pointer;
+}
+
+#createSecurityProfile .form-group .container {
+  display: flex;
+  align-items: center;
+}
+
+#createSecurityProfile h2 {
+  width: 100%;
+}
+
+#createSecurityProfile .addRow {
+  position: relative;
+  width: auto;
+  height: auto;
+}
+
+#createSecurityProfileTable {
+  position: relative;
+  width: 100%;
+  display: table;
+  height: auto;
+  counter-reset: row-num -1;
+}
+
+#createSecurityProfileTable tr {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: flex;
+  counter-increment: row-num;
+}
+
+#createSecurityProfileTable tr td:first-child::before {
+  margin-left: 3rem;
+  content: counter(row-num) ". ";
+}
+
+#createSecurityProfileTable tr th {
+  position: relative;
+  width: 25%;
+  height: auto;
+  display: inline-block;
+}
+
+#createSecurityProfileTable tr th:first-child {
+  width: 10%;
+  text-align: center;
+}
+
+#createSecurityProfileTable tr th:last-child {
+  width: 15%;
+}
+
+#createSecurityProfileTable tr td {
+  position: relative;
+  width: 25%;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+
+#createSecurityProfileTable tr td:first-child {
+  width: 10%;
+}
+
+#createSecurityProfileTable tr td:last-child {
+  width: 15%;
+}
+
+#createSecurityProfileTable tr td p {
+  margin: auto;
+}
+
+#createSecurityProfileTable tr td input {
+  width: 90%;
+}
+
+#createSecurityProfileTable tr td input.remove {
+  width: auto;
+}
+
+#createSecurityProfileTable tr td select {
+  cursor: pointer;
+  width: 85%;
+}
+
+#createSecurityProfile .submitContainer {
+  width: auto;
+  display: flex;
+}
+
+#createSecurityProfile input[type=submit] {
   width: auto;
   margin: auto;
   margin-right: 0px;

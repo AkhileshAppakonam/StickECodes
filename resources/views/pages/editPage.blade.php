@@ -30,16 +30,26 @@
                                 <div class="container p-0 ml-0">
                                     <label for="chooseSP" class="col-md-0 col-form-label text-md-right">Select a Security Profile</label>
                                     <select id="chooseSP" name="securityProfile" class="form-control">
-                                        <option value="SecurityProfile1">Security Profile 1</option>
-                                        <option value="SecurityProfile2">Security Profile 2</option>
-                                        <option value="SecurityProfile3">Security Profile 3</option>
+
+                                        @if (count($securityProfiles) > 0)
+                                            @foreach ($securityProfiles as $securityProfile)
+                                                <option value="{{$securityProfile -> id}}"
+                                                    @if (($page -> security_profile_id) === ($securityProfile -> id))
+                                                        {{"selected"}}
+                                                    @endif
+                                                >{{$securityProfile -> profile_name}}</option>
+                                            @endforeach
+                                        @else
+                                            <option value="">No Security Profiles</option>
+                                        @endif
+
                                     </select>
                                 </div>
                                 <div class="or">
                                     <p class="p-0">OR</p>
                                 </div>
                                 <div class="container p-0 mr-0 makeSP">
-                                    <a href="#" class="btn btn-primary">Make a New Security Profile</a>
+                                    <a href="/public/index.php/securityProfilePage/create" class="btn btn-primary">Make a New Security Profile</a>
                                 </div>
                             </div>
                         </div>

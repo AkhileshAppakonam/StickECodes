@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Codes;
 use App\Pages;
+use App\SecurityProfiles;
 
 class CodesController extends Controller
 {
@@ -27,7 +28,8 @@ class CodesController extends Controller
             abort(403, 'Unauthorized action.');
         } else{
             $page = Pages::where('code_id', $codeId)->get()->first();
-            return view('pages.editPage')->with(['code'=>$code, 'page'=>$page]);
+            $securityProfiles = SecurityProfiles::select('id', 'profile_name')->where('user_id', $authId)->get();
+            return view('pages.editPage')->with(['code'=>$code, 'page'=>$page, 'securityProfiles'=>$securityProfiles]);
         }
     }
 
@@ -35,7 +37,8 @@ class CodesController extends Controller
     {
         $this->validate($request, [
             'codeTitle' => 'required',
-            'pageTitle' => 'required'
+            'pageTitle' => 'required',
+            'securityProfile' => 'required'
         ]);
 
         $code = Codes::find($codeId);
@@ -43,6 +46,7 @@ class CodesController extends Controller
         $code->save();
 
         $page = Pages::find($pageId);
+        $page->security_profile_id = $request->input('securityProfile');
         $page->page_title = $request->input('pageTitle');
         $page->save();
 
