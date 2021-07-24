@@ -25,7 +25,11 @@
                                 <h3>{{$code -> code_title}}</h3>
                                 <small class="ml-1">{{$code -> code_name}}</small>
                             </div>
-                            <p class="ml-1">{{$code -> page_title}}</p>
+                            @foreach ($pages as $page)
+                                @if (($code->id) === ($page->code_id))
+                                    <p class="ml-1">{{$page -> page_title}}</p>
+                                @endif
+                            @endforeach
                             <hr>
                             <div>
                                 <a href="#" class="btn btn-outline-dark">View Page</a>

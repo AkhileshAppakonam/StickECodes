@@ -38,6 +38,14 @@ class User extends Authenticatable
     ];
 
     public function codes(){
-        return $this->hasMany('App\Codes');
+        return $this->hasMany(Codes::class);
+    }
+
+    public function pages() {
+        return $this->hasManyThrough('App\Pages', 'App\Codes', 'user_id', 'code_id', 'id', 'id');
+    }
+
+    public function securityProfiles() {
+        return $this->hasMany(SecurityProfiles::class);
     }
 }

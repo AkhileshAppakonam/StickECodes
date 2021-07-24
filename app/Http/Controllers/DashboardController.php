@@ -30,6 +30,9 @@ class DashboardController extends Controller
         // $codes = Codes::Join('pages', 'pages.code_id', '=', 'codes.id')->where('user_id', $authId)->select('codes.id', 'code_title', 'code_name', 'page_title')->get();
         // return view('pages.dashboard')->with('codes', $codes);
         $user = User::find($authId);
-        return view('pages.dashboard')->with('codes', $user->codes);
+        $codes = $user->codes;
+        $pages = $user->pages;
+
+        return view('pages.dashboard')->with(['codes'=>$codes, 'pages'=>$pages]);
     }
 }

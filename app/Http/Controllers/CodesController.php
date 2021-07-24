@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Codes;
 use App\Pages;
 use App\SecurityProfiles;
+use App\User;
 
 class CodesController extends Controller
 {
@@ -22,13 +23,17 @@ class CodesController extends Controller
     public function show($codeId)
     {
         $authId = auth()->user()->id;
-        $code = Codes::where('id', $codeId)->where('user_id', $authId)->first();
+        $user = User::find($authId);
+        $code = $user->codes->where('id', $codeId)->first();
+        $page = $user->pages->where('code_id', $codeId)->first();
+        $securityProfiles = $user->securityProfiles;
+        // $code = Codes::where('id', $codeId)->where('user_id', $authId)->first();
 
         if (empty($code)) {
             abort(403, 'Unauthorized action.');
         } else{
-            $page = Pages::where('code_id', $codeId)->get()->first();
-            $securityProfiles = SecurityProfiles::select('id', 'profile_name')->where('user_id', $authId)->get();
+            // $page = Pages::where('code_id', $codeId)->get()->first();
+            // $securityProfiles = SecurityProfiles::select('id', 'profile_name')->where('user_id', $authId)->get();
             return view('pages.editPage')->with(['code'=>$code, 'page'=>$page, 'securityProfiles'=>$securityProfiles]);
         }
     }
