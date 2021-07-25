@@ -10,7 +10,7 @@ class SecurityProfiles extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function linkedCodes() {
-        return $this->hasManyThrough(Codes::class, Pages::class, 'security_profile_id', 'user_id', 'id', 'code_id');
+    public function pages() {
+        return $this->hasMany(Pages::class, 'security_profile_id', 'id');
     }
 }

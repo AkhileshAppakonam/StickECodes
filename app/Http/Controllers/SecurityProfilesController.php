@@ -25,14 +25,25 @@ class SecurityProfilesController extends Controller
         $authId = auth()->user()->id;
         $user = User::find($authId);
         $securityProfiles = $user->securityProfiles;
-        $linkedCodes = $user->linkedCodes;
+        $codes = $user->codes;
+        $pages = $user->pages;
+        $counts = $user->pages->groupBy('security_profile_id')->map->count();
 
-        echo $securityProfiles;
-        echo "<br>";
-        echo "<br>";
-        echo $linkedCodes;
 
-        // return view('pages.securityProfile')->with(['securityProfiles'=>$securityProfiles, 'codes'=>$codes, 'pages'=>$pages]);
+        // echo $securityProfiles;
+        // echo "<br>";
+        // echo "<br>";
+        // echo $codes;
+        // echo "<br>";
+        // echo "<br>";
+        // echo $pages;
+        // echo "<br>";
+        // echo "<br>";
+        // echo $counts;
+        // echo "<br>";
+        // echo "<br>";
+
+        return view('pages.securityProfile')->with(['securityProfiles'=>$securityProfiles, 'codes'=>$codes, 'pages'=>$pages, 'counts'=>$counts]);
     }
 
     public function show($secProfileId)

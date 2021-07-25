@@ -11,21 +11,31 @@
                         <div class="col-md-12 securityProfiles">
                             <div class="container py-3 px-4" onclick="securityProfileHeader(this)">
                                 <h3>{{$securityProfile -> profile_name}}:</h3>
-                                <p>4 linked codes with 5 User Permissions</p>
+                                @if (count($counts) > 0)
+                                    @foreach ($counts as $key => $count)
+                                        @if ($key === $securityProfile->id)
+                                            <p>{{$count}} linked @if ($count > 1) {{"codes"}} @else {{"code"}} @endif with 5 User Permissions</p>
+                                        @endif
+                                    @endforeach                    
+                                @endif
                                 <a href="/public/index.php/securityProfilePage/{{$securityProfile -> id}}/editSecurityProfile" class="btn btn-primary" onclick="stopProp(this)">Edit Security Profile</a>
                             </div>
                             <div class="row mx-1 collapse">
                                 <div class="col-md-12 px-0 linkedCodesHeader">
-                                    <h4>Linked Codes (4)</h4>
+                                    @if (count($counts) > 0)
+                                        @foreach ($counts as $key => $count)
+                                            @if ($key === $securityProfile->id)
+                                                <h4>Linked Codes ({{$count}})</h4>
+                                            @endif
+                                        @endforeach                    
+                                    @endif
                                     <h4>Permissions (5)</h4>
                                 </div>
                                 <div class="col-md-12 px-0 pr-2 profileDetails">
                                     <div class="card-container">
-
-
-                                        @foreach ($pages as $page)
-                                            @if (($securityProfile->id) === ($page->security_profile_id))
-                                                @foreach ($codes as $code)
+                                        @foreach ($codes as $code)
+                                            @foreach ($pages as $page)
+                                                @if (($code->id) === ($page->code_id) && ($securityProfile->id) === ($page->security_profile_id))
                                                     <div class="card">
                                                         <article>
                                                             <figure class="mb-0">
@@ -36,18 +46,13 @@
                                                                     <h3>{{$code -> code_title}}</h3>
                                                                     <small class="ml-1">{{$code -> code_name}}</small>
                                                                 </div>
-                                                                @if (($code->id) === ($page->code_id))
-                                                                    <p class="ml-1">{{$page -> page_title}}</p>
-                                                                @endif
+                                                                <p class="ml-1">{{$page -> page_title}}</p>
                                                             </div>
                                                         </article>
                                                     </div>
-                                                @endforeach
-                                            @endif
+                                                @endif
+                                            @endforeach
                                         @endforeach
-
-
-
                                         {{-- <div class="card">
                                             <article>
                                                 <figure class="mb-0">
