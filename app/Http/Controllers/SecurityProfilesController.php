@@ -29,21 +29,32 @@ class SecurityProfilesController extends Controller
         $pages = $user->pages;
         $counts = $user->pages->groupBy('security_profile_id')->map->count();
 
+        $tests = Codes::find($authId)->user->securityProfiles;
 
-        // echo $securityProfiles;
-        // echo "<br>";
-        // echo "<br>";
-        // echo $codes;
-        // echo "<br>";
-        // echo "<br>";
-        // echo $pages;
-        // echo "<br>";
-        // echo "<br>";
-        // echo $counts;
-        // echo "<br>";
-        // echo "<br>";
 
-        return view('pages.securityProfile')->with(['securityProfiles'=>$securityProfiles, 'codes'=>$codes, 'pages'=>$pages, 'counts'=>$counts]);
+        echo $securityProfiles;
+        echo "<br>";
+        echo "<br>";
+        echo $codes;
+        echo "<br>";
+        echo "<br>";
+        echo $pages;
+        echo "<br>";
+        echo "<br>";
+        echo $counts;
+        echo "<br>";
+        echo "<br>";
+        echo $tests;
+        echo "<br>";
+        echo "<br>";
+
+        foreach ($tests as $test) {
+            echo $test->profile_name;
+            echo "<br>";
+            echo "<br>";
+        }
+
+        // return view('pages.securityProfile')->with(['securityProfiles'=>$securityProfiles, 'codes'=>$codes, 'pages'=>$pages, 'counts'=>$counts]);
     }
 
     public function show($secProfileId)
