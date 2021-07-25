@@ -42,7 +42,7 @@ class User extends Authenticatable
     }
 
     public function pages() {
-        return $this->hasManyThrough('App\Pages', 'App\Codes', 'user_id', 'code_id', 'id', 'id');
+        return $this->hasManyThrough(Pages::class, Codes::class, 'user_id', 'code_id', 'id', 'id');
     }
 
     public function securityProfiles() {

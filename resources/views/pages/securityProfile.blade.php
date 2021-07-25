@@ -21,7 +21,34 @@
                                 </div>
                                 <div class="col-md-12 px-0 pr-2 profileDetails">
                                     <div class="card-container">
-                                        <div class="card">
+
+
+                                        @foreach ($pages as $page)
+                                            @if (($securityProfile->id) === ($page->security_profile_id))
+                                                @foreach ($codes as $code)
+                                                    <div class="card">
+                                                        <article>
+                                                            <figure class="mb-0">
+                                                                <div class="image"><img src="../images/stickecode.png" height="200px" width="200px"></div>
+                                                            </figure>
+                                                            <div class="description">
+                                                                <div class="codeTitles">
+                                                                    <h3>{{$code -> code_title}}</h3>
+                                                                    <small class="ml-1">{{$code -> code_name}}</small>
+                                                                </div>
+                                                                @if (($code->id) === ($page->code_id))
+                                                                    <p class="ml-1">{{$page -> page_title}}</p>
+                                                                @endif
+                                                            </div>
+                                                        </article>
+                                                    </div>
+                                                @endforeach
+                                            @endif
+                                        @endforeach
+
+
+
+                                        {{-- <div class="card">
                                             <article>
                                                 <figure class="mb-0">
                                                     <div class="image"><img src="../images/stickecode.png" height="200px" width="200px"></div>
@@ -76,7 +103,7 @@
                                                     <p class="ml-1">Insert Title Description for Public Page Here</p>
                                                 </div>
                                             </article>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="permissions py-2 pr-5">
                                         <table>

@@ -25,8 +25,6 @@ class CodesController extends Controller
         $authId = auth()->user()->id;
         $user = User::find($authId);
         $code = $user->codes->where('id', $codeId)->first();
-        $page = $user->pages->where('code_id', $codeId)->first();
-        $securityProfiles = $user->securityProfiles;
         // $code = Codes::where('id', $codeId)->where('user_id', $authId)->first();
 
         if (empty($code)) {
@@ -34,6 +32,8 @@ class CodesController extends Controller
         } else{
             // $page = Pages::where('code_id', $codeId)->get()->first();
             // $securityProfiles = SecurityProfiles::select('id', 'profile_name')->where('user_id', $authId)->get();
+            $page = $user->pages->where('code_id', $codeId)->first();
+            $securityProfiles = $user->securityProfiles;
             return view('pages.editPage')->with(['code'=>$code, 'page'=>$page, 'securityProfiles'=>$securityProfiles]);
         }
     }

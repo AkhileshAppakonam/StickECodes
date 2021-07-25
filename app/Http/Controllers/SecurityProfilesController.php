@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\SecurityProfiles;
 use App\Pages;
 use App\Codes;
+use App\User;
 
 class SecurityProfilesController extends Controller
 {
@@ -22,9 +23,16 @@ class SecurityProfilesController extends Controller
     public function index()
     {
         $authId = auth()->user()->id;
-        $securityProfiles = SecurityProfiles::where('user_id', $authId)->get();
-        
-        return view('pages.securityProfile')->with('securityProfiles', $securityProfiles);
+        $user = User::find($authId);
+        $securityProfiles = $user->securityProfiles;
+        $linkedCodes = $user->linkedCodes;
+
+        echo $securityProfiles;
+        echo "<br>";
+        echo "<br>";
+        echo $linkedCodes;
+
+        // return view('pages.securityProfile')->with(['securityProfiles'=>$securityProfiles, 'codes'=>$codes, 'pages'=>$pages]);
     }
 
     public function show($secProfileId)
