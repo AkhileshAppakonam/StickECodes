@@ -49,7 +49,7 @@ class SecurityProfilesController extends Controller
         echo "<br>";
 
         foreach ($tests as $test) {
-            echo $test->profile_name;
+            echo $test;
             echo "<br>";
             echo "<br>";
         }
