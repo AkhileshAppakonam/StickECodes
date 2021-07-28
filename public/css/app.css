@@ -11243,6 +11243,24 @@ a.text-dark:focus {
   display: flex;
 }
 
+#securityProfiles .card.noCodes {
+  width: 75%;
+  justify-content: center;
+  margin: 0px auto;
+}
+
+#securityProfiles .card.noCodes h3 {
+  width: 50%;
+  font-size: 30px;
+  text-align: center;
+  line-height: 3rem;
+}
+
+#securityProfiles .card.noCodes .description {
+  justify-content: center;
+  display: flex;
+}
+
 #securityProfiles .card:hover {
   cursor: pointer;
 }

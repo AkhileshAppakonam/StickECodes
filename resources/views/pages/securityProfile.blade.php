@@ -5,69 +5,54 @@
         <div class="container">
             <header class="mb-5"><h1>Your Security Profiles</h1></header>
 
-            @if (count($securityProfiles) > 0)
-                @foreach ($securityProfiles as $securityProfile)
+            @if (!$user->securityProfiles->isEmpty())
+                @foreach ($user->securityProfiles as $securityProfile)
                     <div class="row shadow ml-5 mr-3 mb-5 bg-white rounded">
                         <div class="col-md-12 securityProfiles">
                             <div class="container py-3 px-4" onclick="securityProfileHeader(this)">
                                 <h3>{{$securityProfile -> profile_name}}:</h3>
-                                @if (count($counts) > 0)
-                                    @foreach ($counts as $key => $count)
-                                        @if ($key === $securityProfile->id)
-                                            <p>{{$count}} linked @if ($count > 1) {{"codes"}} @else {{"code"}} @endif with 5 User Permissions</p>
-                                        @endif
-                                    @endforeach                    
+                                @if (($count = $securityProfile->codes->count()) > 0)
+                                    <p>{{$count}} Linked @if ($count>1) {{"Codes"}} @else {{"Code"}} @endif with 5 User Permissions</p>
+                                @else
+                                    <p>No Codes Currently Linked</p>
                                 @endif
                                 <a href="/public/index.php/securityProfilePage/{{$securityProfile -> id}}/editSecurityProfile" class="btn btn-primary" onclick="stopProp(this)">Edit Security Profile</a>
                             </div>
                             <div class="row mx-1 collapse">
                                 <div class="col-md-12 px-0 linkedCodesHeader">
-                                    @if (count($counts) > 0)
-                                        @foreach ($counts as $key => $count)
-                                            @if ($key === $securityProfile->id)
-                                                <h4>Linked Codes ({{$count}})</h4>
-                                            @endif
-                                        @endforeach                    
-                                    @endif
+                                    <h4>Linked Codes({{$count}})</h4>
                                     <h4>Permissions (5)</h4>
                                 </div>
                                 <div class="col-md-12 px-0 pr-2 profileDetails">
                                     <div class="card-container">
-                                        @foreach ($codes as $code)
-                                            @foreach ($pages as $page)
-                                                @if (($code->id) === ($page->code_id) && ($securityProfile->id) === ($page->security_profile_id))
-                                                    <div class="card">
-                                                        <article>
-                                                            <figure class="mb-0">
-                                                                <div class="image"><img src="../images/stickecode.png" height="200px" width="200px"></div>
-                                                            </figure>
-                                                            <div class="description">
-                                                                <div class="codeTitles">
-                                                                    <h3>{{$code -> code_title}}</h3>
-                                                                    <small class="ml-1">{{$code -> code_name}}</small>
-                                                                </div>
-                                                                <p class="ml-1">{{$page -> page_title}}</p>
+                                        @if (!$securityProfile->codes->isEmpty())
+                                            @foreach ($securityProfile->codes as $code)
+                                                <div class="card">
+                                                    <article>
+                                                        <figure class="mb-0">
+                                                            <div class="image"><img src="../images/stickecode.png" height="200px" width="200px"></div>
+                                                        </figure>
+                                                        <div class="description">
+                                                            <div class="codeTitles">
+                                                                <h3>{{$code -> code_title}}</h3>
+                                                                <small class="ml-1">{{$code -> code_name}}</small>
                                                             </div>
-                                                        </article>
-                                                    </div>
-                                                @endif
-                                            @endforeach
-                                        @endforeach
-                                        {{-- <div class="card">
-                                            <article>
-                                                <figure class="mb-0">
-                                                    <div class="image"><img src="../images/stickecode.png" height="200px" width="200px"></div>
-                                                </figure>
-                                                <div class="description">
-                                                    <div class="codeTitles">
-                                                        <h3>Code Title</h3>
-                                                        <small class="ml-1">XXXX</small>
-                                                    </div>
-                                                    <p class="ml-1">Insert Title Description for Public Page Here</p>
+                                                            <p class="ml-1">{{$code -> pivot -> page_title}}</p>
+                                                        </div>
+                                                    </article>
                                                 </div>
-                                            </article>
-                                        </div>
-                                        <div class="card">
+                                            @endforeach
+                                        @else
+                                            <div class="card noCodes">
+                                                <article>
+                                                    <div class="description">
+                                                        <h3>You Have No Linked Codes</h3>
+                                                    </div>
+                                                </article>
+                                            </div>
+                                        @endif
+                                        
+                                        {{-- <div class="card">
                                             <article>
                                                 <figure class="mb-0">
                                                     <div class="image"><img src="../images/stickecode.png" height="200px" width="200px"></div>
@@ -149,6 +134,7 @@
                     <p class="pl-5">You have No Security Profiles</p>
                 </div>
             @endif
+            
 
             <div class="row ml-5 mr-3 mb-5 createNew">
                 <div class="col-md-12 newSecurityProfiles px-1">
@@ -178,3 +164,10 @@
         }
     </script>
 @endsection
+
+
+
+
+
+
+

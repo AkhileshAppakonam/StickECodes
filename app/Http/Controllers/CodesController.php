@@ -40,7 +40,7 @@ class CodesController extends Controller
 
     public function edit(Request $request, $codeId, $pageId)
     {
-        $this->validate($request, [
+        $validated = $request->validate([
             'codeTitle' => 'required',
             'pageTitle' => 'required',
             'securityProfile' => 'required'

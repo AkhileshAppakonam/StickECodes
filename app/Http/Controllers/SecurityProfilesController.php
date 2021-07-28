@@ -23,38 +23,36 @@ class SecurityProfilesController extends Controller
     public function index()
     {
         $authId = auth()->user()->id;
-        $user = User::find($authId);
-        $securityProfiles = $user->securityProfiles;
-        $codes = $user->codes;
-        $pages = $user->pages;
-        $counts = $user->pages->groupBy('security_profile_id')->map->count();
+        $user = User::with('securityProfiles.codes')->get()->find($authId);
 
-        $tests = Codes::find($authId)->user->securityProfiles;
+        // echo $user;
+        // echo "<br>";
+        // echo "<br>";
+        // echo $user->securityProfiles;
+        // echo "<br>";
+        // echo "<br>";
+        // echo $user->codes;
+        // echo "<br>";
+        // echo "<br>";
 
+        // foreach ($user->securityProfiles as $securityProfile) {
+        //     echo "<br>";
+        //     echo "<br>";
+        //     echo $securityProfile;
+        //     echo "<br>";
+        //     echo $securityProfile->profile_name;
+        //     echo "<br>";
+        //     echo $securityProfile->codes->count();
+        //     echo "<br>";
+        //     foreach ($securityProfile->codes as $code) {
+        //         echo $code->code_title;
+        //         echo "<br>";
+        //         echo $code->pivot->page_title;
+        //         echo "<br>";
+        //     }
+        // }
 
-        echo $securityProfiles;
-        echo "<br>";
-        echo "<br>";
-        echo $codes;
-        echo "<br>";
-        echo "<br>";
-        echo $pages;
-        echo "<br>";
-        echo "<br>";
-        echo $counts;
-        echo "<br>";
-        echo "<br>";
-        echo $tests;
-        echo "<br>";
-        echo "<br>";
-
-        foreach ($tests as $test) {
-            echo $test;
-            echo "<br>";
-            echo "<br>";
-        }
-
-        // return view('pages.securityProfile')->with(['securityProfiles'=>$securityProfiles, 'codes'=>$codes, 'pages'=>$pages, 'counts'=>$counts]);
+        return view('pages.securityProfile')->with('user', $user);
     }
 
     public function show($secProfileId)

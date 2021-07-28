@@ -357,9 +357,9 @@
     // border: 2px solid green;
 }
 
-// #securityProfiles .collapse{
-//     // border: 2px solid blue;
-// }
+#securityProfiles .collapse{
+    // border: 2px solid blue;
+}
 
 #securityProfiles .linkedCodesHeader{
     display: flex;
@@ -399,6 +399,26 @@
     padding: 1.5rem;
     transition: 0.2s;
     // border: 2px solid red;
+    display: flex;
+}
+
+#securityProfiles .card.noCodes {
+    width: 75%;
+    justify-content: center;
+    margin: 0px auto;
+    // border: 2px solid red;
+}
+
+#securityProfiles .card.noCodes h3{
+    width: 50%;
+    font-size: 30px;
+    // border: 2px solid red;
+    text-align: center;
+    line-height: 3rem;
+}
+
+#securityProfiles .card.noCodes .description{
+    justify-content: center;
     display: flex;
 }
 
