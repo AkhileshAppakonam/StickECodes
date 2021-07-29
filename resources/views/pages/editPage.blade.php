@@ -2,7 +2,7 @@
 
 @section('content')
     <section id="editPage">
-        <form id="editPageForm" name="editPageForm" enctype="multipart/form-data" action="/public/index.php/codes/{{$code -> id}}/{{$page -> id}}/editPage" method="POST">
+        <form id="editPageForm" name="editPageForm" enctype="multipart/form-data" action="/public/index.php/codes/{{$code -> id}}/{{$code -> pages[0] -> id}}/editPage" method="POST">
             @csrf
 
             <div class="container">
@@ -24,7 +24,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="pageTitle" class="col-md-0 col-form-label text-md-right">Page Title</label>
-                                <input id="pageTitle" name="pageTitle" type="text" class="form-control" placeholder="Insert Title Description for Public Page Here" value="{{$page -> page_title}}" required>
+                                <input id="pageTitle" name="pageTitle" type="text" class="form-control" placeholder="Insert Title Description for Public Page Here" value="{{$code -> pages[0] -> page_title}}" required>
                             </div>
                             <div class="form-group row mb-0">
                                 <div class="container p-0 ml-0">
@@ -34,7 +34,7 @@
                                         @if (count($securityProfiles) > 0)
                                             @foreach ($securityProfiles as $securityProfile)
                                                 <option value="{{$securityProfile -> id}}"
-                                                    @if (($page -> security_profile_id) === ($securityProfile -> id))
+                                                    @if (($code -> pages[0] -> security_profile_id) === ($securityProfile -> id))
                                                         {{"selected"}}
                                                     @endif
                                                 >{{$securityProfile -> profile_name}}</option>

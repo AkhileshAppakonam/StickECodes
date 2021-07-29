@@ -27,12 +27,21 @@ class DashboardController extends Controller
     public function index()
     {
         $authId = auth()->user()->id;
-        // $codes = Codes::Join('pages', 'pages.code_id', '=', 'codes.id')->where('user_id', $authId)->select('codes.id', 'code_title', 'code_name', 'page_title')->get();
-        // return view('pages.dashboard')->with('codes', $codes);
-        $user = User::find($authId);
-        $codes = $user->codes;
-        $pages = $user->pages;
+        $user = User::with('codes.pages')->find($authId);
 
-        return view('pages.dashboard')->with(['codes'=>$codes, 'pages'=>$pages]);
+        // echo $user;
+        // echo "<br>";
+        // echo "<br>";
+
+        // foreach ($user->codes as $code) {
+        //     echo $code->code_title;
+        //     echo "<br>";
+        //     foreach ($code->pages as $page) {
+        //         echo $page->page_title;
+        //         echo "<br>";
+        //     }
+        // }
+
+        return view('pages.dashboard')->with('user', $user);
     }
 }

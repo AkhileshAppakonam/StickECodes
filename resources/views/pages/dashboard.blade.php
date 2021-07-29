@@ -13,8 +13,8 @@
     @include('inc.messages')
 
     <div class="row justify-content-left ml-2">
-        @if (count($codes) > 0)
-            @foreach ($codes as $code)
+        @if (!$user->codes->isEmpty())
+            @foreach ($user->codes as $code)
                 <div class="col-md-4 col-sm-4">
                     <article class="dashboardCodes shadow-lg p-3 mb-5 bg-white rounded">
                         <figure class="mb-0">
@@ -25,10 +25,8 @@
                                 <h3>{{$code -> code_title}}</h3>
                                 <small class="ml-1">{{$code -> code_name}}</small>
                             </div>
-                            @foreach ($pages as $page)
-                                @if (($code->id) === ($page->code_id))
-                                    <p class="ml-1">{{$page -> page_title}}</p>
-                                @endif
+                            @foreach ($code->pages as $page)
+                                <p class="ml-1">{{$page -> page_title}}</p>
                             @endforeach
                             <hr>
                             <div>

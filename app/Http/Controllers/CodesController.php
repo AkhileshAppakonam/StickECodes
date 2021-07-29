@@ -23,18 +23,21 @@ class CodesController extends Controller
     public function show($codeId)
     {
         $authId = auth()->user()->id;
-        $user = User::find($authId);
-        $code = $user->codes->where('id', $codeId)->first();
-        // $code = Codes::where('id', $codeId)->where('user_id', $authId)->first();
+        $codes = Codes::with('pages')->find($codeId);
+        $securityProfiles = User::find($authId)->securityProfiles;
 
-        if (empty($code)) {
+        if (empty($codes) || ($codes->user->id !== $authId)) {
             abort(403, 'Unauthorized action.');
         } else{
-            // $page = Pages::where('code_id', $codeId)->get()->first();
-            // $securityProfiles = SecurityProfiles::select('id', 'profile_name')->where('user_id', $authId)->get();
-            $page = $user->pages->where('code_id', $codeId)->first();
-            $securityProfiles = $user->securityProfiles;
-            return view('pages.editPage')->with(['code'=>$code, 'page'=>$page, 'securityProfiles'=>$securityProfiles]);
+            
+            // echo $codes;
+            // echo "<br>";
+            // echo "<br>";
+            // echo $securityProfiles;
+            // echo "<br>";
+            // echo "<br>";
+
+            return view('pages.editPage')->with(['code'=>$codes, 'securityProfiles'=>$securityProfiles]);
         }
     }
 
