@@ -60,14 +60,14 @@
                             <h2 class="fromLeft pb-3 m-0" data-toggle="collapse" data-target="#textCollapse" aria-expanded="false" aria-controls="collapseExample" onclick="textEntriesDropdown()">Text Entries <i id="textEntries" class="far fa-plus-square ml-2 float-right mr-5 mt-2"></i></h2>
                             <div class="collapse" id="textCollapse">
                                 <hr class="mt-0">
-                                
+
                                 <table class="mx-5" id="textTable">
                                     <tr class="mb-3 pb-2 border-bottom">
                                         <th>Text Title</th>
                                         <th class="textBody">Text</th>
                                         <th class="rowInput">Remove Row</th>
                                     </tr>
-                                    <tr class="mb-2 pb-2 border-bottom">
+                                    <tr class="mb-2 pb-2 pt-2 border-bottom">
                                         <td><input type="text" class="form-control" placeholder="Insert Text Title Here"></td>
                                         <td class="textBody"><textarea name="textBody" placeholder="Insert Text Body Here" class="form-control"></textarea></td>
                                         <td class="rowInput"><input type="button" value="Remove" class="remove btn btn-outline-dark" onclick="remove(this)"></td>
@@ -94,7 +94,7 @@
                                         <th class="textBody">URL</th>
                                         <th class="rowInput">Remove Row</th>
                                     </tr>
-                                    <tr class="mb-2 pb-3 border-bottom">
+                                    <tr class="mb-2 pb-3 pt-2 border-bottom">
                                         <td><input type="text" class="form-control" placeholder="Insert URL Description Here"></td>
                                         <td class="textBody"><input type="text" class="form-control" placeholder="Insert URL Here"></td>
                                         <td class="rowInput"><input type="button" value="Remove" class="remove btn btn-outline-dark" onclick="remove(this)"></td>
@@ -121,12 +121,36 @@
                                         <th class="textBody">File</th>
                                         <th class="rowInput">Remove Row</th>
                                     </tr>
-                                    <tr class="mb-2 pb-3 border-bottom">
-                                        <td><input type="text" class="form-control" placeholder="Insert File Title Here"></td>
-                                        <td class="textBody"><input type="file" class="form-control"></td>
-                                        <td class="rowInput"><input type="button" value="Remove" class="remove btn btn-outline-dark" onclick="remove(this)"></td>
-                                    </tr>
+
+                                    @if (count($pageFiles) > 0)
+                                        @foreach ($pageFiles as $page)
+
+                                            <input type="hidden" id="DBFileCount" name="DBFileCount" class="form-control" value="{{count($page->page_files)}}">
+                                            <input type="hidden" id="DBFileCountRemaining" name="DBFileCountRemaining" class="form-control" value="{{count($page->page_files)}}">
+
+                                            @for ($i = 0; $i < count($page->page_files); $i++)
+                                                <tr class="mb-2 pb-3 pt-2 border-bottom">
+                                                    <td><input type="text" class="form-control" name="userFilesTitleUpdate{{$i}}" value="{{$page->page_files[$i] -> entry_description}}"></td>
+                                                    <td class="textBody">
+                                                        <a href="/public/index.php/viewPagesFile/{{$page->page_files[$i] -> entry_description}}/{{$page->page_files[$i] -> file}}/{{$page->page_files[$i] -> entry_date}}" class="pl-3">{{$page->page_files[$i]->file}}</a>
+                                                        <input type="hidden" class="form-control" name="userFilesUpdate{{$i}}" value="{{$page->page_files[$i]->file}}">
+                                                    </td>
+                                                    <td class="rowInput"><input type="button" value="Remove" class="remove btn btn-outline-dark hasFile" onclick="remove(this)"></td>
+                                                </tr>
+                                                {{-- This input has to be outside tr because remove btn removes tr and therefore any input within it --}}
+                                                <input type="hidden" class="form-control" name="userFilesId{{$i}}" value="{{$page->page_files[$i]->id}}">
+                                            @endfor
+                                        @endforeach
+                                    @endif
+                                        <tr class="mb-2 pb-3 pt-2 border-bottom">
+                                            <td><input type="text" class="form-control" name="userFilesTitle0" placeholder="Insert File Title Here"></td>
+                                            <td class="textBody"><input type="file" name="userFiles0" class="form-control" accept=".jpeg,.jpg,.bmp,.png,.pdf,.gif,.svg"></td>
+                                            <td class="rowInput"><input type="button" value="Remove" class="remove btn btn-outline-dark" onclick="remove(this)"></td>
+                                        </tr>
                                 </table>
+
+
+                                <input type="hidden" id="fileCount" name="fileCount" class="form-control">
 
                                 <div class="mx-5 py-2 mb-4">
                                     <input type="button" value="Add Another File" class="add btn btn-primary" onclick="addFile()">
@@ -205,7 +229,16 @@
 
     <script type="text/javascript">
         function remove(e) {
+
+            if (e.classList.contains('hasFile')) {
+                var DBpageFileCountRemaining = document.getElementById('DBFileCountRemaining');
+
+                DBpageFileCountRemaining.value = DBpageFileCountRemaining.value-1;
+            }
+
             e.parentElement.parentElement.remove();
+
+            fileCount();
         }
 
         function addText() {
@@ -224,12 +257,51 @@
             $(start).append(newRow);
         }
 
+        var x = 1;
         function addFile() {
             var start = $('#fileTable'),
-                newRow = $('<tr class="mb-2 pb-3 pt-2 border-bottom"><td><input type="text" class="form-control" placeholder="Insert File Title Here"></td>' +
-                        '<td class="textBody"><input type="file" class="form-control"></td>' +
+                newRow = $('<tr class="mb-2 pb-3 pt-2 border-bottom"><td><input type="text" name="userFilesTitle'+x+'" class="form-control" placeholder="Insert File Title Here"></td>' +
+                        '<td class="textBody"><input type="file" name="userFiles'+x+'" class="form-control"></td>' +
                         '<td class="rowInput"><input type="button" value="Remove" class="remove btn btn-outline-dark" onclick="remove(this)"></td></tr>');
             $(start).append(newRow);
+
+            fileCount();
+            x++;
+        }
+    </script>
+
+    <script type="text/javascript">
+        function fileCount() {
+            var fileCount = document.getElementById('fileCount');
+            var fileTableRowCount = document.getElementById('fileTable').rows.length;
+
+            fileCount.value = fileTableRowCount-2;
+        }
+    </script>
+
+
+    <script>
+        window.onload = function() {
+            fileCount();
+
+            // var pageFiles = @json($pageFiles);
+
+            // alert(JSON.stringify(pageFiles, null, 4));
+
+            // alert(JSON.stringify(pageFiles[0].page_files[0].file, null, 4));
+
+
+            // for (let i = 0; i <= pageFiles[0].page_files.length-1; i++) {
+            //     var pageFile = document.getElementById(pageFiles[0].page_files[i].id + pageFiles[0].page_files[i].file);
+
+            //     alert(pageFiles[0].page_files[i].file);
+
+            //     // pageFile.value = '/storage/user_files/' + pageFiles[0].page_files[i].file;
+
+            // }
+
+            
+
         }
     </script>
 @endsection

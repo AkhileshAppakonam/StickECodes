@@ -48,4 +48,12 @@ class User extends Authenticatable
     public function securityProfiles() {
         return $this->hasMany(SecurityProfiles::class);
     }
+
+    public function page_users() {
+        return $this->hasMany(PageUsers::class);
+    }
+
+    public function page_files() {
+        return $this->hasMany(PageFiles::class);
+    }
 }

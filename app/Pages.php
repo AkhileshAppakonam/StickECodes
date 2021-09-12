@@ -13,4 +13,8 @@ class Pages extends Model
     public function security_profile() {
         return $this->hasOne(SecurityProfiles::class, 'id', 'security_profile_id');
     }
+
+    public function page_files() {
+        return $this->hasMany(PageFiles::class, 'page_id', 'id');
+    }
 }

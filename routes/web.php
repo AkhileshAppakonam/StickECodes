@@ -28,5 +28,7 @@ Route::get('/securityProfilePage', 'SecurityProfilesController@index');
 Route::get('/securityProfilePage/{secProfileId}/editSecurityProfile', 'SecurityProfilesController@show');
 Route::get('/securityProfilePage/create', 'SecurityProfilesController@create');
 
+Route::get('/viewPagesFile/{fileName}/{file}/{entryDate}', 'CodesController@viewFile');
+
 // Form Requests
 Route::post('/codes/{codeId}/{pageId}/editPage', 'CodesController@edit');
