@@ -94,12 +94,35 @@
                                         <th class="textBody">URL</th>
                                         <th class="rowInput">Remove Row</th>
                                     </tr>
+
+                                    @if (count($pageURLs) > 0)
+                                        @foreach ($pageURLs as $page)
+
+                                            <input type="hidden" id="DBURLCount" name="DBURLCount" class="form-control" value="{{count($page->page_urls)}}">
+                                            <input type="hidden" id="DBURLCountRemaining" name="DBURLCountRemaining" class="form-control" value="{{count($page->page_urls)}}">
+
+                                            @for ($j = 0; $j < count($page->page_urls); $j++)
+                                                <tr class="mb-2 pb-3 pt-2 border-bottom">
+                                                    <td><input type="text" class="form-control" name="userURLTitleUpdate{{$j}}" value="{{$page->page_urls[$j] -> entry_description}}"></td>
+                                                    <td class="textBody">
+                                                        <input type="text" class="form-control" name="userURLUpdate{{$j}}" value="{{$page->page_urls[$j] -> entry_url}}">
+                                                    </td>
+                                                    <td class="rowInput"><input type="button" value="Remove" class="remove btn btn-outline-dark hasURL" onclick="remove(this)"></td>
+                                                </tr>
+                                                {{-- This input has to be outside tr because remove btn removes tr and therefore any input within it --}}
+                                                <input type="hidden" class="form-control" name="userURLId{{$j}}" value="{{$page->page_urls[$j]->id}}">
+                                            @endfor
+                                        @endforeach
+                                    @endif
+
                                     <tr class="mb-2 pb-3 pt-2 border-bottom">
-                                        <td><input type="text" class="form-control" placeholder="Insert URL Description Here"></td>
-                                        <td class="textBody"><input type="text" class="form-control" placeholder="Insert URL Here"></td>
+                                        <td><input type="text" class="form-control" name="userURLTitle0" placeholder="Insert URL Description Here"></td>
+                                        <td class="textBody"><input type="text" name="userURL0" class="form-control" placeholder="Insert URL Here"></td>
                                         <td class="rowInput"><input type="button" value="Remove" class="remove btn btn-outline-dark" onclick="remove(this)"></td>
                                     </tr>
                                 </table>
+
+                                <input type="hidden" id="urlCount" name="urlCount" class="form-control">
 
                                 <div class="mx-5 py-2 mb-4">
                                     <input type="button" value="Add Another URL" class="add btn btn-primary" onclick="addURL()">
@@ -142,11 +165,12 @@
                                             @endfor
                                         @endforeach
                                     @endif
-                                        <tr class="mb-2 pb-3 pt-2 border-bottom">
-                                            <td><input type="text" class="form-control" name="userFilesTitle0" placeholder="Insert File Title Here"></td>
-                                            <td class="textBody"><input type="file" name="userFiles0" class="form-control" accept=".jpeg,.jpg,.bmp,.png,.pdf,.gif,.svg"></td>
-                                            <td class="rowInput"><input type="button" value="Remove" class="remove btn btn-outline-dark" onclick="remove(this)"></td>
-                                        </tr>
+
+                                    <tr class="mb-2 pb-3 pt-2 border-bottom">
+                                        <td><input type="text" class="form-control" name="userFilesTitle0" placeholder="Insert File Title Here"></td>
+                                        <td class="textBody"><input type="file" name="userFiles0" class="form-control" accept=".jpeg,.jpg,.bmp,.png,.pdf,.gif,.svg"></td>
+                                        <td class="rowInput"><input type="button" value="Remove" class="remove btn btn-outline-dark" onclick="remove(this)"></td>
+                                    </tr>
                                 </table>
 
 
@@ -236,9 +260,16 @@
                 DBpageFileCountRemaining.value = DBpageFileCountRemaining.value-1;
             }
 
+            if (e.classList.contains('hasURL')) {
+                var DBpageURLCountRemaining = document.getElementById('DBURLCountRemaining');
+
+                DBpageURLCountRemaining.value = DBpageURLCountRemaining.value-1;
+            }
+
             e.parentElement.parentElement.remove();
 
             fileCount();
+            urlCount();
         }
 
         function addText() {
@@ -249,12 +280,16 @@
             $(start).append(newRow);
         }
 
+        var y = 1;
         function addURL() {
             var start = $('#urlTable'),
-                newRow = $('<tr class="mb-2 pb-3 pt-2 border-bottom"><td><input type="text" class="form-control" placeholder="Insert URL Description Here"></td>' +
-                        '<td class="textBody"><input type="text" class="form-control" placeholder="Insert URL Here"></td>' +
+                newRow = $('<tr class="mb-2 pb-3 pt-2 border-bottom"><td><input type="text" name="userURLTitle'+y+'" class="form-control" placeholder="Insert URL Description Here"></td>' +
+                        '<td class="textBody"><input type="text" name="userURL'+y+'" class="form-control" placeholder="Insert URL Here"></td>' +
                         '<td class="rowInput"><input type="button" value="Remove" class="remove btn btn-outline-dark" onclick="remove(this)"></td></tr>');
             $(start).append(newRow);
+
+            urlCount();
+            y++;
         }
 
         var x = 1;
@@ -277,12 +312,20 @@
 
             fileCount.value = fileTableRowCount-2;
         }
+
+        function urlCount() {
+            var urlCount = document.getElementById('urlCount');
+            var urlTableRowCount = document.getElementById('urlTable').rows.length;
+
+            urlCount.value = urlTableRowCount-2;
+        }
     </script>
 
 
     <script>
         window.onload = function() {
             fileCount();
+            urlCount();
 
             // var pageFiles = @json($pageFiles);
 

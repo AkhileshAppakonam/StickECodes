@@ -8,6 +8,7 @@ use App\Pages;
 use App\SecurityProfiles;
 use App\User;
 use App\PageFiles;
+use App\PageUrls;
 
 class CodesController extends Controller
 {
@@ -26,7 +27,9 @@ class CodesController extends Controller
         $authId = auth()->user()->id;
         $codes = Codes::with('pages')->find($codeId);
         $securityProfiles = User::find($authId)->securityProfiles;
+
         $pageFiles = Pages::with('page_files')->where('code_id', $codeId)->get();
+        $pageURLs = Pages::with('page_urls')->where('code_id', $codeId)->get();
 
         if (empty($codes) || ($codes->user->id !== $authId)) {
             abort(403, 'Unauthorized action.');
@@ -75,7 +78,27 @@ class CodesController extends Controller
             //     }
             // }
 
-            return view('pages.editPage')->with(['code'=>$codes, 'securityProfiles'=>$securityProfiles, 'pageFiles'=>$pageFiles]);
+            // echo "<br>";
+            // echo "<br>";
+            // echo "<br>";
+            // echo "<br>";
+
+            // echo $pageURLs;
+
+            // foreach ($pageURLs as $page) {
+            //     echo "<br>";
+            //     echo $page->page_urls;
+            //     echo "<br>";
+            //     echo count($page->page_urls);
+
+            //     for ($i=0; $i < count($page->page_urls); $i++) { 
+            //         echo "<br>";
+            //         echo $page->page_urls[$i]->entry_url;
+            //         echo "<br>";
+            //     }
+            // }
+
+            return view('pages.editPage')->with(['code'=>$codes, 'securityProfiles'=>$securityProfiles, 'pageFiles'=>$pageFiles, 'pageURLs'=>$pageURLs]);
         }
     }
 
@@ -85,62 +108,150 @@ class CodesController extends Controller
             'codeTitle' => 'required',
             'pageTitle' => 'required',
             'securityProfile' => 'required',
+            // Check Files
             'fileCount' => 'required',
             'DBFileCount' => 'required',
-            'DBFileCountRemaining' => 'required'
+            'DBFileCountRemaining' => 'required',
+            //Check URLs
+            'urlCount' => 'required',
+            'DBURLCount' => 'required',
+            'DBURLCountRemaining' => 'required'
         ]);
 
-        $fileCount = $request->input('fileCount');
-        $DBFileCount = $request->input('DBFileCount');
-        $DBFileCountRemaining = $request->input('DBFileCountRemaining');
+        //Handling URLs Section
 
-        // echo $request->input('codeTitle');
-        // echo "<br>";
-        // echo $request->input('securityProfile');
-        // echo "<br>";
-        // echo $request->input('pageTitle');
-        // echo "<br>";
-        // echo $fileCount;
-        // echo "<br>";
-        // echo $DBFileCount;
-        // echo "<br>";
+            //Dealing with URL Entries
+            $urlCount = $request->input('urlCount');
+            $DBURLCount = $request->input('DBURLCount');
+            $DBURLCountRemaining = $request->input('DBURLCountRemaining');
 
-        for ($i=0; $i <= $fileCount-$DBFileCountRemaining; $i++) { 
-            if ($request->filled('userFilesTitle'.$i) || $request->has('userFiles'.$i)) {
-                $request->validate([
-                    'userFilesTitle'.$i => 'required',
-                    'userFiles'.$i => 'mimes:jpeg,jpg,bmp,png,pdf,gif,svg|required|max:1999'
-                ],
-                [
-                    'userFilesTitle'.$i.'.required' => 'A File Title is Required on Row '.($i+$DBFileCount+1),
-                    'userFiles'.$i.'.required' => 'Please Select a File on Row '.($i+$DBFileCount+1),
-                    'userFiles'.$i.'.mimes' => 'The File on Row '.($i+$DBFileCount+1).' failed to upload. Please ensure the file is one of the following file types: jpeg, jpg, bmp, png, pdf, gif, svg',
-                    'userFiles'.$i.'.max' => 'The File on Row '.($i+$DBFileCount+1).' failed to upload. Please ensure the size of the file does not exceed 1999 Kilobytes',
-                    'userFiles'.$i.'.uploaded' => 'The File on Row '.($i+$DBFileCount+1).' failed to upload. Please ensure the size of the file does not exceed 1999 Kilobytes and is one of the following file types: jpeg, jpg, bmp, png, pdf, gif, svg'
-                ]);
+            // echo $urlCount;
+            // echo "<br>";
 
-                // Get File name with extension
-                $fileNameWithExt = $request->file('userFiles'.$i)->getClientOriginalName();
-                // Get just File name
-                $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-                // Get just ext
-                $extension = $request->file('userFiles'.$i)->getClientOriginalExtension();
-                // File name to store
-                $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-                // // Upload Image
-                $path = $request->file('userFiles'.$i)->storeAs('public/user_files', $fileNameToStore);
+            for ($j=0; $j <= $urlCount-$DBURLCountRemaining ; $j++) { 
+                if ($request->filled('userURLTitle'.$j) || $request->filled('userURL'.$j)) {
+                    $request->validate([
+                        'userURLTitle'.$j => 'required',
+                        'userURL'.$j => 'required|url'
+                    ], 
+                    [
+                        'userURLTitle'.$j.'.required' => 'A URL Description is Required on Row '.($j+$DBURLCount+1),
+                        'userURL'.$j.'.required' => 'A URL is Required on Row '.($j+$DBURLCount+1),
+                        'userURL'.$j.'.url' => 'Invalid URL Format on Row '.($j+$DBURLCount+1)
+                    ]);
 
-                $pageFile = new PageFiles;
-                $pageFile->page_id = $pageId;
-                $pageFile->user_id = auth()->user()->id;
-                $pageFile->entry_date = NOW();
-                $pageFile->entry_description = $request->input('userFilesTitle'.$i);
-                $pageFile->file = $fileNameToStore;
-                $pageFile->file_type = $extension;
-                $pageFile->save();
+                    $pageURL = new PageUrls;
+                    $pageURL->page_id = $pageId;
+                    $pageURL->user_id = auth()->user()->id;
+                    $pageURL->entry_date = NOW();
+                    $pageURL->entry_description = $request->input('userURLTitle'.$j);
+                    $pageURL->entry_url = $request->input('userURL'.$j);
+                    $pageURL->save();
+                }
             }
-        }
 
+            // Updating Existin URLs
+            for ($j=0; $j <= $DBURLCount-1; $j++) { 
+                if ($request->filled('userURLTitleUpdate'.$j) || $request->filled('userURLUpdate'.$j)) {
+                    $request->validate([
+                        'userURLTitleUpdate'.$j => 'required',
+                        'userURLUpdate'.$j => 'required|url'
+                    ], 
+                    [
+                        'userURLTitleUpdate'.$j.'.required' => 'A URL Description is Required on Row '.($j+1),
+                        'userURLUpdate'.$j.'.required' => 'A URL is Required on Row '.($j+1),
+                        'userURLUpdate'.$j.'.url' => 'Invalid URL Format on Row '.($j+1)
+                    ]);
+
+                    $pageURL = PageUrls::find($request->input('userURLId'.$j));
+                    $pageURL->entry_description = $request->input('userURLTitleUpdate'.$j);
+                    $pageURL->entry_url = $request->input('userURLUpdate'.$j);
+                    $pageURL->save();
+                } else {
+                    $pageURLDelete = PageUrls::find($request->input('userURLId'.$j))->delete();
+                }
+                
+            }
+
+        // End URL Section
+
+        // Handling Files Section
+
+            // Dealing with File Entries
+            $fileCount = $request->input('fileCount');
+            $DBFileCount = $request->input('DBFileCount');
+            $DBFileCountRemaining = $request->input('DBFileCountRemaining');
+
+            // echo $request->input('codeTitle');
+            // echo "<br>";
+            // echo $request->input('securityProfile');
+            // echo "<br>";
+            // echo $request->input('pageTitle');
+            // echo "<br>";
+            // echo $fileCount;
+            // echo "<br>";
+            // echo $DBFileCount;
+            // echo "<br>";
+
+            for ($i=0; $i <= $fileCount-$DBFileCountRemaining; $i++) { 
+                if ($request->filled('userFilesTitle'.$i) || $request->has('userFiles'.$i)) {
+                    $request->validate([
+                        'userFilesTitle'.$i => 'required',
+                        'userFiles'.$i => 'mimes:jpeg,jpg,bmp,png,pdf,gif,svg|required|max:1999'
+                    ],
+                    [
+                        'userFilesTitle'.$i.'.required' => 'A File Title is Required on Row '.($i+$DBFileCount+1),
+                        'userFiles'.$i.'.required' => 'Please Select a File on Row '.($i+$DBFileCount+1),
+                        'userFiles'.$i.'.mimes' => 'The File on Row '.($i+$DBFileCount+1).' failed to upload. Please ensure the file is one of the following file types: jpeg, jpg, bmp, png, pdf, gif, svg',
+                        'userFiles'.$i.'.max' => 'The File on Row '.($i+$DBFileCount+1).' failed to upload. Please ensure the size of the file does not exceed 1999 Kilobytes',
+                        'userFiles'.$i.'.uploaded' => 'The File on Row '.($i+$DBFileCount+1).' failed to upload. Please ensure the size of the file does not exceed 1999 Kilobytes and is one of the following file types: jpeg, jpg, bmp, png, pdf, gif, svg'
+                    ]);
+
+                    // Get File name with extension
+                    $fileNameWithExt = $request->file('userFiles'.$i)->getClientOriginalName();
+                    // Get just File name
+                    $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+                    // Get just ext
+                    $extension = $request->file('userFiles'.$i)->getClientOriginalExtension();
+                    // File name to store
+                    $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+                    // // Upload Image
+                    $path = $request->file('userFiles'.$i)->storeAs('public/user_files', $fileNameToStore);
+
+                    $pageFile = new PageFiles;
+                    $pageFile->page_id = $pageId;
+                    $pageFile->user_id = auth()->user()->id;
+                    $pageFile->entry_date = NOW();
+                    $pageFile->entry_description = $request->input('userFilesTitle'.$i);
+                    $pageFile->file = $fileNameToStore;
+                    $pageFile->file_type = $extension;
+                    $pageFile->save();
+                }
+            }
+
+            // Updating Existing Files
+            for ($i=0; $i <= $DBFileCount-1; $i++) { 
+                if ($request->filled('userFilesUpdate'.$i)) {
+                    $request->validate([
+                        'userFilesTitleUpdate'.$i => 'required',
+                        'userFilesUpdate'.$i => 'required',
+                        'userFilesId'.$i => 'required'
+                    ],
+                    [
+                        'userFilesTitleUpdate'.$i.'.required' => 'A File Title is Required on Row '.($i+1)
+                    ]);
+
+                    $pageFile = PageFiles::find($request->input('userFilesId'.$i));
+                    $pageFile->entry_description = $request->input('userFilesTitleUpdate'.$i);
+                    $pageFile->save();
+                } else {
+                    $pageFileDelete = PageFiles::find($request->input('userFilesId'.$i))->delete();
+                }
+            }
+
+        // End Files Section
+
+        // Saving General Code Information
         $code = Codes::find($codeId);
         $code->code_title = $request->input('codeTitle');
         $code->save();
@@ -149,26 +260,6 @@ class CodesController extends Controller
         $page->security_profile_id = $request->input('securityProfile');
         $page->page_title = $request->input('pageTitle');
         $page->save();
-
-        // Updating Existing Files
-        for ($i=0; $i <= $DBFileCount-1; $i++) { 
-            if ($request->filled('userFilesUpdate'.$i)) {
-                $request->validate([
-                    'userFilesTitleUpdate'.$i => 'required',
-                    'userFilesUpdate'.$i => 'required',
-                    'userFilesId'.$i => 'required'
-                ],
-                [
-                    'userFilesTitleUpdate'.$i.'.required' => 'A File Title is Required on Row '.($i+1)
-                ]);
-
-                $pageFile = PageFiles::find($request->input('userFilesId'.$i));
-                $pageFile->entry_description = $request->input('userFilesTitleUpdate'.$i);
-                $pageFile->save();
-            } else {
-                $pageFileDelete = PageFiles::find($request->input('userFilesId'.$i))->delete();
-            }
-        }
 
         return redirect('/dashboard')->with('success', $code->code_name.': Code Updated Successfully');
     }
