@@ -9,6 +9,7 @@ use App\SecurityProfiles;
 use App\User;
 use App\PageFiles;
 use App\PageUrls;
+use App\PageTexts;
 
 class CodesController extends Controller
 {
@@ -30,6 +31,7 @@ class CodesController extends Controller
 
         $pageFiles = Pages::with('page_files')->where('code_id', $codeId)->get();
         $pageURLs = Pages::with('page_urls')->where('code_id', $codeId)->get();
+        $pageTexts = Pages::with('page_texts')->where('code_id', $codeId)->get();
 
         if (empty($codes) || ($codes->user->id !== $authId)) {
             abort(403, 'Unauthorized action.');
@@ -98,7 +100,7 @@ class CodesController extends Controller
             //     }
             // }
 
-            return view('pages.editPage')->with(['code'=>$codes, 'securityProfiles'=>$securityProfiles, 'pageFiles'=>$pageFiles, 'pageURLs'=>$pageURLs]);
+            return view('pages.editPage')->with(['code'=>$codes, 'securityProfiles'=>$securityProfiles, 'pageFiles'=>$pageFiles, 'pageURLs'=>$pageURLs, 'pageTexts'=>$pageTexts]);
         }
     }
 
@@ -112,21 +114,74 @@ class CodesController extends Controller
             'fileCount' => 'required',
             'DBFileCount' => 'required',
             'DBFileCountRemaining' => 'required',
-            //Check URLs
+            // Check URLs
             'urlCount' => 'required',
             'DBURLCount' => 'required',
-            'DBURLCountRemaining' => 'required'
+            'DBURLCountRemaining' => 'required',
+            // Check Texts
+            'textCount' => 'required',
+            'DBTextCount' => 'required',
+            'DBTextCountRemaining' => 'required'
         ]);
 
-        //Handling URLs Section
+        // Handling Texts Section
 
-            //Dealing with URL Entries
+            // Dealting with Text Entries
+            $textCount = $request->input('textCount');
+            $DBTextCount = $request->input('DBTextCount');
+            $DBTextCountRemaining = $request->input('DBTextCountRemaining');
+
+            for ($k=0; $k <= $textCount-$DBTextCountRemaining; $k++) { 
+                if ($request->filled('userTextTitle'.$k) || $request->filled('userText'.$k)) {
+                    $request->validate([
+                        'userTextTitle'.$k => 'required',
+                        'userText'.$k => 'required'
+                    ],
+                    [
+                        'userTextTitle'.$k.'.required' => 'A Text Title is Required on Row '.($k+$DBTextCountRemaining+1),
+                        'userText'.$k.'.required' => 'A Text Description is Required on Row '.($k+$DBTextCountRemaining+1)
+                    ]);
+
+                    $pageText = new PageTexts;
+                    $pageText->page_id = $pageId;
+                    $pageText->user_id = auth()->user()->id;
+                    $pageText->entry_date = NOW();
+                    $pageText->entry_description = $request->input('userTextTitle'.$k);
+                    $pageText->entry_text = $request->input('userText'.$k);
+                    $pageText->save();
+                }
+            }
+
+            // Updating Existing Text Entries
+            for ($k=0; $k <= $DBTextCount-1; $k++) { 
+                if ($request->filled('userTextTitleUpdate'.$k) || $request->filled('userTextUpdate'.$k)) {
+                    $request->validate([
+                        'userTextTitleUpdate'.$k => 'required',
+                        'userTextUpdate'.$k => 'required',
+                        'userTextId'.$k => 'required'
+                    ],
+                    [
+                        'userTextTitleUpdate'.$k.'.required' => 'A Text Title is Required on Row '.($k+1),
+                        'userTextUpdate'.$k.'.required' => 'A Text Description is Required on Row '.($k+1)
+                    ]);
+
+                    $pageText = PageTexts::find($request->input('userTextId'.$k));
+                    $pageText->entry_description = $request->input('userTextTitleUpdate'.$k);
+                    $pageText->entry_text = $request->input('userTextUpdate'.$k);
+                    $pageText->save();
+                } else{
+                    $pageTextDelete = PageTexts::find($request->input('userTextId'.$k))->delete();
+                }
+            }
+
+        // End Texts Section
+
+        // Handling URLs Section
+
+            // Dealing with URL Entries
             $urlCount = $request->input('urlCount');
             $DBURLCount = $request->input('DBURLCount');
             $DBURLCountRemaining = $request->input('DBURLCountRemaining');
-
-            // echo $urlCount;
-            // echo "<br>";
 
             for ($j=0; $j <= $urlCount-$DBURLCountRemaining ; $j++) { 
                 if ($request->filled('userURLTitle'.$j) || $request->filled('userURL'.$j)) {
@@ -135,9 +190,9 @@ class CodesController extends Controller
                         'userURL'.$j => 'required|url'
                     ], 
                     [
-                        'userURLTitle'.$j.'.required' => 'A URL Description is Required on Row '.($j+$DBURLCount+1),
-                        'userURL'.$j.'.required' => 'A URL is Required on Row '.($j+$DBURLCount+1),
-                        'userURL'.$j.'.url' => 'Invalid URL Format on Row '.($j+$DBURLCount+1)
+                        'userURLTitle'.$j.'.required' => 'A URL Description is Required on Row '.($j+$DBURLCountRemaining+1),
+                        'userURL'.$j.'.required' => 'A URL is Required on Row '.($j+$DBURLCountRemaining+1),
+                        'userURL'.$j.'.url' => 'Invalid URL Format on Row '.($j+$DBURLCountRemaining+1)
                     ]);
 
                     $pageURL = new PageUrls;
@@ -155,7 +210,8 @@ class CodesController extends Controller
                 if ($request->filled('userURLTitleUpdate'.$j) || $request->filled('userURLUpdate'.$j)) {
                     $request->validate([
                         'userURLTitleUpdate'.$j => 'required',
-                        'userURLUpdate'.$j => 'required|url'
+                        'userURLUpdate'.$j => 'required|url',
+                        'userURLId'.$j => 'required'
                     ], 
                     [
                         'userURLTitleUpdate'.$j.'.required' => 'A URL Description is Required on Row '.($j+1),
@@ -200,11 +256,11 @@ class CodesController extends Controller
                         'userFiles'.$i => 'mimes:jpeg,jpg,bmp,png,pdf,gif,svg|required|max:1999'
                     ],
                     [
-                        'userFilesTitle'.$i.'.required' => 'A File Title is Required on Row '.($i+$DBFileCount+1),
-                        'userFiles'.$i.'.required' => 'Please Select a File on Row '.($i+$DBFileCount+1),
-                        'userFiles'.$i.'.mimes' => 'The File on Row '.($i+$DBFileCount+1).' failed to upload. Please ensure the file is one of the following file types: jpeg, jpg, bmp, png, pdf, gif, svg',
-                        'userFiles'.$i.'.max' => 'The File on Row '.($i+$DBFileCount+1).' failed to upload. Please ensure the size of the file does not exceed 1999 Kilobytes',
-                        'userFiles'.$i.'.uploaded' => 'The File on Row '.($i+$DBFileCount+1).' failed to upload. Please ensure the size of the file does not exceed 1999 Kilobytes and is one of the following file types: jpeg, jpg, bmp, png, pdf, gif, svg'
+                        'userFilesTitle'.$i.'.required' => 'A File Title is Required on Row '.($i+$DBFileCountRemaining+1),
+                        'userFiles'.$i.'.required' => 'Please Select a File on Row '.($i+$DBFileCountRemaining+1),
+                        'userFiles'.$i.'.mimes' => 'The File on Row '.($i+$DBFileCountRemaining+1).' failed to upload. Please ensure the file is one of the following file types: jpeg, jpg, bmp, png, pdf, gif, svg',
+                        'userFiles'.$i.'.max' => 'The File on Row '.($i+$DBFileCountRemaining+1).' failed to upload. Please ensure the size of the file does not exceed 1999 Kilobytes',
+                        'userFiles'.$i.'.uploaded' => 'The File on Row '.($i+$DBFileCountRemaining+1).' failed to upload. Please ensure the size of the file does not exceed 1999 Kilobytes and is one of the following file types: jpeg, jpg, bmp, png, pdf, gif, svg'
                     ]);
 
                     // Get File name with extension

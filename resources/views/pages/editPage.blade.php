@@ -67,12 +67,34 @@
                                         <th class="textBody">Text</th>
                                         <th class="rowInput">Remove Row</th>
                                     </tr>
+
+                                    @if (count($pageTexts) > 0)
+                                        @foreach ($pageTexts as $page)
+
+                                            <input type="hidden" id="DBTextCount" name="DBTextCount" class="form-control" value="{{count($page->page_texts)}}">
+                                            <input type="hidden" id="DBTextCountRemaining" name="DBTextCountRemaining" class="form-control" value="{{count($page->page_texts)}}">
+
+                                            @for ($k = 0; $k < count($page->page_texts); $k++)
+                                                <tr class="mb-2 pb-3 pt-2 border-bottom">
+                                                    <td><input type="text" class="form-control" name="userTextTitleUpdate{{$k}}" value="{{$page->page_texts[$k] -> entry_description}}"></td>
+                                                    <td class="textBody"><textarea name="userTextUpdate{{$k}}" placeholder="Insert Text Body Here" class="form-control">{{$page->page_texts[$k] -> entry_text}}</textarea></td>
+                                                    <td class="rowInput"><input type="button" value="Remove" class="remove btn btn-outline-dark hasText" onclick="remove(this)"></td>
+                                                </tr>
+                                                {{-- This input has to be outside tr because remove btn removes tr and therefore any input within it --}}
+                                                <input type="hidden" class="form-control" name="userTextId{{$k}}" value="{{$page->page_texts[$k]->id}}">
+                                            @endfor
+
+                                        @endforeach
+                                    @endif
+
                                     <tr class="mb-2 pb-2 pt-2 border-bottom">
-                                        <td><input type="text" class="form-control" placeholder="Insert Text Title Here"></td>
-                                        <td class="textBody"><textarea name="textBody" placeholder="Insert Text Body Here" class="form-control"></textarea></td>
+                                        <td><input type="text" class="form-control" name="userTextTitle0" placeholder="Insert Text Title Here"></td>
+                                        <td class="textBody"><textarea name="userText0" placeholder="Insert Text Body Here" class="form-control"></textarea></td>
                                         <td class="rowInput"><input type="button" value="Remove" class="remove btn btn-outline-dark" onclick="remove(this)"></td>
                                     </tr>
                                 </table>
+
+                                <input type="hidden" id="textCount" name="textCount" class="form-control">
 
                                 <div class="mx-5 py-2 mb-4">
                                     <input type="button" value="Add More Text" class="add btn btn-primary" onclick="addText()">
@@ -104,9 +126,7 @@
                                             @for ($j = 0; $j < count($page->page_urls); $j++)
                                                 <tr class="mb-2 pb-3 pt-2 border-bottom">
                                                     <td><input type="text" class="form-control" name="userURLTitleUpdate{{$j}}" value="{{$page->page_urls[$j] -> entry_description}}"></td>
-                                                    <td class="textBody">
-                                                        <input type="text" class="form-control" name="userURLUpdate{{$j}}" value="{{$page->page_urls[$j] -> entry_url}}">
-                                                    </td>
+                                                    <td class="textBody"><input type="text" class="form-control" name="userURLUpdate{{$j}}" value="{{$page->page_urls[$j] -> entry_url}}"></td>
                                                     <td class="rowInput"><input type="button" value="Remove" class="remove btn btn-outline-dark hasURL" onclick="remove(this)"></td>
                                                 </tr>
                                                 {{-- This input has to be outside tr because remove btn removes tr and therefore any input within it --}}
@@ -266,18 +286,29 @@
                 DBpageURLCountRemaining.value = DBpageURLCountRemaining.value-1;
             }
 
+            if (e.classList.contains('hasText')) {
+                var DBpageTextCountRemaining = document.getElementById('DBTextCountRemaining');
+
+                DBpageTextCountRemaining.value = DBpageTextCountRemaining.value-1;
+            }
+
             e.parentElement.parentElement.remove();
 
             fileCount();
             urlCount();
+            textCount();
         }
 
+        z = 1;
         function addText() {
             var start = $('#textTable'),
-                newRow = $('<tr class="mb-2 pb-2 pt-2 border-bottom"><td><input type="text" class="form-control" placeholder="Insert Text Title Here"></td>' +
-                        '<td class="textBody"><textarea name="textBody" placeholder="Insert Text Body Here" class="form-control"></textarea></td>' +
+                newRow = $('<tr class="mb-2 pb-2 pt-2 border-bottom"><td><input type="text" name="userTextTitle'+z+'" class="form-control" placeholder="Insert Text Title Here"></td>' +
+                        '<td class="textBody"><textarea name="userText'+z+'" placeholder="Insert Text Body Here" class="form-control"></textarea></td>' +
                         '<td class="rowInput"><input type="button" value="Remove" class="remove btn btn-outline-dark" onclick="remove(this)"></td></tr>');
             $(start).append(newRow);
+
+            textCount();
+            z++;
         }
 
         var y = 1;
@@ -319,6 +350,13 @@
 
             urlCount.value = urlTableRowCount-2;
         }
+
+        function textCount() {
+            var textCount = document.getElementById('textCount');
+            var textTableRowCount = document.getElementById('textTable').rows.length;
+
+            textCount.value = textTableRowCount-2;
+        }
     </script>
 
 
@@ -326,25 +364,7 @@
         window.onload = function() {
             fileCount();
             urlCount();
-
-            // var pageFiles = @json($pageFiles);
-
-            // alert(JSON.stringify(pageFiles, null, 4));
-
-            // alert(JSON.stringify(pageFiles[0].page_files[0].file, null, 4));
-
-
-            // for (let i = 0; i <= pageFiles[0].page_files.length-1; i++) {
-            //     var pageFile = document.getElementById(pageFiles[0].page_files[i].id + pageFiles[0].page_files[i].file);
-
-            //     alert(pageFiles[0].page_files[i].file);
-
-            //     // pageFile.value = '/storage/user_files/' + pageFiles[0].page_files[i].file;
-
-            // }
-
-            
-
+            textCount();
         }
     </script>
 @endsection

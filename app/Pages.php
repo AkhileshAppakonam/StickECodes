@@ -21,4 +21,8 @@ class Pages extends Model
     public function page_urls(){
         return $this->hasMany(PageUrls::class, 'page_id', 'id');
     }
+
+    public function page_texts() {
+        return $this->hasMany(PageTexts::class, 'page_id', 'id');
+    }
 }
