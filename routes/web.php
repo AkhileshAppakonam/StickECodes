@@ -32,3 +32,4 @@ Route::get('/viewPagesFile/{fileName}/{file}/{entryDate}', 'CodesController@view
 
 // Form Requests
 Route::post('/codes/{codeId}/{pageId}/editPage', 'CodesController@edit');
+Route::post('/securityProfilePage/{secProfileId}/editSecurityProfile', 'SecurityProfilesController@edit');

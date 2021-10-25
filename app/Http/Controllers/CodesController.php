@@ -205,7 +205,7 @@ class CodesController extends Controller
                 }
             }
 
-            // Updating Existin URLs
+            // Updating Existing URLs
             for ($j=0; $j <= $DBURLCount-1; $j++) { 
                 if ($request->filled('userURLTitleUpdate'.$j) || $request->filled('userURLUpdate'.$j)) {
                     $request->validate([

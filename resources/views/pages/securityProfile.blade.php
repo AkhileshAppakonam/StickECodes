@@ -3,7 +3,12 @@
 @section('content')
     <section id="securityProfiles">
         <div class="container">
-            <header class="mb-5"><h1>Your Security Profiles</h1></header>
+            <header class="mb-4"><h1>Your Security Profiles</h1></header>
+
+            <div class="ml-1 mb-4">
+                @include('inc.messages')
+            </div>
+            
 
             @if (!$user->securityProfiles->isEmpty())
                 @foreach ($user->securityProfiles as $securityProfile)
