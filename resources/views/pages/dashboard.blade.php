@@ -18,7 +18,7 @@
                 <div class="col-md-4 col-sm-4">
                     <article class="dashboardCodes shadow-lg p-3 mb-5 bg-white rounded">
                         <figure class="mb-0">
-                            <div class="image"><a href="#"><img src="../images/stickecode.png"></a></div>
+                            <div class="image"><a href="/public/index.php/pages/{{$user -> name}}/{{$code -> code_name}}"><img src='{{file_get_contents('/var/www/html/resources/views/QRCodeImageData/9c9Sz.png')}}' alt='QR Code' width='300' height='300'></a></div>
                         </figure>
                         <div class="description px-5 pb-5">
                             <div class="codeTitles">
@@ -41,6 +41,10 @@
             <p>You have No Codes</p>
         @endif
         
+    </div>
+
+    <div>
+        <a href="/public/index.php/createCode">Generate New QR Code</a>
     </div>
 </div>
 @endsection

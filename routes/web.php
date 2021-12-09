@@ -19,6 +19,10 @@ Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
 Route::get('/services', 'PagesController@services');
 
+Route::get('/testQRCode', function(){
+    return view('pages.testQRCode');
+});
+
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index');
@@ -33,3 +37,10 @@ Route::get('/viewPagesFile/{fileName}/{file}/{entryDate}', 'CodesController@view
 // Form Requests
 Route::post('/codes/{codeId}/{pageId}/editPage', 'CodesController@edit');
 Route::post('/securityProfilePage/{secProfileId}/editSecurityProfile', 'SecurityProfilesController@edit');
+
+// Generating User QR Code Pages
+Route::get('pages/{userName}/{codeName}', function ($userName, $codeName) {
+    return view('QRCodePages.'.$userName.' '.$codeName);
+});
+
+Route::get('/createCode','CodesController@create');

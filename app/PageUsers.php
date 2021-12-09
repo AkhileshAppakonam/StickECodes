@@ -11,6 +11,6 @@ class PageUsers extends Model
     }
 
     public function pages() {
-        return $this->belongsTo(Pages::class);
+        return $this->belongsTo(Pages::class, 'page_id', 'id');
     }
 }

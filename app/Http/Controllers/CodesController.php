@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -11,6 +13,12 @@ use App\PageFiles;
 use App\PageUrls;
 use App\PageTexts;
 
+// For Generating QR Codes
+use chillerlan\QRCode\QRCode;
+use chillerlan\QRCode\QROptions;
+
+require_once('./../vendor/autoload.php');
+
 class CodesController extends Controller
 {
     /**
@@ -21,6 +29,51 @@ class CodesController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function create() 
+    {
+        $options = new QROptions([
+            'eccLevel' => QRCode::ECC_L,
+            'outputType' => QRCode::OUTPUT_MARKUP_SVG,
+            'version' => 5,
+        ]);
+
+        // Generate Random 5 byte String for Code Name
+        $length = 5;
+        $randomBytes = openssl_random_pseudo_bytes($length);
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        $charactersLength = strlen($characters);
+        $codeName = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $codeName .= $characters[ord($randomBytes[$i]) % $charactersLength];
+        }
+
+
+        $authName = auth()->user()->name;
+        $authId = auth()->user()->id;
+
+        $key = $authName."/".$codeName;
+
+        $code = new Codes;
+        $code->created_at = NOW();
+        $code->updated_at = NOW();
+        $code->code_name = $codeName;
+        $code->user_id = $authId;
+        $code->code_title = "Unnamed Code: ".$codeName;
+        $code->geo_location = 0;
+        $code->location = NULL;
+        $code->save();
+
+
+        $qrcode = (new QRCode($options))->render('http://54.219.144.210/public/index.php/pages/'.$key);
+
+        fopen(resource_path('views/QRCodePages/'.$authName.' '.$codeName.'.blade.php' ), 'w' );
+
+        file_put_contents('/var/www/html/resources/views/QRCodeImageData/'.$codeName.'.png', $qrcode);
+
+        return redirect('/dashboard')->with('success', $codeName.': Code Created Successfully');
     }
 
     public function show($codeId)
@@ -271,7 +324,7 @@ class CodesController extends Controller
                     $extension = $request->file('userFiles'.$i)->getClientOriginalExtension();
                     // File name to store
                     $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-                    // // Upload Image
+                    // Upload Image
                     $path = $request->file('userFiles'.$i)->storeAs('public/user_files', $fileNameToStore);
 
                     $pageFile = new PageFiles;

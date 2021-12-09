@@ -107,7 +107,15 @@ class SecurityProfilesController extends Controller
         $DBspUsersCount = $request->input('DBspUsersCount');
         $DBspUsersCountRemaining = $request->input('DBspUsersCountRemaining');
 
-        // Check optional filed to make profile public
+        // echo "Total: ".$userCount;
+        // echo "<br>";
+        // echo "DB Count: ".$DBspUsersCount;
+        // echo "<br>";
+        // echo "Remaining: ".$DBspUsersCountRemaining;
+        // echo "<br>";   
+        // echo "<br>";     
+
+        // Check optional filled to make profile public
         if (!$request->has('profileType')) {
             $profileType = 'priv';
         } else {
@@ -170,29 +178,40 @@ class SecurityProfilesController extends Controller
                 $securityProfileUsers->permissions = $permissions;
                 $securityProfileUsers->save();
 
-                // echo "Security Profile Id: ".$secProfileId;
-                // echo "<br>";
+                // Dont Need For now
+                    // echo "Security Profile Id: ".$secProfileId;
+                    // echo "<br>";
 
-                $SPPageIds = SecurityProfiles::find($secProfileId)->pages;
+                    // $SPPageIds = SecurityProfiles::find($secProfileId)->pages;
 
-                // echo "Security Profile Page Id: ".$SPPageIds;
-                // echo "<br>";
-                // echo "<br>";
+                    // echo "Security Profile Page Id: ".$SPPageIds;
+                    // echo "<br>";
+                    // echo "<br>";
 
-                foreach ($SPPageIds as $SPPageId) {
-                    $pageUsers = new PageUsers;
-                    $pageUsers->created_at = NOW();
-                    $pageUsers->updated_at = NOW();
-                    $pageUsers->user_id = $SPUserId;
-                    $pageUsers->page_id = $SPPageId->id;
-                    $pageUsers->permissions = $permissions;
-                    $pageUsers->invitee_id = 0;
-                    $pageUsers->user_type = 'spu';
-                    $pageUsers->save();
-                }
+                    // foreach ($SPPageIds as $SPPageId) {
+                    //     $pageUsers = new PageUsers;
+                    //     $pageUsers->created_at = NOW();
+                    //     $pageUsers->updated_at = NOW();
+                    //     $pageUsers->user_id = $SPUserId;
+                    //     $pageUsers->page_id = $SPPageId->id;
+                    //     $pageUsers->permissions = $permissions;
+                    //     $pageUsers->invitee_id = 0;
+                    //     $pageUsers->user_type = 'spu';
+                    //     $pageUsers->save();
+                    // }
             }
         }
 
+
+        // Don't Need for Now
+            // $pageUsers = PageUsers::whereHas('pages', function($q) use($secProfileId){
+            //                         $q->where('security_profile_id', $secProfileId);
+            //                     })->get();
+
+            // $SPPageIds = SecurityProfiles::find($secProfileId)->pages;
+
+            // echo $pageUsers;
+                            
         // Update Existing SP Users
         for ($j=0; $j <= $DBspUsersCount-1; $j++) { 
             if ($request->filled('addUserEmailUpdate'.$j) || $request->filled('addUserNameUpdate'.$j)) {
@@ -210,9 +229,9 @@ class SecurityProfilesController extends Controller
                 ]);
 
                 $SPUserIdUpdate = User::where([
-                    'email' => $request->input('addUserEmailUpdate'.$j), 
-                    'name' => $request->input('addUserNameUpdate'.$j) 
-                ])->first('id')->id;
+                                    'email' => $request->input('addUserEmailUpdate'.$j), 
+                                    'name' => $request->input('addUserNameUpdate'.$j) 
+                                ])->first('id')->id;
 
                 if ($request->input('addUserPermissionsUpdate'.$j) == "view") {
                     $permissionsUpdate = 1;
@@ -222,34 +241,24 @@ class SecurityProfilesController extends Controller
                     $permissionsUpdate = 3;
                 }
 
-
                 $securityProfileUsers = SecurityProfileUsers::find($request->input('securityProfileUserId'.$j));
-                // $securityProfileUsers->updated_at = NOW();
-                // $securityProfileUsers->user_id = $SPUserIdUpdate;
-                // $securityProfileUsers->permissions = $permissionsUpdate;
-                // $securityProfileUsers->save();
-
-                echo $securityProfileUsers;
-                echo "<br>";
-
-                $pageUsers = Pages::where('security_profile_id', $secProfileId)->with('page_users')->get();
-                
-                echo $pageUsers;
-                echo "<br>";
-                echo "<br>";
+                $securityProfileUsers->updated_at = NOW();
+                $securityProfileUsers->user_id = $SPUserIdUpdate;
+                $securityProfileUsers->permissions = $permissionsUpdate;
+                $securityProfileUsers->save();
 
             } else {
-                
+                $securityProfileUsers = SecurityProfileUsers::find($request->input('securityProfileUserId'.$j))->delete();
             }
         }
 
-        // $securityProfile = SecurityProfiles::find($secProfileId);
-        // $securityProfile->updated_at = NOW();
-        // $securityProfile->profile_type = $profileType;
-        // $securityProfile->profile_name = $request->input('securityProfileName');
-        // $securityProfile->save();
+        $securityProfile = SecurityProfiles::find($secProfileId);
+        $securityProfile->updated_at = NOW();
+        $securityProfile->profile_type = $profileType;
+        $securityProfile->profile_name = $request->input('securityProfileName');
+        $securityProfile->save();
 
-        // return redirect('/securityProfilePage')->with('success', $securityProfile->profile_name.': Security Profile Updated Successfully');
+        return redirect('/securityProfilePage')->with('success', $securityProfile->profile_name.': Security Profile Updated Successfully');
 
     }
 }
