@@ -54,6 +54,8 @@ class CodesController extends Controller
         $authName = auth()->user()->name;
         $authId = auth()->user()->id;
 
+        $authName = str_replace(' ', '', $authName);
+
         $key = $authName."/".$codeName;
 
         $code = new Codes;
@@ -66,10 +68,18 @@ class CodesController extends Controller
         $code->location = NULL;
         $code->save();
 
+        $page = new Pages;
+        $page->created_at = NOW();
+        $page->updated_at = NOW();
+        $page->code_id = $code->id;
+        $page->security_profile_id = NULL;
+        $page->page_title = "Unset Page Title Description";
+        $page->save();
+
 
         $qrcode = (new QRCode($options))->render('http://54.219.144.210/public/index.php/pages/'.$key);
 
-        fopen(resource_path('views/QRCodePages/'.$authName.' '.$codeName.'.blade.php' ), 'w' );
+        fopen(resource_path('views/QRCodePages/'.$authName.$codeName.'.blade.php' ), 'w' );
 
         file_put_contents('/var/www/html/resources/views/QRCodeImageData/'.$codeName.'.png', $qrcode);
 

@@ -35,7 +35,7 @@
                                                 <div class="card">
                                                     <article>
                                                         <figure class="mb-0">
-                                                            <div class="image"><img src="../images/stickecode.png" height="200px" width="200px"></div>
+                                                            <div class="image"><img src="{{file_get_contents('/var/www/html/resources/views/QRCodeImageData/'.$code -> code_name.'.png')}}" height="200px" width="200px"></div>
                                                         </figure>
                                                         <div class="description">
                                                             <div class="codeTitles">

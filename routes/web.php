@@ -40,7 +40,8 @@ Route::post('/securityProfilePage/{secProfileId}/editSecurityProfile', 'Security
 
 // Generating User QR Code Pages
 Route::get('pages/{userName}/{codeName}', function ($userName, $codeName) {
-    return view('QRCodePages.'.$userName.' '.$codeName);
+    $userName = str_replace(' ', '', $userName);
+    return view('QRCodePages.'.$userName.$codeName);
 });
 
 Route::get('/createCode','CodesController@create');

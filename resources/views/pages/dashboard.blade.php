@@ -18,9 +18,9 @@
                 <div class="col-md-4 col-sm-4">
                     <article class="dashboardCodes shadow-lg p-3 mb-5 bg-white rounded">
                         <figure class="mb-0">
-                            <div class="image"><a href="/public/index.php/pages/{{$user -> name}}/{{$code -> code_name}}"><img src='{{file_get_contents('/var/www/html/resources/views/QRCodeImageData/9c9Sz.png')}}' alt='QR Code' width='300' height='300'></a></div>
+                            <div class="image"><a href="/public/index.php/pages/{{$user -> name}}/{{$code -> code_name}}"><img src="{{file_get_contents('/var/www/html/resources/views/QRCodeImageData/'.$code -> code_name.'.png')}}" alt='QR Code' width='300' height='300'></a></div>
                         </figure>
-                        <div class="description px-5 pb-5">
+                        <div class="description pb-5">
                             <div class="codeTitles">
                                 <h3>{{$code -> code_title}}</h3>
                                 <small class="ml-1">{{$code -> code_name}}</small>
@@ -30,7 +30,7 @@
                             @endforeach
                             <hr>
                             <div>
-                                <a href="#" class="btn btn-outline-dark">View Page</a>
+                                <a href="/public/index.php/pages/{{$user -> name}}/{{$code -> code_name}}" class="btn btn-outline-dark">View Page</a>
                                 <a href="/public/index.php/codes/{{$code -> id}}/editPage" class="btn btn-outline-dark float-right">Edit Page</a>
                             </div>
                         </div>
