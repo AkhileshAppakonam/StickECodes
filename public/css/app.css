@@ -11619,3 +11619,59 @@ a.text-dark:focus {
   margin-right: 0px;
 }
 
+#publicQRCodePage .form-group {
+  height: auto;
+}
+
+#publicQRCodePage table {
+  position: relative;
+  display: table;
+  width: 100%;
+  height: auto;
+}
+
+#publicQRCodePage table tr {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: flex;
+}
+
+#publicQRCodePage table tr th {
+  position: relative;
+  width: 33.33%;
+  height: auto;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #343a40;
+  border-color: #454d55;
+  color: white;
+}
+
+#publicQRCodePage table#textEntries tr th {
+  width: 25%;
+}
+
+#publicQRCodePage table tr td {
+  position: relative;
+  width: 33.33%;
+  height: auto;
+  display: inline-block;
+  padding: 1rem 1rem 0.5rem 1rem;
+  border-top: 1px solid #dee2e6;
+}
+
+#publicQRCodePage table#textEntries tr td {
+  width: 25%;
+}
+
+#publicQRCodePage table tr td textarea {
+  overflow: auto;
+  resize: vertical;
+  width: 100%;
+  height: auto;
+  min-height: 50px;
+  max-height: 150px;
+  background: none;
+}
+

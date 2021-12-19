@@ -20,14 +20,14 @@ Route::get('/about', 'PagesController@about');
 Route::get('/services', 'PagesController@services');
 
 Route::get('/testQRCode', function(){
-    return view('pages.testQRCode');
+    return view('inc.templateQRCodePage');
 });
 
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index');
 
-Route::get('/codes/{codeId}/editPage', 'CodesController@show');
+Route::get('/codes/{codeId}/editPage', 'CodesController@showEditPage');
 Route::get('/securityProfilePage', 'SecurityProfilesController@index');
 Route::get('/securityProfilePage/{secProfileId}/editSecurityProfile', 'SecurityProfilesController@show');
 Route::get('/securityProfilePage/create', 'SecurityProfilesController@create');
@@ -39,9 +39,5 @@ Route::post('/codes/{codeId}/{pageId}/editPage', 'CodesController@edit');
 Route::post('/securityProfilePage/{secProfileId}/editSecurityProfile', 'SecurityProfilesController@edit');
 
 // Generating User QR Code Pages
-Route::get('pages/{userName}/{codeName}', function ($userName, $codeName) {
-    $userName = str_replace(' ', '', $userName);
-    return view('QRCodePages.'.$userName.$codeName);
-});
-
 Route::get('/createCode','CodesController@create');
+Route::get('pages/{userName}/{codeName}', 'CodesController@showPublicQRCodePage');

@@ -79,14 +79,38 @@ class CodesController extends Controller
 
         $qrcode = (new QRCode($options))->render('http://54.219.144.210/public/index.php/pages/'.$key);
 
-        fopen(resource_path('views/QRCodePages/'.$authName.$codeName.'.blade.php' ), 'w' );
+        $file = fopen(resource_path('views/QRCodePages/'.$authName.$codeName.'.blade.php' ), 'w' ) or die("Unable to Create Page!");
+        $txt = "@include('inc.templateQRCodePage')";
+        file_put_contents(resource_path('views/QRCodePages/'.$authName.$codeName.'.blade.php' ), $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
+        fclose($file);
 
         file_put_contents('/var/www/html/resources/views/QRCodeImageData/'.$codeName.'.png', $qrcode);
 
         return redirect('/dashboard')->with('success', $codeName.': Code Created Successfully');
     }
 
-    public function show($codeId)
+    public function showPublicQRCodePage($userName, $codeName)
+    {
+        $userName = str_replace(' ', '', $userName);
+
+        $textEntries = PageTexts::whereHas('pages.code', function($q) use($codeName){
+                                    $q->where('code_name', $codeName);
+                                })->with('user:id,name')->get();
+        $urlEntries = PageUrls::whereHas('pages.code', function($q) use($codeName){
+                                    $q->where('code_name', $codeName);
+                                })->with('user:id,name')->get();
+        $fileEntries = PageFiles::whereHas('pages.code', function($q) use($codeName){
+                                    $q->where('code_name', $codeName);
+                                })->with('user:id,name')->get();
+
+        try {
+            return view('QRCodePages.'.$userName.$codeName)->with(['pageTexts'=>$textEntries, 'pageUrls'=>$urlEntries, 'pageFiles'=>$fileEntries, 'codeName'=>$codeName]);
+        } catch (\Throwable $th) {
+            abort(403, 'Unauthorized action.');
+        }
+    }
+
+    public function showEditPage($codeId)
     {
         $authId = auth()->user()->id;
         $codes = Codes::with('pages')->find($codeId);

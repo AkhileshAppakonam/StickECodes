@@ -13,7 +13,7 @@
                 <div class="row shadow p-3 mb-5 bg-white rounded">
                     <div class="col-md-4 code">
                         <figure class="mb-0">
-                            <div class="image"><a href="#"><img src="{{file_get_contents('/var/www/html/resources/views/QRCodeImageData/'.$code -> code_name.'.png')}}" alt='QR Code' width='300' height='300'></a></div>
+                            <div class="image"><a href="/public/index.php/pages/{{auth() -> user() -> name}}/{{$code -> code_name}}"><img src="{{file_get_contents('/var/www/html/resources/views/QRCodeImageData/'.$code -> code_name.'.png')}}" alt='QR Code' width='300' height='300'></a></div>
                         </figure>
                     </div>
                     <div class="col-md-8 codeProperties">
