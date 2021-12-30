@@ -26,6 +26,10 @@
                                     <td><textarea class="px-2" disabled>{{$pageText -> entry_text}}</textarea></td>
                                 </tr>
                             @endforeach
+                        @else
+                            <tr class="noContents">
+                                <td><p>No Texts</p></td>
+                            </tr>
                         @endif
                     </table>
                 </div>
@@ -48,6 +52,10 @@
                                     <td><a class="pl-1" href="{{$pageUrl -> entry_url}}">{{$pageUrl -> entry_description}}</a></td>
                                 </tr>
                             @endforeach
+                        @else
+                            <tr class="noContents">
+                                <td><p>No Urls</p></td>
+                            </tr>
                         @endif
                     </table>
                 </div>
@@ -70,6 +78,10 @@
                                     <td><a class="pl-1" href="/public/index.php/viewPagesFile/{{$pageFile -> entry_description}}/{{$pageFile -> file}}/{{$pageFile -> entry_date}}">{{$pageFile -> entry_description}}</a></td>
                                 </tr>
                             @endforeach
+                        @else
+                            <tr class="noContents">
+                                <td><p>No Files</p></td>
+                            </tr>
                         @endif
 
                         

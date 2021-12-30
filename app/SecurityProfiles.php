@@ -17,4 +17,8 @@ class SecurityProfiles extends Model
     public function codes() {
         return $this->belongsToMany(Codes::class, 'pages', 'security_profile_id', 'code_id')->withPivot('page_title');
     }
+
+    public function security_profile_users() {
+        return $this->hasMany(SecurityProfileUsers::class, 'security_profile_id', 'id');
+    }
 }

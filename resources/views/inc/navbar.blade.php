@@ -17,6 +17,7 @@
             <li class="nav-item"><a href="/" class="nav-link" aria-current="page" id="home">Home</a></li>
             <li class="nav-item"><a href="/public/index.php/about" class="nav-link" id="about">About</a></li>
             <li class="nav-item"><a href="/public/index.php/services" class="nav-link" id="services">Services</a></li>
+            <li class="nav-item"><a href="/public/index.php/codes/lookUp" class="nav-link" id="services">Enter a Code</a></li>
           </ul>
 
           <!-- Right Side Of Navbar -->

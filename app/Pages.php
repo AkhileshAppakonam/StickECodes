@@ -26,7 +26,7 @@ class Pages extends Model
         return $this->hasMany(PageTexts::class, 'page_id', 'id');
     }
 
-    public function page_users() {
-        return $this->hasMany(PageUsers::class, 'page_id', 'id');
-    }
+    // public function page_users() {
+    //     return $this->hasMany(PageUsers::class, 'page_id', 'id');
+    // }
 }

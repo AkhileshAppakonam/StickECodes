@@ -6,7 +6,7 @@
             @csrf
 
             <div class="container">
-                <header class="mb-4"><h1>Edit Security Profile</h1></header>
+                <header class="mb-4"><h1>{{$headerType?? "Edit Security Profile"}}</h1></header>
 
                 @include('inc.messages')
 
@@ -43,31 +43,34 @@
                                 <th>Permissions</th>
                                 <th>Remove Row</th>
                             </tr>
+                            
+                            @isset($securityProfileUsers)
+                                @if (count($securityProfileUsers) > 0)
 
-                            @if (count($securityProfileUsers) > 0)
+                                    <input type="hidden" id="DBspUsersCount" name="DBspUsersCount" class="form-control" value="{{count($securityProfileUsers)}}">
+                                    <input type="hidden" id="DBspUsersCountRemaining" name="DBspUsersCountRemaining" class="form-control" value="{{count($securityProfileUsers)}}">
 
-                                <input type="hidden" id="DBspUsersCount" name="DBspUsersCount" class="form-control" value="{{count($securityProfileUsers)}}">
-                                <input type="hidden" id="DBspUsersCountRemaining" name="DBspUsersCountRemaining" class="form-control" value="{{count($securityProfileUsers)}}">
-
-                                {{-- Key is really a counter variable --}}
-                                @foreach ($securityProfileUsers as $key => $securityProfileUser)
-                                    <tr class="mb-2 pb-3 border-bottom">
-                                        <td><p></p></td>
-                                        <td><input type="text" name="addUserEmailUpdate{{$key}}" class="form-control" placeholder="Insert Email Address Here" value="{{$securityProfileUser->user->email}}"></td>
-                                        <td><input type="text" name="addUserNameUpdate{{$key}}" class="form-control" placeholder="Insert Name Here" value="{{$securityProfileUser->user->name}}"></td>
-                                        <td>
-                                            <select id="choosePermissions" name="addUserPermissionsUpdate{{$key}}" class="form-control">
-                                                <option value="view" @if ($securityProfileUser->permissions == 1) {{"selected"}} @endif>View Only</option>
-                                                <option value="update" @if ($securityProfileUser->permissions == 2) {{"selected"}} @endif>View and Update</option>
-                                                <option value="full" @if ($securityProfileUser->permissions == 3) {{"selected"}} @endif>Full Control</option>
-                                            </select>
-                                        </td>
-                                        <td><input type="button" value="Remove" class="remove btn btn-outline-dark hasSPUser" onclick="remove(this)"></td>
-                                    </tr>
-                                    {{-- This input has to be outside tr because remove btn removes tr and therefore any input within it --}}
-                                    <input type="hidden" class="form-control" name="securityProfileUserId{{$key}}" value="{{$securityProfileUser->id}}">
-                                @endforeach
-                            @endif
+                                    {{-- Key is really a counter variable --}}
+                                    @foreach ($securityProfileUsers as $key => $securityProfileUser)
+                                        <tr class="mb-2 pb-3 border-bottom">
+                                            <td><p></p></td>
+                                            <td><input type="text" name="addUserEmailUpdate{{$key}}" class="form-control" placeholder="Insert Email Address Here" value="{{$securityProfileUser->user->email}}"></td>
+                                            <td><input type="text" name="addUserNameUpdate{{$key}}" class="form-control" placeholder="Insert Name Here" value="{{$securityProfileUser->user->name}}"></td>
+                                            <td>
+                                                <select id="choosePermissions" name="addUserPermissionsUpdate{{$key}}" class="form-control">
+                                                    <option value="view" @if ($securityProfileUser->permissions == 1) {{"selected"}} @endif>View Only</option>
+                                                    <option value="update" @if ($securityProfileUser->permissions == 2) {{"selected"}} @endif>View and Update</option>
+                                                    <option value="full" @if ($securityProfileUser->permissions == 3) {{"selected"}} @endif>Full Control</option>
+                                                </select>
+                                            </td>
+                                            <td><input type="button" value="Remove" class="remove btn btn-outline-dark hasSPUser" onclick="remove(this)"></td>
+                                        </tr>
+                                        {{-- This input has to be outside tr because remove btn removes tr and therefore any input within it --}}
+                                        <input type="hidden" class="form-control" name="securityProfileUserId{{$key}}" value="{{$securityProfileUser->id}}">
+                                    @endforeach
+                                @endif
+                            @endisset
+                                
 
                             <tr class="mb-2 pb-3 border-bottom">
                                 <td><p></p></td>

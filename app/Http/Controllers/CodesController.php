@@ -110,85 +110,101 @@ class CodesController extends Controller
         }
     }
 
-    public function showEditPage($codeId)
+    public function showEditPage(Codes $code)
     {
+        $this->authorize('editPage', $code);
+
         $authId = auth()->user()->id;
-        $codes = Codes::with('pages')->find($codeId);
-        $securityProfiles = User::find($authId)->securityProfiles;
+        $securityProfiles = auth()->user()->securityProfiles;
 
-        $pageFiles = Pages::with('page_files')->where('code_id', $codeId)->get();
-        $pageURLs = Pages::with('page_urls')->where('code_id', $codeId)->get();
-        $pageTexts = Pages::with('page_texts')->where('code_id', $codeId)->get();
+        // echo $code;
+        // echo "<br>";
 
-        if (empty($codes) || ($codes->user->id !== $authId)) {
-            abort(403, 'Unauthorized action.');
-        } else{
+        // foreach ($code->pages as $page) {
+        //     echo $page->page_files;
+        //     echo "<br>";
+        //     echo $page->page_urls;
+        //     echo "<br>";
+        //     echo $page->page_texts;
+        //     echo "<br>";
+        // }
+
+        $pageFiles = Pages::with('page_files')->where('code_id', $code->id)->get();
+        $pageURLs = Pages::with('page_urls')->where('code_id', $code->id)->get();
+        $pageTexts = Pages::with('page_texts')->where('code_id', $code->id)->get();
+
+        return view('pages.editPage')->with(['code'=>$code, 'securityProfiles'=>$securityProfiles, 'pageFiles'=>$pageFiles, 'pageURLs'=>$pageURLs, 'pageTexts'=>$pageTexts]);
+
+
+        // if (empty($codes) || ($codes->user->id !== $authId)) {
+        //     abort(403, 'Unauthorized action.');
+        // } else{
             
-            // echo $codes;
-            // echo "<br>";
-            // echo "<br>";
-            // echo $securityProfiles;
-            // echo "<br>";
-            // echo "<br>";
-            // echo $pageFiles;
-            // echo "<br>";
-            // echo "<br>";
+        //     // echo $codes;
+        //     // echo "<br>";
+        //     // echo "<br>";
+        //     // echo $securityProfiles;
+        //     // echo "<br>";
+        //     // echo "<br>";
+        //     // echo $pageFiles;
+        //     // echo "<br>";
+        //     // echo "<br>";
             
-            // foreach ($pageFiles as $page) {
-            //     echo "<br>";
-            //     echo $page->page_files;
-            //     echo "<br>";
+        //     // foreach ($pageFiles as $page) {
+        //     //     echo "<br>";
+        //     //     echo $page->page_files;
+        //     //     echo "<br>";
 
-            //     foreach ($page->page_files as $page_file) {
-            //         echo "<br>";
-            //         echo $page_file->entry_description;
-            //         echo "<br>";
-            //         echo $page_file->file;
-            //         echo "<br>";
-            //         echo "<br>";
-            //     }
-            // }
+        //     //     foreach ($page->page_files as $page_file) {
+        //     //         echo "<br>";
+        //     //         echo $page_file->entry_description;
+        //     //         echo "<br>";
+        //     //         echo $page_file->file;
+        //     //         echo "<br>";
+        //     //         echo "<br>";
+        //     //     }
+        //     // }
 
-            // echo "<br>";
-            // echo "<br>";
-            // echo "<br>";
-            // echo "<br>";
+        //     // echo "<br>";
+        //     // echo "<br>";
+        //     // echo "<br>";
+        //     // echo "<br>";
 
-            // foreach ($pageFiles as $page) {
-            //     echo "<br>";
-            //     echo $page->page_files;
-            //     echo "<br>";
-            //     echo count($page->page_files);
+        //     // foreach ($pageFiles as $page) {
+        //     //     echo "<br>";
+        //     //     echo $page->page_files;
+        //     //     echo "<br>";
+        //     //     echo count($page->page_files);
 
-            //     for ($j=0; $j < count($page->page_files); $j++) { 
-            //         echo "<br>";
-            //         echo $page->page_files[$j]->file;
-            //         echo "<br>";
-            //     }
-            // }
+        //     //     for ($j=0; $j < count($page->page_files); $j++) { 
+        //     //         echo "<br>";
+        //     //         echo $page->page_files[$j]->file;
+        //     //         echo "<br>";
+        //     //     }
+        //     // }
 
-            // echo "<br>";
-            // echo "<br>";
-            // echo "<br>";
-            // echo "<br>";
+        //     // echo "<br>";
+        //     // echo "<br>";
+        //     // echo "<br>";
+        //     // echo "<br>";
 
-            // echo $pageURLs;
+        //     // echo $pageURLs;
 
-            // foreach ($pageURLs as $page) {
-            //     echo "<br>";
-            //     echo $page->page_urls;
-            //     echo "<br>";
-            //     echo count($page->page_urls);
+        //     // foreach ($pageURLs as $page) {
+        //     //     echo "<br>";
+        //     //     echo $page->page_urls;
+        //     //     echo "<br>";
+        //     //     echo count($page->page_urls);
 
-            //     for ($i=0; $i < count($page->page_urls); $i++) { 
-            //         echo "<br>";
-            //         echo $page->page_urls[$i]->entry_url;
-            //         echo "<br>";
-            //     }
-            // }
+        //     //     for ($i=0; $i < count($page->page_urls); $i++) { 
+        //     //         echo "<br>";
+        //     //         echo $page->page_urls[$i]->entry_url;
+        //     //         echo "<br>";
+        //     //     }
+        //     // }
 
-            return view('pages.editPage')->with(['code'=>$codes, 'securityProfiles'=>$securityProfiles, 'pageFiles'=>$pageFiles, 'pageURLs'=>$pageURLs, 'pageTexts'=>$pageTexts]);
-        }
+        //     return view('pages.editPage')->with(['code'=>$codes, 'securityProfiles'=>$securityProfiles, 'pageFiles'=>$pageFiles, 'pageURLs'=>$pageURLs, 'pageTexts'=>$pageTexts]);
+        // }
     }
 
     public function edit(Request $request, $codeId, $pageId)
@@ -410,5 +426,20 @@ class CodesController extends Controller
     public function viewFile($fileName, $file, $entryDate)
     {  
         return view('pages.viewFile')->with(['fileName'=>$fileName, 'file'=>$file, 'entryDate'=>$entryDate]);
+    }
+
+    public function codeLookUp(Request $request)
+    {
+        $validated = $request->validate([
+            'codeName' => 'required'
+        ]);
+
+        try {
+            $userName = Codes::where('code_name', $request->input('codeName'))->get()->first()->user->name;
+
+            return $this->showPublicQRCodePage($userName, $request->input('codeName'));
+        } catch (\Throwable $th) {
+            return redirect('/codes/lookUp')->with('error', $request->input('codeName').': This code does not exist');
+        }
     }
 }

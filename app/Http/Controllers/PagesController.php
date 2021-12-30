@@ -33,4 +33,9 @@ class PagesController extends Controller
         );
         return view('pages.services')->with($data);
     }
+
+    public function codeLookUpView()
+    {
+        return view('pages.codeLookUp');
+    }
 }

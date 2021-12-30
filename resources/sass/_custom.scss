@@ -1,23 +1,23 @@
 // User Dashboard
-.dashboardCodes{
+#dashboard .dashboardCodes{
     position: relative;
     display: inline-block;
     // border: 2px solid red;
 }
 
-.dashboardCodes figure{
+#dashboard .dashboardCodes figure{
     position: relative;
     display: inline-block;
     // border: 2px solid blue;
 }
 
-.dashboardCodes figure .image{
+#dashboard .dashboardCodes figure .image{
     position: relative;
     display: inline-block;
     // border: 2px solid yellow;
 }
 
-.dashboardCodes .description{
+#dashboard .dashboardCodes .description{
     position: relative;
     width: 100%;
     height: auto;
@@ -26,7 +26,7 @@
     display: inline-block;
 }
 
-.dashboardCodes .description .codeTitles{
+#dashboard .dashboardCodes .description .codeTitles{
     position: relative;
     width: 100%;
     height: auto;
@@ -35,15 +35,48 @@
     padding: none;
 }
 
-.dashboardCodes .description .codeTitles h3{
+#dashboard .dashboardCodes .description .codeTitles h3{
     // border: 2px solid blue;
     display: block;
 }
 
-.dashboardCodes .description .codeTitles small{
+#dashboard .dashboardCodes .description .codeTitles small{
     // border: 2px solid blue;
     display: block;
     margin: auto;
+}
+
+#dashboard .dashboardCodes .container{
+    position: relative;
+    padding: 0rem;
+    display: flex;
+    // border: 2px solid yellow;
+}
+
+#dashboard .dashboardCodes .container a, #dashboard .dashboardCodes .container button{
+    position: relative;
+    width: auto;
+    height: auto;
+    padding: 0.5rem;
+    // border-radius: 5rem;
+    // border: 2px solid red;
+    margin: auto;
+}
+
+#dashboard .dashboardCodes .container i{
+    position: relative;
+    font-size: 22px;
+    color: #0B0080;
+}
+
+#dashboard .dashboardCodes .container i:hover{
+    color: black;
+}
+
+#dashboard .deleteBtn{
+    background: none;
+    padding: 0px;
+    border: none;
 }
 
 
@@ -297,6 +330,7 @@
 }
 
 #securityProfiles .container .row{
+    width: auto;
     // border: 2px solid red;
     background: white;
 }
@@ -308,11 +342,20 @@
 
 #securityProfiles .container .securityProfiles .container{
     position: relative;
-    width: 100%;
+    width: auto;
     height: auto;
     display: flex;
     align-items: center;
+    padding: 0rem;
     // border: 2px solid blue;
+}
+
+#securityProfiles .container .securityProfiles .container .container{
+    position: relative;
+    width: 85%;
+    height: auto;
+    margin-left: 0rem;
+    // border: 2px solid yellow;
 }
 
 #securityProfiles .container .securityProfiles .container:hover{
@@ -346,14 +389,30 @@
     text-underline-offset: 5px;
 }
 
-#securityProfiles .container .securityProfiles .container a{
+#securityProfiles .container .securityProfiles .container a, #securityProfiles .container .securityProfiles .container button{
     position: relative;
     width: auto;
     height: auto;
+    padding: 0.5rem;
+    // border-radius: 5rem;
+    // border: 2px solid;
     margin: auto;
-    margin-right: 0px;
-    margin-left: 0px;
-    // border: 2px solid green;
+}
+
+#securityProfiles .container .securityProfiles .container i{
+    position: relative;
+    font-size: 25px;
+    color: #0645AD;
+}
+
+#securityProfiles .container .securityProfiles .container i:hover{
+    color: #0B0080;
+}
+
+#securityProfiles .deleteBtn{
+    background: none;
+    padding: 0px;
+    border: none;
 }
 
 #securityProfiles .collapse{
@@ -514,7 +573,7 @@
     position: relative;
     display: table;
     width: 100%;
-    // border: 2px solid blue;
+    border: 2px solid blue;
 }
 
 #securityProfiles table tr{
@@ -522,17 +581,23 @@
     display: flex;
     width: 100%;
     height: auto;
-    // border: 2px solid green;
+    border: 2px solid green;
     padding: 1rem 0;
+    counter-increment: row-num;
 }
 
-#securityProfiles table tr th{
+#securityProfiles table tr td{
     position: relative;
     display: inline-block;
-    width: 33.33%;
+    width: 50%;
     height: auto;
-    // border: 2px solid red;
+    border: 2px solid red;
     text-align: center;
+}
+
+#securityProfiles table tr td:first-child::before{
+    text-align: left;
+    content: counter(row-num) ". ";
 }
 
 #securityProfiles .noSecProfiles{
@@ -763,144 +828,144 @@
 //     // border: 2px solid red;
 // }
 
-#createSecurityProfile .form-group.headerDetails{
-    display: flex;
-}
+// #createSecurityProfile .form-group.headerDetails{
+//     display: flex;
+// }
  
-#createSecurityProfile .form-group .form-group{
-    // border: 2px solid yellow;
-    display: block;
-}
+// #createSecurityProfile .form-group .form-group{
+//     // border: 2px solid yellow;
+//     display: block;
+// }
  
-#createSecurityProfile label{
-    width: auto;
-    // border: 2px solid green;
-}
- 
-#createSecurityProfile input{
-    width: 100%;
-    // border: 2px solid green;
-}
- 
-#createSecurityProfile input[type="checkbox"]{
-    width: auto;
-    cursor: pointer;
-    transform: scale(1.25);
-    margin-left: 0px;
-}
- 
-#createSecurityProfile label[for="public"]{
-    cursor: pointer;
-}
- 
-#createSecurityProfile .form-group .container{
-    display: flex;
-    align-items: center;
-    // border: 2px solid blue;
-}
- 
-#createSecurityProfile h2{
-    width: 100%;
-    // border: 2px solid green;
-}
- 
-// #createSecurityProfile .form-group .container div{
+// #createSecurityProfile label{
+//     width: auto;
 //     // border: 2px solid green;
 // }
  
-#createSecurityProfile .addRow{
-    position: relative;
-    width: auto;
-    height: auto;
-    // border: 2px solid green;
-}
+// #createSecurityProfile input{
+//     width: 100%;
+//     // border: 2px solid green;
+// }
  
-#createSecurityProfileTable{
-    position: relative;
-    width: 100%;
-    display: table;
-    height: auto;
-    // border: 2px solid green;
-    counter-reset: row-num -1;
-}
+// #createSecurityProfile input[type="checkbox"]{
+//     width: auto;
+//     cursor: pointer;
+//     transform: scale(1.25);
+//     margin-left: 0px;
+// }
  
-#createSecurityProfileTable tr{
-    position: relative;
-    width: 100%;
-    height: auto;
-    display: flex;
-    // border: 2px solid blue;
-    counter-increment: row-num;
-}
+// #createSecurityProfile label[for="public"]{
+//     cursor: pointer;
+// }
  
-#createSecurityProfileTable tr td:first-child::before {
-    margin-left: 3rem;
-    content: counter(row-num) ". ";
-}
+// #createSecurityProfile .form-group .container{
+//     display: flex;
+//     align-items: center;
+//     // border: 2px solid blue;
+// }
  
-#createSecurityProfileTable tr th{
-    position: relative;
-    width: 25%;
-    height: auto;
-    display: inline-block;
-    // border: 2px solid red;
-}
+// #createSecurityProfile h2{
+//     width: 100%;
+//     // border: 2px solid green;
+// }
  
-#createSecurityProfileTable tr th:first-child{
-    width: 10%;
-    text-align: center;
-}
+// // #createSecurityProfile .form-group .container div{
+// //     // border: 2px solid green;
+// // }
  
-#createSecurityProfileTable tr th:last-child{
-    width: 15%;
-}
+// #createSecurityProfile .addRow{
+//     position: relative;
+//     width: auto;
+//     height: auto;
+//     // border: 2px solid green;
+// }
  
-#createSecurityProfileTable tr td{
-    position: relative;
-    width: 25%;
-    height: auto;
-    display: flex;
-    align-items: center;
-    // border: 2px solid red;
-}
+// #createSecurityProfileTable{
+//     position: relative;
+//     width: 100%;
+//     display: table;
+//     height: auto;
+//     // border: 2px solid green;
+//     counter-reset: row-num -1;
+// }
  
-#createSecurityProfileTable tr td:first-child{
-    width: 10%;
-}
+// #createSecurityProfileTable tr{
+//     position: relative;
+//     width: 100%;
+//     height: auto;
+//     display: flex;
+//     // border: 2px solid blue;
+//     counter-increment: row-num;
+// }
  
-#createSecurityProfileTable tr td:last-child{
-    width: 15%;
-}
+// #createSecurityProfileTable tr td:first-child::before {
+//     margin-left: 3rem;
+//     content: counter(row-num) ". ";
+// }
  
-#createSecurityProfileTable tr td p{
-    // border: 2px solid green;
-    margin: auto;
-}
+// #createSecurityProfileTable tr th{
+//     position: relative;
+//     width: 25%;
+//     height: auto;
+//     display: inline-block;
+//     // border: 2px solid red;
+// }
  
-#createSecurityProfileTable tr td input{
-    width: 90%;
-}
+// #createSecurityProfileTable tr th:first-child{
+//     width: 10%;
+//     text-align: center;
+// }
  
-#createSecurityProfileTable tr td input.remove{
-    width: auto;
-}
+// #createSecurityProfileTable tr th:last-child{
+//     width: 15%;
+// }
  
-#createSecurityProfileTable tr td select{
-    cursor: pointer;
-    width: 85%;
-}
+// #createSecurityProfileTable tr td{
+//     position: relative;
+//     width: 25%;
+//     height: auto;
+//     display: flex;
+//     align-items: center;
+//     // border: 2px solid red;
+// }
  
-#createSecurityProfile .submitContainer{
-    width: auto;
-    display: flex;
-    // border: 2px solid green;
-}
+// #createSecurityProfileTable tr td:first-child{
+//     width: 10%;
+// }
  
-#createSecurityProfile input[type="submit"]{
-    width: auto;
-    margin: auto;
-    margin-right: 0px;
-}
+// #createSecurityProfileTable tr td:last-child{
+//     width: 15%;
+// }
+ 
+// #createSecurityProfileTable tr td p{
+//     // border: 2px solid green;
+//     margin: auto;
+// }
+ 
+// #createSecurityProfileTable tr td input{
+//     width: 90%;
+// }
+ 
+// #createSecurityProfileTable tr td input.remove{
+//     width: auto;
+// }
+ 
+// #createSecurityProfileTable tr td select{
+//     cursor: pointer;
+//     width: 85%;
+// }
+ 
+// #createSecurityProfile .submitContainer{
+//     width: auto;
+//     display: flex;
+//     // border: 2px solid green;
+// }
+ 
+// #createSecurityProfile input[type="submit"]{
+//     width: auto;
+//     margin: auto;
+//     margin-right: 0px;
+// }
 
 
 // Template QR Code Page
@@ -993,13 +1058,19 @@
     max-height: 150px;
     background: none;
 }
+ 
+#publicQRCodePage table tr.noContents{
+    // border: 2px solid yellow;
+}
 
-// #publicQRCodePage .urlEntries{
-//     border: 2px solid red;
-//     height: 200px;
-// }
+#publicQRCodePage table tr.noContents td{
+    flex-grow: 1;
+    // border: 2px solid red;
+}
 
-// #publicQRCodePage .fileEntries{
-//     border: 2px solid red;
-//     height: 200px;
-// }
+#publicQRCodePage table tr.noContents td p{
+    text-align: center;
+    padding: 2rem 0;
+    font-size: 28px;
+    border: 2px dotted darkgrey;
+}

@@ -12,32 +12,28 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/welcome', 'PagesController@welcome');
-
-Route::get('/', 'PagesController@index');
-Route::get('/about', 'PagesController@about');
-Route::get('/services', 'PagesController@services');
-
-Route::get('/testQRCode', function(){
-    return view('inc.templateQRCodePage');
-});
-
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index');
 
-Route::get('/codes/{codeId}/editPage', 'CodesController@showEditPage');
+Route::get('/welcome', 'PagesController@welcome');
+Route::get('/', 'PagesController@index');
+Route::get('/about', 'PagesController@about');
+Route::get('/services', 'PagesController@services');
+Route::get('/codes/lookUp', 'PagesController@codeLookUpView');
+
+Route::get('/codes/{code}/editPage', 'CodesController@showEditPage');
+Route::get('/viewPagesFile/{fileName}/{file}/{entryDate}', 'CodesController@viewFile');
+Route::get('/createCode','CodesController@create'); // Generating User QR Code Pages
+Route::get('/pages/{userName}/{codeName}', 'CodesController@showPublicQRCodePage'); // Showing Public QR Code Pages
+
+
 Route::get('/securityProfilePage', 'SecurityProfilesController@index');
 Route::get('/securityProfilePage/{secProfileId}/editSecurityProfile', 'SecurityProfilesController@show');
 Route::get('/securityProfilePage/create', 'SecurityProfilesController@create');
 
-Route::get('/viewPagesFile/{fileName}/{file}/{entryDate}', 'CodesController@viewFile');
-
 // Form Requests
 Route::post('/codes/{codeId}/{pageId}/editPage', 'CodesController@edit');
 Route::post('/securityProfilePage/{secProfileId}/editSecurityProfile', 'SecurityProfilesController@edit');
-
-// Generating User QR Code Pages
-Route::get('/createCode','CodesController@create');
-Route::get('pages/{userName}/{codeName}', 'CodesController@showPublicQRCodePage');
+Route::post('/securityProfiles/deleteSecurityProfile', 'SecurityProfilesController@delete');
+Route::post('/codes/lookUp', 'CodesController@codeLookUp');
