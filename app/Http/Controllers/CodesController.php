@@ -207,8 +207,10 @@ class CodesController extends Controller
         // }
     }
 
-    public function edit(Request $request, $codeId, $pageId)
+    public function edit(Request $request, Codes $code, $pageId)
     {
+        $this->authorize('editPage', $code);
+
         $validated = $request->validate([
             'codeTitle' => 'required',
             'pageTitle' => 'required',
@@ -411,7 +413,6 @@ class CodesController extends Controller
         // End Files Section
 
         // Saving General Code Information
-        $code = Codes::find($codeId);
         $code->code_title = $request->input('codeTitle');
         $code->save();
 
@@ -423,9 +424,11 @@ class CodesController extends Controller
         return redirect('/dashboard')->with('success', $code->code_name.': Code Updated Successfully');
     }
 
-    public function viewFile($fileName, $file, $entryDate)
+    public function viewFile(PageFiles $file)
     {  
-        return view('pages.viewFile')->with(['fileName'=>$fileName, 'file'=>$file, 'entryDate'=>$entryDate]);
+        $this->authorize('viewPageFile', $file);
+        
+        return view('pages.viewFile')->with('file', $file);
     }
 
     public function codeLookUp(Request $request)

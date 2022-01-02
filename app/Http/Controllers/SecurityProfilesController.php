@@ -24,8 +24,7 @@ class SecurityProfilesController extends Controller
     
     public function index()
     {
-        $authId = auth()->user()->id;
-        $user = User::find($authId);
+        $user = auth()->user();
 
         // echo $user;
         // echo "<br>";
@@ -65,41 +64,45 @@ class SecurityProfilesController extends Controller
         return view('pages.securityProfile')->with('user', $user);
     }
 
-    public function show($secProfileId)
+    public function show(SecurityProfiles $secProfile)
     {
-        if ($secProfileId != -1) {
-            $authId = auth()->user()->id;
-            $securityProfile = SecurityProfiles::where(['id'=>$secProfileId, 'user_id'=>$authId])->get()->first();
-            $securityProfileUsers = SecurityProfileUsers::where('security_profile_id', $secProfileId)->with('user')->get();
+        $this->authorize('editSecurityProfile', $secProfile);
 
-            // echo $securityProfileUsers;
-            // echo "<br>";
-            // echo "<br>";
+        return view('pages.editSecurityProfile')->with('securityProfile', $secProfile);
+        
+        // if ($secProfileId != -1) {
+        //     $authId = auth()->user()->id;
+        //     $securityProfile = SecurityProfiles::where(['id'=>$secProfileId, 'user_id'=>$authId])->get()->first();
+        //     $securityProfileUsers = SecurityProfileUsers::where('security_profile_id', $secProfileId)->with('user')->get();
 
-            // foreach ($securityProfileUsers as $securityProfileUser) {
-            //     echo $securityProfileUser->permissions;
-            //     echo "<br>";
-            //     echo $securityProfileUser->user->name;
-            //     echo "<br>";
-            //     echo $securityProfileUser->user->email;
-            //     echo "<br>";
-            // }
+        //     // echo $securityProfileUsers;
+        //     // echo "<br>";
+        //     // echo "<br>";
 
-            // echo "<br>";
-            // echo "<br>";
+        //     // foreach ($securityProfileUsers as $securityProfileUser) {
+        //     //     echo $securityProfileUser->permissions;
+        //     //     echo "<br>";
+        //     //     echo $securityProfileUser->user->name;
+        //     //     echo "<br>";
+        //     //     echo $securityProfileUser->user->email;
+        //     //     echo "<br>";
+        //     // }
 
-            // echo count($securityProfileUsers->pluck('user'));
-            // echo "<br>";
-            // echo count($securityProfileUsers);
+        //     // echo "<br>";
+        //     // echo "<br>";
 
-            if (empty($securityProfile)) {
-                abort(403, 'Unauthorized action.');
-            } else {
-                return view('pages.editSecurityProfile')->with(['securityProfile'=>$securityProfile, 'securityProfileUsers'=>$securityProfileUsers]);
-            }
-        } else {
-            return redirect('/dashboard')->with('error', "Please ensure that your code is linked to a secuirty profile before editing permissions");
-        }
+        //     // echo count($securityProfileUsers->pluck('user'));
+        //     // echo "<br>";
+        //     // echo count($securityProfileUsers);
+
+        //     if (empty($securityProfile)) {
+        //         abort(403, 'Unauthorized action.');
+        //     } else {
+        //         return view('pages.editSecurityProfile')->with(['securityProfile'=>$securityProfile, 'securityProfileUsers'=>$securityProfileUsers]);
+        //     }
+        // } else {
+        //     return redirect('/dashboard')->with('error', "Please ensure that your code is linked to a secuirty profile before editing permissions");
+        // }
 
         
     }
@@ -187,8 +190,10 @@ class SecurityProfilesController extends Controller
     //     }
     // }
 
-    public function edit(Request $request, $secProfileId)
+    public function edit(Request $request, SecurityProfiles $secProfile)
     {
+        $this->authorize('editSecurityProfile', $secProfile);
+
         $validated = $request->validate([
             'securityProfileName' => 'required',
             'profileType' => 'nullable|string',
@@ -236,6 +241,39 @@ class SecurityProfilesController extends Controller
                     'addUserPermissions'.$i.'.required' => 'Please Select Appropriate Permissions on Row '.($i+1)
                 ]);
 
+                $SPUser = User::where([
+                                        'email' => $request->input('addUserEmail'.$i), 
+                                        'name' => $request->input('addUserName'.$i) 
+                                    ])->first();
+
+                // Have to query each time because values are being updated
+                $secProfile = SecurityProfiles::find($secProfile->id);
+
+                if ($SPUser == NULL) {
+                    return redirect('/securityProfilePage/'.$secProfile -> id.'/editSecurityProfile')->with('error', $request->input('addUserName'.$i).' is not a registered user. Please make sure you have provided the right combination of the name and email fileds');
+                } elseif ($SPUser->can('checkDuplicateUser', $secProfile->security_profile_users)) {
+                    return redirect('/securityProfilePage/'.$secProfile -> id.'/editSecurityProfile')->with('error', $request->input('addUserName'.$i).' is already added to this security profile');
+                } else {
+
+                    if ($request->input('addUserPermissions'.$i) == "view") {
+                        $permissions = 1;
+                    } elseif ($request->input('addUserPermissions'.$i) == "update") {
+                        $permissions = 2;
+                    } elseif ($request->input('addUserPermissions'.$i) == "full") {
+                        $permissions = 3;
+                    }
+
+                    $securityProfileUsers = new SecurityProfileUsers;
+                    $securityProfileUsers->created_at = NOW();
+                    $securityProfileUsers->updated_at = NOW();
+                    $securityProfileUsers->security_profile_id = $secProfile -> id;
+                    $securityProfileUsers->user_id = $SPUser -> id;
+                    $securityProfileUsers->invitee_id = 0;
+                    $securityProfileUsers->permissions = $permissions;
+                    $securityProfileUsers->save();
+                }
+                
+
                 // echo $request->input('addUserEmail'.$i);
                 // echo "<br>";
                 // echo $request->input('addUserName'.$i);
@@ -243,36 +281,23 @@ class SecurityProfilesController extends Controller
                 // echo $request->input('addUserPermissions'.$i);
                 // echo "<br>";
 
-                if ($request->input('addUserPermissions'.$i) == "view") {
-                    $permissions = 1;
-                } elseif ($request->input('addUserPermissions'.$i) == "update") {
-                    $permissions = 2;
-                } elseif ($request->input('addUserPermissions'.$i) == "full") {
-                    $permissions = 3;
-                }
+                
 
-                try {
-                    $SPUserId = User::where([
-                                    'email' => $request->input('addUserEmail'.$i), 
-                                    'name' => $request->input('addUserName'.$i) 
-                                ])->first('id')->id;
-                } catch (\Throwable $th) {
-                    return redirect('/securityProfilePage/'.$secProfileId.'/editSecurityProfile')->with('error', $request->input('addUserName'.$i).' is not a registered user');
-                }
+                // try {
+                //     $SPUserId = User::where([
+                //                     'email' => $request->input('addUserEmail'.$i), 
+                //                     'name' => $request->input('addUserName'.$i) 
+                //                 ])->first('id')->id;
+                // } catch (\Throwable $th) {
+                //     return redirect('/securityProfilePage/'.$secProfile -> id.'/editSecurityProfile')->with('error', $request->input('addUserName'.$i).' is not a registered user');
+                // }
 
                 // echo $permissions;
                 // echo "<br>";
                 // echo "Security Profile User Id: ".$SPUserId;
                 // echo "<br>";
 
-                $securityProfileUsers = new SecurityProfileUsers;
-                $securityProfileUsers->created_at = NOW();
-                $securityProfileUsers->updated_at = NOW();
-                $securityProfileUsers->security_profile_id = $secProfileId;
-                $securityProfileUsers->user_id = $SPUserId;
-                $securityProfileUsers->invitee_id = 0;
-                $securityProfileUsers->permissions = $permissions;
-                $securityProfileUsers->save();
+                
 
                 // Dont Need For now - for if user doesn't have a registered account 
                     // echo "Security Profile Id: ".$secProfileId;
@@ -324,37 +349,52 @@ class SecurityProfilesController extends Controller
                     'addUserPermissionsUpdate'.$j.'.required' => 'Please Select Appropriate Permissions on Row '.($j+1)
                 ]);
 
-                $SPUserIdUpdate = User::where([
+                $SPUserUpdate = User::where([
                                     'email' => $request->input('addUserEmailUpdate'.$j), 
                                     'name' => $request->input('addUserNameUpdate'.$j) 
-                                ])->first('id')->id;
+                                ])->first();
 
-                if ($request->input('addUserPermissionsUpdate'.$j) == "view") {
-                    $permissionsUpdate = 1;
-                } elseif ($request->input('addUserPermissionsUpdate'.$j) == "update") {
-                    $permissionsUpdate = 2;
-                } elseif ($request->input('addUserPermissionsUpdate'.$j) == "full") {
-                    $permissionsUpdate = 3;
+                // Have to query each time because values are being updated
+                $secProfile = SecurityProfiles::find($secProfile->id);
+
+                if ($SPUserUpdate == NULL) {
+                    return redirect('/securityProfilePage/'.$secProfile -> id.'/editSecurityProfile')->with('error', $request->input('addUserNameUpdate'.$j).' is not a registered user. Please make sure you have provided the right combination of the name and email fileds');
+                } elseif ($SPUserUpdate->can('checkDuplicateUser', $secProfile->security_profile_users->take($j))) { // Check against user input values
+
+                    // Check against original database values
+                    if ($secProfile->security_profile_users[$j]->user->can('checkDuplicateUser', $secProfile->security_profile_users->take($j))) {
+                        SecurityProfileUsers::find($secProfile->security_profile_users[$j]->id)->delete();
+                    }
+                    
+                    return redirect('/securityProfilePage/'.$secProfile -> id.'/editSecurityProfile')->with('error', $request->input('addUserNameUpdate'.$j).' is already added to this security profile');
+                } else {
+
+                    if ($request->input('addUserPermissionsUpdate'.$j) == "view") {
+                        $permissionsUpdate = 1;
+                    } elseif ($request->input('addUserPermissionsUpdate'.$j) == "update") {
+                        $permissionsUpdate = 2;
+                    } elseif ($request->input('addUserPermissionsUpdate'.$j) == "full") {
+                        $permissionsUpdate = 3;
+                    }
+
+                    $securityProfileUsers = SecurityProfileUsers::find($request->input('securityProfileUserId'.$j));
+                    $securityProfileUsers->updated_at = NOW();
+                    $securityProfileUsers->user_id = $SPUserUpdate -> id;
+                    $securityProfileUsers->permissions = $permissionsUpdate;
+                    $securityProfileUsers->save();
                 }
-
-                $securityProfileUsers = SecurityProfileUsers::find($request->input('securityProfileUserId'.$j));
-                $securityProfileUsers->updated_at = NOW();
-                $securityProfileUsers->user_id = $SPUserIdUpdate;
-                $securityProfileUsers->permissions = $permissionsUpdate;
-                $securityProfileUsers->save();
 
             } else {
                 $securityProfileUsers = SecurityProfileUsers::find($request->input('securityProfileUserId'.$j))->delete();
             }
         }
 
-        $securityProfile = SecurityProfiles::find($secProfileId);
-        $securityProfile->updated_at = NOW();
-        $securityProfile->profile_type = $profileType;
-        $securityProfile->profile_name = $request->input('securityProfileName');
-        $securityProfile->save();
+        $secProfile->updated_at = NOW();
+        $secProfile->profile_type = $profileType;
+        $secProfile->profile_name = $request->input('securityProfileName');
+        $secProfile->save();
 
-        return redirect('/securityProfilePage')->with('success', $securityProfile->profile_name.': Security Profile Updated Successfully');
+        return redirect('/securityProfilePage')->with('success', $secProfile->profile_name.': Security Profile Updated Successfully');
 
     }
 

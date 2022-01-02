@@ -3,11 +3,10 @@
 namespace App\Policies;
 
 use App\User;
-use App\Codes;
-use App\PageFiles;
+use App\SecurityProfiles;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CodesPolicy
+class SecurityProfilesPolicy
 {
     use HandlesAuthorization;
 
@@ -21,13 +20,8 @@ class CodesPolicy
         //
     }
 
-    public function edit(User $user, Codes $code)
+    public function edit(User $user, SecurityProfiles $securityProfile)
     {
-        return $user->id === $code->user_id;
-    }
-
-    public function pageFile(User $user, PageFiles $file)
-    {
-        return $user->id === $file->user_id;
+        return $user->id === $securityProfile->user_id;
     }
 }

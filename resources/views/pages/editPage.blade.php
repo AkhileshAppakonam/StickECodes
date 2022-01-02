@@ -175,7 +175,7 @@
                                                 <tr class="mb-2 pb-3 pt-2 border-bottom">
                                                     <td><input type="text" class="form-control" name="userFilesTitleUpdate{{$i}}" value="{{$page->page_files[$i] -> entry_description}}"></td>
                                                     <td class="textBody">
-                                                        <a href="/public/index.php/viewPagesFile/{{$page->page_files[$i] -> entry_description}}/{{$page->page_files[$i] -> file}}/{{$page->page_files[$i] -> entry_date}}" class="pl-3">{{$page->page_files[$i]->file}}</a>
+                                                        <a href="/public/index.php/viewPagesFile/{{$page->page_files[$i] -> id}}" class="pl-3">{{$page->page_files[$i]->file}}</a>
                                                         <input type="hidden" class="form-control" name="userFilesUpdate{{$i}}" value="{{$page->page_files[$i]->file}}">
                                                     </td>
                                                     <td class="rowInput"><input type="button" value="Remove" class="remove btn btn-outline-dark hasFile" onclick="remove(this)"></td>

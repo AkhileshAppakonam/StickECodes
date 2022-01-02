@@ -35,10 +35,19 @@
                                         <hr>
                                         <div class="container">
                                             <a href="/public/index.php/pages/{{$user -> name}}/{{$code -> code_name}}"><i class="fas fa-eye"></i></a>
-                                            <a href="/public/index.php/codes/{{$code -> id}}/editPage"><i class="fas fa-edit"></i></a>
+
+                                            @can('editPage', $code)
+                                                <a href="/public/index.php/codes/{{$code -> id}}/editPage"><i class="fas fa-edit"></i></a>
+                                            @endcan
+                                            
                                             @foreach ($code->pages as $page)
-                                                <a href="/public/index.php/securityProfilePage/{{$page -> security_profile_id ?? -1}}/editSecurityProfile"><i class="fas fa-user-shield"></i></a>
+                                                @isset($page->security_profile)
+                                                    @can('editSecurityProfile', $page->security_profile)
+                                                        <a href="/public/index.php/securityProfilePage/{{$page -> security_profile_id}}/editSecurityProfile"><i class="fas fa-user-shield"></i></a>
+                                                    @endcan
+                                                @endisset
                                             @endforeach
+
                                             <button name="delete" type="submit" value="{{$code -> id}}" class="deleteBtn" onclick="return confirm('Delete this code profile and all of its contents.');"><i class='fas fa-trash'></i></button>
                                         </div>
                                     </div>

@@ -23,17 +23,20 @@ Route::get('/services', 'PagesController@services');
 Route::get('/codes/lookUp', 'PagesController@codeLookUpView');
 
 Route::get('/codes/{code}/editPage', 'CodesController@showEditPage');
-Route::get('/viewPagesFile/{fileName}/{file}/{entryDate}', 'CodesController@viewFile');
+Route::get('/viewPagesFile/{file}', 'CodesController@viewFile');
 Route::get('/createCode','CodesController@create'); // Generating User QR Code Pages
 Route::get('/pages/{userName}/{codeName}', 'CodesController@showPublicQRCodePage'); // Showing Public QR Code Pages
 
 
 Route::get('/securityProfilePage', 'SecurityProfilesController@index');
-Route::get('/securityProfilePage/{secProfileId}/editSecurityProfile', 'SecurityProfilesController@show');
+Route::get('/securityProfilePage/{secProfile}/editSecurityProfile', 'SecurityProfilesController@show');
 Route::get('/securityProfilePage/create', 'SecurityProfilesController@create');
 
 // Form Requests
-Route::post('/codes/{codeId}/{pageId}/editPage', 'CodesController@edit');
-Route::post('/securityProfilePage/{secProfileId}/editSecurityProfile', 'SecurityProfilesController@edit');
+Route::post('/codes/{code}/{pageId}/editPage', 'CodesController@edit');
+Route::post('/securityProfilePage/{secProfile}/editSecurityProfile', 'SecurityProfilesController@edit');
 Route::post('/securityProfiles/deleteSecurityProfile', 'SecurityProfilesController@delete');
 Route::post('/codes/lookUp', 'CodesController@codeLookUp');
+
+// Permanent Redirects
+// Route::permanentRedirect('/codes/{code}/{pageId}/editPage', '/public/index.php/dashboard');

@@ -26,8 +26,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $authId = auth()->user()->id;
-        $user = User::with('codes.pages')->find($authId);
+        $user = auth()->user();
 
         // echo $user;
         // echo "<br>";
@@ -37,7 +36,7 @@ class DashboardController extends Controller
         //     echo $code->code_title;
         //     echo "<br>";
         //     foreach ($code->pages as $page) {
-        //         echo $page->page_title;
+        //         echo $page->security_profile;
         //         echo "<br>";
         //     }
         // }
