@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 use App\SecurityProfiles;
 use App\Pages;
 use App\Codes;
@@ -24,44 +25,7 @@ class SecurityProfilesController extends Controller
     
     public function index()
     {
-        $user = auth()->user();
-
-        // echo $user;
-        // echo "<br>";
-        // echo "<br>";
-        // echo $user->securityProfiles;
-        // echo "<br>";
-        // echo "<br>";
-
-        // foreach ($user->securityProfiles as $securityProfile) {
-        //     echo "<br>";
-        //     echo "<br>";
-        //     echo $securityProfile;
-        //     echo "<br>";
-        //     echo $securityProfile->profile_name;
-        //     echo "<br>";
-        //     echo $securityProfile->codes;
-        //     echo "<br>";
-        //     echo $securityProfile->codes->count();
-        //     echo "<br>";
-        //     echo $securityProfile->security_profile_users;
-        //     echo "<br>";
-
-        //     foreach ($securityProfile->codes as $code) {
-        //         echo $code->code_title;
-        //         echo "<br>";
-        //         echo $code->pivot->page_title;
-        //         echo "<br>";
-        //     }
-
-        //     foreach ($securityProfile->security_profile_users as $securityProfileUser) {
-        //         echo "<br>";
-        //         echo $securityProfileUser->user->name;
-        //         echo "<br>";
-        //     }
-        // }
-
-        return view('pages.securityProfile')->with('user', $user);
+        return view('pages.securityProfile')->with('user', Auth::user());
     }
 
     public function show(SecurityProfiles $secProfile)
@@ -69,54 +33,18 @@ class SecurityProfilesController extends Controller
         $this->authorize('editSecurityProfile', $secProfile);
 
         return view('pages.editSecurityProfile')->with('securityProfile', $secProfile);
-        
-        // if ($secProfileId != -1) {
-        //     $authId = auth()->user()->id;
-        //     $securityProfile = SecurityProfiles::where(['id'=>$secProfileId, 'user_id'=>$authId])->get()->first();
-        //     $securityProfileUsers = SecurityProfileUsers::where('security_profile_id', $secProfileId)->with('user')->get();
-
-        //     // echo $securityProfileUsers;
-        //     // echo "<br>";
-        //     // echo "<br>";
-
-        //     // foreach ($securityProfileUsers as $securityProfileUser) {
-        //     //     echo $securityProfileUser->permissions;
-        //     //     echo "<br>";
-        //     //     echo $securityProfileUser->user->name;
-        //     //     echo "<br>";
-        //     //     echo $securityProfileUser->user->email;
-        //     //     echo "<br>";
-        //     // }
-
-        //     // echo "<br>";
-        //     // echo "<br>";
-
-        //     // echo count($securityProfileUsers->pluck('user'));
-        //     // echo "<br>";
-        //     // echo count($securityProfileUsers);
-
-        //     if (empty($securityProfile)) {
-        //         abort(403, 'Unauthorized action.');
-        //     } else {
-        //         return view('pages.editSecurityProfile')->with(['securityProfile'=>$securityProfile, 'securityProfileUsers'=>$securityProfileUsers]);
-        //     }
-        // } else {
-        //     return redirect('/dashboard')->with('error', "Please ensure that your code is linked to a secuirty profile before editing permissions");
-        // }
-
-        
     }
 
     public function create() 
     {
-        $authId = auth()->user()->id;
+        $this->authorize('createSecurityProfile', SecurityProfiles::class);
 
         $securityProfile = new SecurityProfiles;
         $securityProfile->created_at = NOW();
         $securityProfile->updated_at = NOW();
         $securityProfile->profile_type = "priv";
         $securityProfile->profile_name = "Unnamed Security Profile";
-        $securityProfile->user_id = $authId;
+        $securityProfile->user_id = Auth::user()->id;
         $securityProfile->save();
 
         return view('pages.editSecurityProfile')->with(['securityProfile'=>$securityProfile, 'headerType'=>"New Security Profile"]);
@@ -273,32 +201,6 @@ class SecurityProfilesController extends Controller
                     $securityProfileUsers->save();
                 }
                 
-
-                // echo $request->input('addUserEmail'.$i);
-                // echo "<br>";
-                // echo $request->input('addUserName'.$i);
-                // echo "<br>";
-                // echo $request->input('addUserPermissions'.$i);
-                // echo "<br>";
-
-                
-
-                // try {
-                //     $SPUserId = User::where([
-                //                     'email' => $request->input('addUserEmail'.$i), 
-                //                     'name' => $request->input('addUserName'.$i) 
-                //                 ])->first('id')->id;
-                // } catch (\Throwable $th) {
-                //     return redirect('/securityProfilePage/'.$secProfile -> id.'/editSecurityProfile')->with('error', $request->input('addUserName'.$i).' is not a registered user');
-                // }
-
-                // echo $permissions;
-                // echo "<br>";
-                // echo "Security Profile User Id: ".$SPUserId;
-                // echo "<br>";
-
-                
-
                 // Dont Need For now - for if user doesn't have a registered account 
                     // echo "Security Profile Id: ".$secProfileId;
                     // echo "<br>";
@@ -403,8 +305,12 @@ class SecurityProfilesController extends Controller
         $validated = $request->validate([
             'delete' => 'required'
         ]);
+        
+        $securityProfile = SecurityProfiles::find($request->input('delete'));
 
-        $securityProfile = SecurityProfiles::find($request->input('delete'))->delete();
+        $this->authorize('deleteSecurityProfile', $securityProfile);
+
+        $securityProfile->delete();
         $securityProfileUser = SecurityProfileUsers::where('security_profile_id', $request->input('delete'))->delete();
 
         $pages = Pages::where('security_profile_id', $request->input('delete'))->get();

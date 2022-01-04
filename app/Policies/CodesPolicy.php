@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use Auth;
 use App\User;
 use App\Codes;
 use App\PageFiles;
@@ -19,6 +20,11 @@ class CodesPolicy
     public function __construct()
     {
         //
+    }
+
+    public function create(User $user)
+    {
+        return $user->id === Auth::user()->id;
     }
 
     public function edit(User $user, Codes $code)

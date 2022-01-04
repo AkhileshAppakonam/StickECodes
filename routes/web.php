@@ -27,7 +27,6 @@ Route::get('/viewPagesFile/{file}', 'CodesController@viewFile');
 Route::get('/createCode','CodesController@create'); // Generating User QR Code Pages
 Route::get('/pages/{userName}/{codeName}', 'CodesController@showPublicQRCodePage'); // Showing Public QR Code Pages
 
-
 Route::get('/securityProfilePage', 'SecurityProfilesController@index');
 Route::get('/securityProfilePage/{secProfile}/editSecurityProfile', 'SecurityProfilesController@show');
 Route::get('/securityProfilePage/create', 'SecurityProfilesController@create');
@@ -36,7 +35,10 @@ Route::get('/securityProfilePage/create', 'SecurityProfilesController@create');
 Route::post('/codes/{code}/{pageId}/editPage', 'CodesController@edit');
 Route::post('/securityProfilePage/{secProfile}/editSecurityProfile', 'SecurityProfilesController@edit');
 Route::post('/securityProfiles/deleteSecurityProfile', 'SecurityProfilesController@delete');
-Route::post('/codes/lookUp', 'CodesController@codeLookUp');
+Route::post('/codes/lookUp', 'CodesController@codeLookUp')->withoutMiddleware(['auth']);
 
 // Permanent Redirects
 // Route::permanentRedirect('/codes/{code}/{pageId}/editPage', '/public/index.php/dashboard');
+// Route::permanentRedirect('/securityProfilePage/{secProfile}/editSecurityProfile', '/public/index.php/dashboard');
+// Route::permanentRedirect('/securityProfiles/deleteSecurityProfile', '/public/index.php/dashboard');
+// Route::permanentRedirect('/codes/lookUp', '/public/index.php/dashboard');

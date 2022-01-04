@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 use App\Codes;
 use App\Pages;
 use App\SecurityProfiles;
@@ -33,6 +34,8 @@ class CodesController extends Controller
 
     public function create() 
     {
+        $this->authorize('createQRCode', Codes::class);
+
         $options = new QROptions([
             'eccLevel' => QRCode::ECC_L,
             'outputType' => QRCode::OUTPUT_MARKUP_SVG,
@@ -93,18 +96,10 @@ class CodesController extends Controller
     {
         $userName = str_replace(' ', '', $userName);
 
-        $textEntries = PageTexts::whereHas('pages.code', function($q) use($codeName){
-                                    $q->where('code_name', $codeName);
-                                })->with('user:id,name')->get();
-        $urlEntries = PageUrls::whereHas('pages.code', function($q) use($codeName){
-                                    $q->where('code_name', $codeName);
-                                })->with('user:id,name')->get();
-        $fileEntries = PageFiles::whereHas('pages.code', function($q) use($codeName){
-                                    $q->where('code_name', $codeName);
-                                })->with('user:id,name')->get();
+        $code = Codes::where('code_name', $codeName)->get()->first();
 
         try {
-            return view('QRCodePages.'.$userName.$codeName)->with(['pageTexts'=>$textEntries, 'pageUrls'=>$urlEntries, 'pageFiles'=>$fileEntries, 'codeName'=>$codeName]);
+            return view('QRCodePages.'.$userName.$codeName)->with('code', $code);
         } catch (\Throwable $th) {
             abort(403, 'Unauthorized action.');
         }
@@ -134,77 +129,6 @@ class CodesController extends Controller
         $pageTexts = Pages::with('page_texts')->where('code_id', $code->id)->get();
 
         return view('pages.editPage')->with(['code'=>$code, 'securityProfiles'=>$securityProfiles, 'pageFiles'=>$pageFiles, 'pageURLs'=>$pageURLs, 'pageTexts'=>$pageTexts]);
-
-
-        // if (empty($codes) || ($codes->user->id !== $authId)) {
-        //     abort(403, 'Unauthorized action.');
-        // } else{
-            
-        //     // echo $codes;
-        //     // echo "<br>";
-        //     // echo "<br>";
-        //     // echo $securityProfiles;
-        //     // echo "<br>";
-        //     // echo "<br>";
-        //     // echo $pageFiles;
-        //     // echo "<br>";
-        //     // echo "<br>";
-            
-        //     // foreach ($pageFiles as $page) {
-        //     //     echo "<br>";
-        //     //     echo $page->page_files;
-        //     //     echo "<br>";
-
-        //     //     foreach ($page->page_files as $page_file) {
-        //     //         echo "<br>";
-        //     //         echo $page_file->entry_description;
-        //     //         echo "<br>";
-        //     //         echo $page_file->file;
-        //     //         echo "<br>";
-        //     //         echo "<br>";
-        //     //     }
-        //     // }
-
-        //     // echo "<br>";
-        //     // echo "<br>";
-        //     // echo "<br>";
-        //     // echo "<br>";
-
-        //     // foreach ($pageFiles as $page) {
-        //     //     echo "<br>";
-        //     //     echo $page->page_files;
-        //     //     echo "<br>";
-        //     //     echo count($page->page_files);
-
-        //     //     for ($j=0; $j < count($page->page_files); $j++) { 
-        //     //         echo "<br>";
-        //     //         echo $page->page_files[$j]->file;
-        //     //         echo "<br>";
-        //     //     }
-        //     // }
-
-        //     // echo "<br>";
-        //     // echo "<br>";
-        //     // echo "<br>";
-        //     // echo "<br>";
-
-        //     // echo $pageURLs;
-
-        //     // foreach ($pageURLs as $page) {
-        //     //     echo "<br>";
-        //     //     echo $page->page_urls;
-        //     //     echo "<br>";
-        //     //     echo count($page->page_urls);
-
-        //     //     for ($i=0; $i < count($page->page_urls); $i++) { 
-        //     //         echo "<br>";
-        //     //         echo $page->page_urls[$i]->entry_url;
-        //     //         echo "<br>";
-        //     //     }
-        //     // }
-
-        //     return view('pages.editPage')->with(['code'=>$codes, 'securityProfiles'=>$securityProfiles, 'pageFiles'=>$pageFiles, 'pageURLs'=>$pageURLs, 'pageTexts'=>$pageTexts]);
-        // }
     }
 
     public function edit(Request $request, Codes $code, $pageId)

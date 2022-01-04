@@ -29,11 +29,14 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         // Code Gates
+        Gate::define('createQRCode', 'App\Policies\CodesPolicy@create');
         Gate::define('editPage', 'App\Policies\CodesPolicy@edit');
         Gate::define('viewPageFile', 'App\Policies\CodesPolicy@pageFile');
 
         // Security Profile Gates
+        Gate::define('createSecurityProfile', 'App\Policies\SecurityProfilesPolicy@create');
         Gate::define('editSecurityProfile', 'App\Policies\SecurityProfilesPolicy@edit');
+        Gate::define('deleteSecurityProfile', 'App\Policies\SecurityProfilesPolicy@delete');
         
         // Security Profile User Gates
         Gate::define('checkDuplicateUser', 'App\Policies\SecurityProfileUsersPolicy@duplicateUser');
