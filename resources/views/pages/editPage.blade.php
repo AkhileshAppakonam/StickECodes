@@ -13,23 +13,23 @@
                 <div class="row shadow p-3 mb-5 bg-white rounded">
                     <div class="col-md-4 code">
                         <figure class="mb-0">
-                            <div class="image"><a href="/public/index.php/pages/{{auth() -> user() -> name}}/{{$code -> code_name}}"><img src="{{file_get_contents('/var/www/html/resources/views/QRCodeImageData/'.$code -> code_name.'.png')}}" alt='QR Code' width='300' height='300'></a></div>
+                            <div class="image"><a href="/public/index.php/pages/{{$code -> user -> name}}/{{$code -> code_name}}"><img src="{{file_get_contents('/var/www/html/resources/views/QRCodeImageData/'.$code -> code_name.'.png')}}" alt='QR Code' width='300' height='300'></a></div>
                         </figure>
                     </div>
                     <div class="col-md-8 codeProperties">
                         <div class="container"> 
                             <div class="form-group row">
                                 <label for="codeTitle" class="col-md-0 col-form-label text-md-right">Code Title</label>
-                                <input id="codeTitle" name="codeTitle" type="text" class="form-control" placeholder="Insert Code Title Here" value="{{$code -> code_title}}" required>
+                                <input id="codeTitle" name="codeTitle" type="text" class="form-control" placeholder="Insert Code Title Here" value="{{$code -> code_title}}" @cannot('fullControl', $code) {{"disabled"}} @endcannot required>
                             </div>
                             <div class="form-group row">
                                 <label for="pageTitle" class="col-md-0 col-form-label text-md-right">Page Title</label>
-                                <input id="pageTitle" name="pageTitle" type="text" class="form-control" placeholder="Insert Title Description for Public Page Here" value="{{$code -> pages[0] -> page_title}}" required>
+                                <input id="pageTitle" name="pageTitle" type="text" class="form-control" placeholder="Insert Title Description for Public Page Here" value="{{$code -> pages[0] -> page_title}}" @cannot('fullControl', $code) {{"disabled"}} @endcannot required>
                             </div>
                             <div class="form-group row mb-0">
                                 <div class="container p-0 ml-0">
                                     <label for="chooseSP" class="col-md-0 col-form-label text-md-right">Select a Security Profile</label>
-                                    <select id="chooseSP" name="securityProfile" class="form-control">
+                                    <select id="chooseSP" name="securityProfile" class="form-control" @cannot('fullControl', $code) {{"disabled"}} @endcannot>
 
                                         @if (count($securityProfiles) > 0)
                                             @foreach ($securityProfiles as $securityProfile)
@@ -49,7 +49,7 @@
                                     <p class="p-0">OR</p>
                                 </div>
                                 <div class="container p-0 mr-0 makeSP">
-                                    <a href="/public/index.php/securityProfilePage/create" class="btn btn-primary">Make a New Security Profile</a>
+                                    <a href="/public/index.php/securityProfilePage/create" class="btn btn-primary @cannot('fullControl', $code) {{"disabled"}} @endcannot">Make a New Security Profile</a>
                                 </div>
                             </div>
                         </div>

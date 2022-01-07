@@ -37,8 +37,10 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('createSecurityProfile', 'App\Policies\SecurityProfilesPolicy@create');
         Gate::define('editSecurityProfile', 'App\Policies\SecurityProfilesPolicy@edit');
         Gate::define('deleteSecurityProfile', 'App\Policies\SecurityProfilesPolicy@delete');
+        Gate::define('fullControl', 'App\Policies\SecurityProfilesPolicy@editSubs');
         
         // Security Profile User Gates
         Gate::define('checkDuplicateUser', 'App\Policies\SecurityProfileUsersPolicy@duplicateUser');
+        Gate::define('viewAndUpdate', 'App\Policies\SecurityProfileUsersPolicy@editPage');
     }
 }

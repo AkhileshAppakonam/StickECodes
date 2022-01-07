@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Auth;
 use App\Codes;
 use App\Pages;
 use App\SecurityProfiles;
+use App\SecurityProfilesUsers;
 use App\User;
 use App\PageFiles;
 use App\PageUrls;
@@ -97,7 +99,7 @@ class CodesController extends Controller
         $userName = str_replace(' ', '', $userName);
 
         $code = Codes::where('code_name', $codeName)->get()->first();
-
+        
         try {
             return view('QRCodePages.'.$userName.$codeName)->with('code', $code);
         } catch (\Throwable $th) {
@@ -107,10 +109,11 @@ class CodesController extends Controller
 
     public function showEditPage(Codes $code)
     {
-        $this->authorize('editPage', $code);
+        if (!(Gate::allows('editPage', $code) || Gate::allows('viewAndUpdate', $code))) {
+            abort(403, 'Unauthorized action.');
+        }
 
-        $authId = auth()->user()->id;
-        $securityProfiles = auth()->user()->securityProfiles;
+        $securityProfiles = $code->user->securityProfiles;
 
         // echo $code;
         // echo "<br>";
@@ -133,7 +136,9 @@ class CodesController extends Controller
 
     public function edit(Request $request, Codes $code, $pageId)
     {
-        $this->authorize('editPage', $code);
+        if (!(Gate::allows('editPage', $code) || Gate::allows('viewAndUpdate', $code))) {
+            abort(403, 'Unauthorized action.');
+        }
 
         $validated = $request->validate([
             'codeTitle' => 'required',
@@ -345,7 +350,11 @@ class CodesController extends Controller
         $page->page_title = $request->input('pageTitle');
         $page->save();
 
-        return redirect('/dashboard')->with('success', $code->code_name.': Code Updated Successfully');
+        if (Gate::allows('editPage', $code)) {
+            return redirect('/dashboard')->with('success', $code->code_name.': Code Updated Successfully');
+        } elseif (Gate::allows('viewAndUpdate', $code)) {
+            return redirect('/pages/'.$code -> user -> name.'/'.$code -> code_name)->with('success', $code->code_name.': Code Updated Successfully');
+        }
     }
 
     public function viewFile(PageFiles $file)

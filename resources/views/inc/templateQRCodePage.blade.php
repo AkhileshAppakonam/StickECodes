@@ -5,10 +5,12 @@
         <div class="container">
             <header class="mb-5">
                 <h1>This is the public page for: {{$code -> code_name}}</h1>
-                @can('editPage', $code)
-                    <a href="#" class="btn btn-primary">Edit Page</a>
-                @endcan
+                @canany(['editPage', 'viewAndUpdate'], $code)
+                    <a href="/public/index.php/codes/{{$code -> id}}/editPage" class="btn btn-primary">Edit Page</a>
+                @endcanany
             </header>
+
+            @include('inc.messages')
 
             <div class="row px-3">
                 @foreach ($code -> pages as $page)
