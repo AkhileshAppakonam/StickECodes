@@ -83,7 +83,7 @@
                                     <tr>
                                         <td><p>{{$pageFile -> created_at}}/p></td>
                                         <td><p>{{$pageFile -> user -> name}}</p></td>
-                                        <td><a class="pl-1" href="/public/index.php/viewPagesFile/{{$pageFile -> entry_description}}/{{$pageFile -> file}}/{{$pageFile -> entry_date}}">{{$pageFile -> entry_description}}</a></td>
+                                        <td><a class="pl-1" href="/public/index.php/viewPagesFile/{{$pageFile -> id}}">{{$pageFile -> entry_description}}</a></td>
                                     </tr>
                                 @endforeach
                             @else

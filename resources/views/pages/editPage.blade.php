@@ -20,16 +20,16 @@
                         <div class="container"> 
                             <div class="form-group row">
                                 <label for="codeTitle" class="col-md-0 col-form-label text-md-right">Code Title</label>
-                                <input id="codeTitle" name="codeTitle" type="text" class="form-control" placeholder="Insert Code Title Here" value="{{$code -> code_title}}" @cannot('fullControl', $code) {{"disabled"}} @endcannot required>
+                                <input id="codeTitle" name="codeTitle" type="text" class="form-control" placeholder="Insert Code Title Here" value="{{$code -> code_title}}" @canany(['fullControl', 'editPage'], $code) @elsecanany(['viewAndUpdate'], $code) {{"disabled"}} @endcanany required>
                             </div>
                             <div class="form-group row">
                                 <label for="pageTitle" class="col-md-0 col-form-label text-md-right">Page Title</label>
-                                <input id="pageTitle" name="pageTitle" type="text" class="form-control" placeholder="Insert Title Description for Public Page Here" value="{{$code -> pages[0] -> page_title}}" @cannot('fullControl', $code) {{"disabled"}} @endcannot required>
+                                <input id="pageTitle" name="pageTitle" type="text" class="form-control" placeholder="Insert Title Description for Public Page Here" value="{{$code -> pages[0] -> page_title}}" @canany(['fullControl', 'editPage'], $code) @elsecanany(['viewAndUpdate'], $code) {{"disabled"}} @endcanany required>
                             </div>
                             <div class="form-group row mb-0">
                                 <div class="container p-0 ml-0">
                                     <label for="chooseSP" class="col-md-0 col-form-label text-md-right">Select a Security Profile</label>
-                                    <select id="chooseSP" name="securityProfile" class="form-control" @cannot('fullControl', $code) {{"disabled"}} @endcannot>
+                                    <select id="chooseSP" name="securityProfile" class="form-control" @canany(['fullControl', 'editPage'], $code) @elsecanany(['viewAndUpdate'], $code) {{"disabled"}} @endcanany>
 
                                         @if (count($securityProfiles) > 0)
                                             @foreach ($securityProfiles as $securityProfile)
@@ -49,7 +49,7 @@
                                     <p class="p-0">OR</p>
                                 </div>
                                 <div class="container p-0 mr-0 makeSP">
-                                    <a href="/public/index.php/securityProfilePage/create" class="btn btn-primary @cannot('fullControl', $code) {{"disabled"}} @endcannot">Make a New Security Profile</a>
+                                    <a href="/public/index.php/securityProfilePage/create/{{$code->id}}" class="btn btn-primary @canany(['fullControl', 'editPage'], $code) @elsecanany(['viewAndUpdate'], $code) {{"disabled"}} @endcanany">Make a New Security Profile</a>
                                 </div>
                             </div>
                         </div>

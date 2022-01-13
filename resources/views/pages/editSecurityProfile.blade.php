@@ -2,11 +2,11 @@
 
 @section('content')
     <section id="editSecurityProfile">
-        <form id="editSecurityProfileForm" name="editSecurityProfileForm" enctype="multipart/form-data" action="/public/index.php/securityProfilePage/{{$securityProfile -> id}}/editSecurityProfile" method="POST">
+        <form id="editSecurityProfileForm" name="editSecurityProfileForm" enctype="multipart/form-data" action="/public/index.php/securityProfilePage/{{$securityProfile -> id}}/editSecurityProfile/{{$code -> id ?? ''}}" method="POST">
             @csrf
 
             <div class="container">
-                <header class="mb-4"><h1>{{$headerType?? "Edit Security Profile"}}</h1></header>
+                <header class="mb-4"><h1>{{$headerType ?? "Edit Security Profile"}}</h1></header>
 
                 @include('inc.messages')
 

@@ -359,8 +359,6 @@ class CodesController extends Controller
 
     public function viewFile(PageFiles $file)
     {  
-        $this->authorize('viewPageFile', $file);
-        
         return view('pages.viewFile')->with('file', $file);
     }
 
