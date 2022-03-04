@@ -30,7 +30,7 @@ features. Present in all stages of software development cycle from design and te
 CONFIGURATION - Application
 -------------
 
-1. Navigate to http://ec2-54-219-144-210.us-west-1.compute.amazonaws.com in any browser to land on the home page of the SecuritEcodes program
+1. Navigate to http://ec2-54-176-144-89.us-west-1.compute.amazonaws.com in any browser to land on the home page of the SecuritEcodes program
 2. Create an account by signing up and entering a unique username and password
 3. Generate dynamic QR Codes on dahsboard:
 	- Save Texts, Urls, and files to code page
