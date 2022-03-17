@@ -33,6 +33,7 @@ Route::get('/securityProfilePage/create/{code?}', 'SecurityProfilesController@cr
 
 // Form Requests
 Route::post('/codes/{code}/{pageId}/editPage', 'CodesController@edit');
+Route::post('/codes/delete', 'CodesController@delete');
 Route::post('/securityProfilePage/{secProfile}/editSecurityProfile/{code?}', 'SecurityProfilesController@edit');
 Route::post('/securityProfiles/deleteSecurityProfile', 'SecurityProfilesController@delete');
 Route::post('/codes/lookUp', 'CodesController@codeLookUp')->withoutMiddleware(['auth']);

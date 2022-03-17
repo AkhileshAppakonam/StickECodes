@@ -2,7 +2,7 @@
 
 @section('content')
     <section id="dashboard">
-        <form id="dashboardForm" name="dashboardForm" enctype="multipart/form-data" action="" method="POST">
+        <form id="dashboardForm" name="dashboardForm" enctype="multipart/form-data" action="/public/index.php/codes/delete" method="POST">
             @csrf
 
             <div class="container">

@@ -63,73 +63,75 @@ class SecurityProfilesController extends Controller
         return view('pages.editSecurityProfile')->with(['securityProfile'=>$securityProfile, 'headerType'=>"New Security Profile", 'code'=>$code]);
     }
 
-    // public function create(Request $request)
-    // {
-    //     $validated = $request->validate([
-    //         'securityProfileName' => 'required',
-    //         'profileType' => 'nullable|string',
-    //         'userCount' => 'required'
-    //     ]);
+/* ------- NOT IN USE -------
+    public function create(Request $request)
+    {
+        $validated = $request->validate([
+            'securityProfileName' => 'required',
+            'profileType' => 'nullable|string',
+            'userCount' => 'required'
+        ]);
 
-    //     $userCount = $request->input('userCount');
+        $userCount = $request->input('userCount');
 
-    //     echo $userCount;
-    //     echo "<br>";
+        echo $userCount;
+        echo "<br>";
 
-    //     // Check optional filled to make profile public
-    //     if (!$request->has('profileType')) {
-    //         $profileType = 'priv';
-    //     } else {
-    //         $profileType = $request->input('profileType');
-    //     }
+        // Check optional filled to make profile public
+        if (!$request->has('profileType')) {
+            $profileType = 'priv';
+        } else {
+            $profileType = $request->input('profileType');
+        }
 
-    //     echo $profileType;
-    //     echo "<br>";
+        echo $profileType;
+        echo "<br>";
 
         
 
-    //     for ($i=0; $i <= $userCount ; $i++) { 
-    //         if ($request->filled('addUserEmail'.$i) || $request->filled('addUserName'.$i)) {
-    //             $request->validate([
-    //                 'addUserEmail'.$i => 'required|email',
-    //                 'addUserName'.$i => 'required',
-    //                 'addUserPermissions'.$i => 'required'
-    //             ],
-    //             [
-    //                 'addUserEmail'.$i.'.required' => 'An Email is Required on Row '.($i+1),
-    //                 'addUserEmail'.$i.'.email' => 'Please Enter a Valid Email on Row '.($i+1),
-    //                 'addUserName'.$i.'.required' => 'A Name is Required on Row '.($i+1),
-    //                 'addUserPermissions'.$i.'.required' => 'Please Select Appropriate Permissions on Row '.($i+1)
-    //             ]);
+        for ($i=0; $i <= $userCount ; $i++) { 
+            if ($request->filled('addUserEmail'.$i) || $request->filled('addUserName'.$i)) {
+                $request->validate([
+                    'addUserEmail'.$i => 'required|email',
+                    'addUserName'.$i => 'required',
+                    'addUserPermissions'.$i => 'required'
+                ],
+                [
+                    'addUserEmail'.$i.'.required' => 'An Email is Required on Row '.($i+1),
+                    'addUserEmail'.$i.'.email' => 'Please Enter a Valid Email on Row '.($i+1),
+                    'addUserName'.$i.'.required' => 'A Name is Required on Row '.($i+1),
+                    'addUserPermissions'.$i.'.required' => 'Please Select Appropriate Permissions on Row '.($i+1)
+                ]);
 
-    //             if ($request->input('addUserPermissions'.$i) == "view") {
-    //                 $permissions = 1;
-    //             } elseif ($request->input('addUserPermissions'.$i) == "update") {
-    //                 $permissions = 2;
-    //             } elseif ($request->input('addUserPermissions'.$i) == "full") {
-    //                 $permissions = 3;
-    //             }
+                if ($request->input('addUserPermissions'.$i) == "view") {
+                    $permissions = 1;
+                } elseif ($request->input('addUserPermissions'.$i) == "update") {
+                    $permissions = 2;
+                } elseif ($request->input('addUserPermissions'.$i) == "full") {
+                    $permissions = 3;
+                }
 
-    //             try {
-    //                 $SPUserId = User::where([
-    //                                 'email' => $request->input('addUserEmail'.$i), 
-    //                                 'name' => $request->input('addUserName'.$i) 
-    //                             ])->first('id')->id;
-    //             } catch (\Throwable $th) {
-    //                 return redirect('/securityProfilePage/'.$secProfileId.'/editSecurityProfile')->with('error', $request->input('addUserName'.$i).' is not a registered user');
-    //             }
+                try {
+                    $SPUserId = User::where([
+                                    'email' => $request->input('addUserEmail'.$i), 
+                                    'name' => $request->input('addUserName'.$i) 
+                                ])->first('id')->id;
+                } catch (\Throwable $th) {
+                    return redirect('/securityProfilePage/'.$secProfileId.'/editSecurityProfile')->with('error', $request->input('addUserName'.$i).' is not a registered user');
+                }
 
-    //             $securityProfileUsers = new SecurityProfileUsers;
-    //             $securityProfileUsers->created_at = NOW();
-    //             $securityProfileUsers->updated_at = NOW();
-    //             $securityProfileUsers->security_profile_id = $secProfileId;
-    //             $securityProfileUsers->user_id = $SPUserId;
-    //             $securityProfileUsers->invitee_id = 0;
-    //             $securityProfileUsers->permissions = $permissions;
-    //             $securityProfileUsers->save();
-    //         }   
-    //     }
-    // }
+                $securityProfileUsers = new SecurityProfileUsers;
+                $securityProfileUsers->created_at = NOW();
+                $securityProfileUsers->updated_at = NOW();
+                $securityProfileUsers->security_profile_id = $secProfileId;
+                $securityProfileUsers->user_id = $SPUserId;
+                $securityProfileUsers->invitee_id = 0;
+                $securityProfileUsers->permissions = $permissions;
+                $securityProfileUsers->save();
+            }   
+        }
+    }
+------- NOT IN USE ------- */
 
     public function edit(Request $request, SecurityProfiles $secProfile, Codes $code = Null)
     {

@@ -81,7 +81,7 @@
                             @if (count($page -> page_files) > 0)
                                 @foreach ($page -> page_files as $pageFile)
                                     <tr>
-                                        <td><p>{{$pageFile -> created_at}}/p></td>
+                                        <td><p>{{$pageFile -> created_at}}</p></td>
                                         <td><p>{{$pageFile -> user -> name}}</p></td>
                                         <td><a class="pl-1" href="/public/index.php/viewPagesFile/{{$pageFile -> id}}">{{$pageFile -> entry_description}}</a></td>
                                     </tr>

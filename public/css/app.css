@@ -11389,7 +11389,6 @@ a.text-dark:focus {
   position: relative;
   display: table;
   width: 100%;
-  border: 2px solid blue;
 }
 
 #securityProfiles table tr {
@@ -11397,13 +11396,8 @@ a.text-dark:focus {
   display: flex;
   width: 100%;
   height: auto;
-  border: 2px solid green;
   padding: 1rem 0;
   counter-increment: row-num;
-}
-
-#securityProfiles table tr td:first-child::before {
-  content: counter(row-num) ". ";
 }
 
 #securityProfiles table tr td {
@@ -11411,8 +11405,12 @@ a.text-dark:focus {
   display: inline-block;
   width: 50%;
   height: auto;
-  border: 2px solid red;
   text-align: center;
+}
+
+#securityProfiles table tr td:first-child::before {
+  text-align: left;
+  content: counter(row-num) ". ";
 }
 
 #securityProfiles .noSecProfiles p {

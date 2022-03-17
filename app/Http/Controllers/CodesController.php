@@ -82,7 +82,7 @@ class CodesController extends Controller
         $page->save();
 
 
-        $qrcode = (new QRCode($options))->render('http://54.219.144.210/public/index.php/pages/'.$key);
+        $qrcode = (new QRCode($options))->render('http://54.176.144.89/public/index.php/pages/'.$key);
 
         $file = fopen(resource_path('views/QRCodePages/'.$authName.$codeName.'.blade.php' ), 'w' ) or die("Unable to Create Page!");
         $txt = "@include('inc.templateQRCodePage')";
@@ -375,5 +375,50 @@ class CodesController extends Controller
         } catch (\Throwable $th) {
             return redirect('/codes/lookUp')->with('error', $request->input('codeName').': This code does not exist');
         }
+    }
+
+    public function delete(Request $request)
+    {
+        $request->validate([
+            'delete' => 'required'
+        ]);
+
+        $authName = auth()->user()->name;
+        $authName = str_replace(' ', '', $authName);
+
+        $code = Codes::find($request->input('delete'));
+        $codeName = $code->code_name;
+
+        // Code Deletion and all its contents
+        foreach ($code->pages as $page) {
+            foreach ($page->page_texts as $pageTexts) {
+                $pageTexts->delete();
+            }
+
+            foreach ($page->page_urls as $pageUrls) {
+                $pageUrls->delete();
+            }
+
+            foreach ($page->page_files as $pageFiles) {
+                $pageFiles->delete();
+            }
+
+            $page->delete();
+        }
+
+        $code->delete();
+
+        // File Deletion within Server
+        if(\File::exists(resource_path('views/QRCodePages/'.$authName.$codeName.'.blade.php'))){
+            echo $authName.$codeName;
+            \File::delete(resource_path('views/QRCodePages/'.$authName.$codeName.'.blade.php'));
+        }
+
+        if(\File::exists(resource_path('views/QRCodeImageData/'.$codeName.'.png'))){
+            echo $codeName;
+            \File::delete(resource_path('views/QRCodeImageData/'.$codeName.'.png'));
+        }
+
+        return redirect('/dashboard')->with('success', $codeName.': Code Deleted Successfully');
     }
 }
