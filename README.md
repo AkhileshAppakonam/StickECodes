@@ -1,61 +1,55 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+SECURIT-E-CODES PROGRAM
 
-## About Laravel
+StickEcodes Inc.
+	Full Stack Software Development and Operations Intern
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+INTRODUCTION
+------------
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Dynamic QR code program enabling StickEcodes to utilize the patented features of multi-layer information transfer, geo-location access and
+response, security enhancements, and enhanced features of the StickEcodes program. Current client opportunities include medical test tracking,
+remembrance of fallen Veterans/first responders, and property documentation for insurance purposes.
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+REQUIREMENTS
+------------
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Chrome
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+CONTRIBUTIONS
+-------------
 
-### Premium Partners
+Created client and server-side application of the SecuritEcodes program and wrote all code in its entirety including structuring database backend and designing 
+front-end user interface using PHP Laravel framework. Developed, designed, and tested features that enable StickEcodes to utilize patented
+features. Present in all stages of software development cycle from design and testing to deployment and maintenance.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
 
-## Contributing
+CONFIGURATION - Application
+-------------
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. Navigate to http://ec2-54-176-144-89.us-west-1.compute.amazonaws.com in any browser to land on the home page of the SecuritEcodes program
+2. Create an account by signing up and entering a unique username and password
+3. Generate dynamic QR Codes on dahsboard:
+	- Save Texts, Urls, and files to code page
+	- Create one or more levels of security by adding a Security Profile to the newly created code
+	- Set user permissions and accessibility to specific or multiple code pages
 
-## Code of Conduct
+CONFIGURATION - Laravel Framework
+-------------
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+MVC (Model-View-Controller) Method
+	- Controller Files: 	\app\Http\Controllers
+	- Policy Files:     	\app\Policies
+	- Model Files:	    	\app
+	- Migration Files:  	\database\migrations
+	- Laravel Blade Files:  \resources\views\inc
+				\resources\views\layouts
+				\resources\views\pages
+				\resources\views\QRCodesPages
+	- Laravel Assests: 	\resources\sass
+	- Routes: 		\routes\web.php
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
