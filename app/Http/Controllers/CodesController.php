@@ -115,7 +115,8 @@ class CodesController extends Controller
 
         $securityProfiles = $code->user->securityProfiles;
 
-        // echo $code;
+        // echo $code->pages;
+        // echo "<br>";
         // echo "<br>";
 
         // foreach ($code->pages as $page) {
@@ -125,7 +126,15 @@ class CodesController extends Controller
         //     echo "<br>";
         //     echo $page->page_texts;
         //     echo "<br>";
+
+        //     foreach ($page->page_texts as $pageText) {
+        //         echo $pageText;
+        //         echo "<br>";
+        //     }
         // }
+
+        // echo "<br>";
+        // echo "<br>";
 
         $pageFiles = Pages::with('page_files')->where('code_id', $code->id)->get();
         $pageURLs = Pages::with('page_urls')->where('code_id', $code->id)->get();

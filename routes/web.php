@@ -31,6 +31,8 @@ Route::get('/securityProfilePage', 'SecurityProfilesController@index');
 Route::get('/securityProfilePage/{secProfile}/editSecurityProfile/{code?}', 'SecurityProfilesController@show');
 Route::get('/securityProfilePage/create/{code?}', 'SecurityProfilesController@create');
 
+Route::get('/codes/{code}/createPage', 'PagesController@create');
+
 // Form Requests
 Route::post('/codes/{code}/{pageId}/editPage', 'CodesController@edit');
 Route::post('/codes/delete', 'CodesController@delete');
