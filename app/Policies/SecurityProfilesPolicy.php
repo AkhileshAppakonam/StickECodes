@@ -6,6 +6,7 @@ use Auth;
 use App\User;
 use App\SecurityProfiles;
 use App\Codes;
+use App\Pages;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class SecurityProfilesPolicy
@@ -35,18 +36,5 @@ class SecurityProfilesPolicy
     public function delete(User $user, SecurityProfiles $securityProfile)
     {
         return $user->id === $securityProfile->user_id;
-    }
-
-    public function editSubs(User $user, Codes $code)
-    {
-        foreach ($code->securityProfiles as $securityProfile) {
-            foreach ($securityProfile->security_profile_users as $securityProfileUser) {
-                if ($user->id === $securityProfileUser->user_id && $securityProfileUser->permissions > 2) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
     }
 }

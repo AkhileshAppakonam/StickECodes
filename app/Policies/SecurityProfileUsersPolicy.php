@@ -7,6 +7,7 @@ use App\Codes;
 use App\User;
 use App\SecurityProfileUsers;
 use App\SecurityProfiles;
+Use App\Pages;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class SecurityProfileUsersPolicy
@@ -34,16 +35,69 @@ class SecurityProfileUsersPolicy
         return false;
     }
 
-    public function editPage(User $user, Codes $code)
+    // public function fullControl(User $user, Codes $code)
+    // {
+    //     foreach ($code->securityProfiles as $securityProfile) {
+    //         foreach ($securityProfile->security_profile_users as $securityProfileUser) {
+    //             if ($user->id === $securityProfileUser->user_id && $securityProfileUser->permissions > 2) {
+    //                 return true;
+    //             }
+    //         }
+    //     }
+
+    //     return false;
+    // }
+
+    // public function viewAndUpdate(User $user, Codes $code)
+    // {
+    //     foreach ($code->securityProfiles as $securityProfile) {
+    //         foreach ($securityProfile->security_profile_users as $securityProfileUser) {
+    //             if ($user->id === $securityProfileUser->user_id && $securityProfileUser->permissions > 1) {
+    //                 return true;
+    //             }
+    //         }
+    //     }
+
+    //     return false;
+    // }
+
+    // public function viewOnly(User $user, Codes $code)
+    // {
+    //     foreach ($code->securityProfiles as $securityProfile) {
+    //         foreach ($securityProfile->security_profile_users as $securityProfileUser) {
+    //             if ($user->id === $securityProfileUser->user_id && $securityProfileUser->permissions > 0) {
+    //                 return true;
+    //             }
+    //         }
+    //     }
+
+    //     return false;
+    // }
+
+    public function viewOnly(User $user, Pages $page)
     {
-        foreach ($code->securityProfiles as $securityProfile) {
-            foreach ($securityProfile->security_profile_users as $securityProfileUser) {
-                if ($user->id === $securityProfileUser->user_id && $securityProfileUser->permissions > 1) {
-                    return true;
-                }
+        foreach ($page->security_profile->security_profile_users as $securityProfileUser) {
+            if ($user->id === $securityProfileUser->user_id && $securityProfileUser->permissions > 0) {
+                return true;
             }
         }
+    }
 
-        return false;
+    public function viewAndUpdate(User $user, Pages $page)
+    {
+        foreach ($page->security_profile->security_profile_users as $securityProfileUser) {
+            if ($user->id === $securityProfileUser->user_id && $securityProfileUser->permissions > 1) {
+                return true;
+            }
+        }
+    }
+
+    public function fullControl(User $user, Pages $page)
+    {
+        foreach ($page->security_profile->security_profile_users as $securityProfileUser) {
+            if ($user->id === $securityProfileUser->user_id && $securityProfileUser->permissions > 2) {
+                return true;
+            }
+        }
     }
 }

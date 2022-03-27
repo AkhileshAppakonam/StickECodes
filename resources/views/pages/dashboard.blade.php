@@ -36,7 +36,7 @@
                                         <div class="container">
                                             <a href="/public/index.php/pages/{{$user -> name}}/{{$code -> code_name}}"><i class="fas fa-eye"></i></a>
 
-                                            @can('editPage', $code)
+                                            @can('masterUser', $code)
                                                 <a href="/public/index.php/codes/{{$code -> id}}/editPage"><i class="fas fa-edit"></i></a>
                                             @endcan
                                             

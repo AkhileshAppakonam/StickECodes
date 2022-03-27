@@ -109,7 +109,7 @@ class CodesController extends Controller
 
     public function showEditPage(Codes $code)
     {
-        if (!(Gate::allows('editPage', $code) || Gate::allows('viewAndUpdate', $code))) {
+        if (!(Gate::allows('masterUser', $code) || Gate::allows('editCode', $code))) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -145,7 +145,7 @@ class CodesController extends Controller
 
     public function edit(Request $request, Codes $code, $pageId)
     {
-        if (!(Gate::allows('editPage', $code) || Gate::allows('viewAndUpdate', $code))) {
+        if (!(Gate::allows('masterUser', $code) || Gate::allows('editCode', $code))) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -359,9 +359,9 @@ class CodesController extends Controller
         $page->page_title = $request->input('pageTitle');
         $page->save();
 
-        if (Gate::allows('editPage', $code)) {
+        if (Gate::allows('masterUser', $code)) {
             return redirect('/dashboard')->with('success', $code->code_name.': Code Updated Successfully');
-        } elseif (Gate::allows('viewAndUpdate', $code)) {
+        } elseif (Gate::allows('editCode', $code)) {
             return redirect('/pages/'.$code -> user -> name.'/'.$code -> code_name)->with('success', $code->code_name.': Code Updated Successfully');
         }
     }
