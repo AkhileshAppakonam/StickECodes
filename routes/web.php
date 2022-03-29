@@ -25,7 +25,7 @@ Route::get('/codes/lookUp', 'PagesController@codeLookUpView');
 Route::get('/codes/{code}/editPage', 'CodesController@showEditPage');
 Route::get('/viewPagesFile/{file}', 'CodesController@viewFile')->withoutMiddleware(['auth']);
 Route::get('/createCode','CodesController@create'); // Generating User QR Code Pages
-Route::get('/pages/{userName}/{codeName}', 'CodesController@showPublicQRCodePage'); // Showing Public QR Code Pages
+Route::get('/pages/{userName}/{codeName}', 'CodesController@showPublicQRCodePage')->withoutMiddleware(['auth']); // Showing Public QR Code Pages
 
 Route::get('/securityProfilePage', 'SecurityProfilesController@index');
 Route::get('/securityProfilePage/{secProfile}/editSecurityProfile/{code?}', 'SecurityProfilesController@show');

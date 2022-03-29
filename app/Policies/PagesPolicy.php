@@ -21,7 +21,7 @@ class PagesPolicy
         //
     }
 
-    public function publicSP(User $user, Pages $page)
+    public function publicSP(?User $user, Pages $page)
     {
         return $page->security_profile->profile_type == "gpub";
     }

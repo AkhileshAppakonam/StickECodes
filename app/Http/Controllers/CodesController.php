@@ -140,7 +140,7 @@ class CodesController extends Controller
         $pageURLs = Pages::with('page_urls')->where('code_id', $code->id)->get();
         $pageTexts = Pages::with('page_texts')->where('code_id', $code->id)->get();
 
-        return view('pages.editPage')->with(['code'=>$code, 'securityProfiles'=>$securityProfiles, 'pageFiles'=>$pageFiles, 'pageURLs'=>$pageURLs, 'pageTexts'=>$pageTexts]);
+        return view('pages.editPage')->with(['code'=>$code, 'securityProfiles'=>$securityProfiles]);
     }
 
     public function edit(Request $request, Codes $code, $pageId)

@@ -35,68 +35,35 @@ class SecurityProfileUsersPolicy
         return false;
     }
 
-    // public function fullControl(User $user, Codes $code)
-    // {
-    //     foreach ($code->securityProfiles as $securityProfile) {
-    //         foreach ($securityProfile->security_profile_users as $securityProfileUser) {
-    //             if ($user->id === $securityProfileUser->user_id && $securityProfileUser->permissions > 2) {
-    //                 return true;
-    //             }
-    //         }
-    //     }
-
-    //     return false;
-    // }
-
-    // public function viewAndUpdate(User $user, Codes $code)
-    // {
-    //     foreach ($code->securityProfiles as $securityProfile) {
-    //         foreach ($securityProfile->security_profile_users as $securityProfileUser) {
-    //             if ($user->id === $securityProfileUser->user_id && $securityProfileUser->permissions > 1) {
-    //                 return true;
-    //             }
-    //         }
-    //     }
-
-    //     return false;
-    // }
-
-    // public function viewOnly(User $user, Codes $code)
-    // {
-    //     foreach ($code->securityProfiles as $securityProfile) {
-    //         foreach ($securityProfile->security_profile_users as $securityProfileUser) {
-    //             if ($user->id === $securityProfileUser->user_id && $securityProfileUser->permissions > 0) {
-    //                 return true;
-    //             }
-    //         }
-    //     }
-
-    //     return false;
-    // }
-
     public function viewOnly(User $user, Pages $page)
     {
-        foreach ($page->security_profile->security_profile_users as $securityProfileUser) {
-            if ($user->id === $securityProfileUser->user_id && $securityProfileUser->permissions > 0) {
-                return true;
+        if ($page->security_profile_id != Null) {
+            foreach ($page->security_profile->security_profile_users as $securityProfileUser) {
+                if ($user->id === $securityProfileUser->user_id && $securityProfileUser->permissions > 0) {
+                    return true;
+                }
             }
         }
     }
 
     public function viewAndUpdate(User $user, Pages $page)
     {
-        foreach ($page->security_profile->security_profile_users as $securityProfileUser) {
-            if ($user->id === $securityProfileUser->user_id && $securityProfileUser->permissions > 1) {
-                return true;
+        if ($page->security_profile_id != Null) {
+            foreach ($page->security_profile->security_profile_users as $securityProfileUser) {
+                if ($user->id === $securityProfileUser->user_id && $securityProfileUser->permissions > 1) {
+                    return true;
+                }
             }
         }
     }
 
     public function fullControl(User $user, Pages $page)
     {
-        foreach ($page->security_profile->security_profile_users as $securityProfileUser) {
-            if ($user->id === $securityProfileUser->user_id && $securityProfileUser->permissions > 2) {
-                return true;
+        if ($page->security_profile_id != Null) {
+            foreach ($page->security_profile->security_profile_users as $securityProfileUser) {
+                if ($user->id === $securityProfileUser->user_id && $securityProfileUser->permissions > 2) {
+                    return true;
+                }
             }
         }
     }
