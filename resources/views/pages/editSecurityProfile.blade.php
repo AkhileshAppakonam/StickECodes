@@ -2,7 +2,7 @@
 
 @section('content')
     <section id="editSecurityProfile">
-        <form id="editSecurityProfileForm" name="editSecurityProfileForm" enctype="multipart/form-data" action="/public/index.php/securityProfilePage/{{$securityProfile -> id}}/editSecurityProfile/{{$code -> id ?? ''}}" method="POST">
+        <form id="editSecurityProfileForm" name="editSecurityProfileForm" enctype="multipart/form-data" action="/public/index.php/securityProfilePage/{{$securityProfile -> id}}/editSecurityProfile/{{$page -> id ?? ''}}" method="POST">
             @csrf
 
             <div class="container">

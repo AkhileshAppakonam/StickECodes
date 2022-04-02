@@ -29,25 +29,25 @@ class SecurityProfilesController extends Controller
         return view('pages.securityProfile')->with('user', Auth::user());
     }
 
-    public function show(SecurityProfiles $secProfile, Codes $code = Null)
+    public function show(SecurityProfiles $secProfile, Pages $page = Null)
     {
         try {
-            if (!(Gate::allows('editSecurityProfile', $secProfile) || Gate::allows('fullControl', $code))) {
+            if (!(Gate::allows('editSecurityProfile', $secProfile) || Gate::allows('fullControl', $page))) {
                 abort(403, 'Unauthorized action.');
             }
         } catch (\Throwable $th) {
             abort(403, 'Not Found.');
         }
 
-        return view('pages.editSecurityProfile')->with(['securityProfile'=>$secProfile, 'code'=>$code]);
+        return view('pages.editSecurityProfile')->with(['securityProfile'=>$secProfile, 'page'=>$page]);
     }
 
-    public function create(Codes $code = Null) 
+    public function create(Pages $page = Null) 
     {
         $this->authorize('createSecurityProfile', SecurityProfiles::class);
 
-        if ($code != NULL) {
-            $id = $code->user->id; // If SP user is creating a new profile
+        if ($page != NULL) {
+            $id = $page->code->user->id; // If SP user is creating a new profile
         } else {
             $id = Auth::user()->id; // Master user is creating a new profile
         }
@@ -60,7 +60,7 @@ class SecurityProfilesController extends Controller
         $securityProfile->user_id = $id;
         $securityProfile->save();
 
-        return view('pages.editSecurityProfile')->with(['securityProfile'=>$securityProfile, 'headerType'=>"New Security Profile", 'code'=>$code]);
+        return view('pages.editSecurityProfile')->with(['securityProfile'=>$securityProfile, 'headerType'=>"New Security Profile", 'page'=>$page]);
     }
 
 /* ------- NOT IN USE -------
@@ -133,9 +133,9 @@ class SecurityProfilesController extends Controller
     }
 ------- NOT IN USE ------- */
 
-    public function edit(Request $request, SecurityProfiles $secProfile, Codes $code = Null)
+    public function edit(Request $request, SecurityProfiles $secProfile, Pages $page = Null)
     {
-        if (!(Gate::allows('editSecurityProfile', $secProfile) || Gate::allows('fullControl', $code))) {
+        if (!(Gate::allows('editSecurityProfile', $secProfile) || Gate::allows('fullControl', $page))) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -144,10 +144,16 @@ class SecurityProfilesController extends Controller
             'profileType' => 'nullable|string',
             'userCount' => 'required'
         ]);
-
+        
         $userCount = $request->input('userCount');
         $DBspUsersCount = $request->input('DBspUsersCount');
         $DBspUsersCountRemaining = $request->input('DBspUsersCountRemaining');
+
+        if ($page != Null) {
+            $pageId = $page->id;
+        } else {
+            $pageId = Null;
+        }
 
         // echo "Total: ".$userCount;
         // echo "<br>";
@@ -163,6 +169,11 @@ class SecurityProfilesController extends Controller
         } else {
             $profileType = $request->input('profileType');
         }
+
+        $secProfile->updated_at = NOW();
+        $secProfile->profile_type = $profileType;
+        $secProfile->profile_name = $request->input('securityProfileName');
+        $secProfile->save();
         
         // echo $request->input('securityProfileName');
         // echo "<br>";
@@ -195,9 +206,9 @@ class SecurityProfilesController extends Controller
                 $secProfile = SecurityProfiles::find($secProfile->id);
 
                 if ($SPUser == NULL) {
-                    return redirect('/securityProfilePage/'.$secProfile -> id.'/editSecurityProfile/'.$code->id)->with('error', $request->input('addUserName'.$i).' is not a registered user. Please make sure you have provided the right combination of the name and email fileds');
+                    return redirect('/securityProfilePage/'.$secProfile -> id.'/editSecurityProfile/'.$pageId)->with('error', $request->input('addUserName'.$i).' is not a registered user. Please make sure you have provided the right combination of the name and email fileds');
                 } elseif ($SPUser->can('checkDuplicateUser', $secProfile->security_profile_users)) {
-                    return redirect('/securityProfilePage/'.$secProfile -> id.'/editSecurityProfile/'.$code->id)->with('error', $request->input('addUserName'.$i).' is already added to this security profile');
+                    return redirect('/securityProfilePage/'.$secProfile -> id.'/editSecurityProfile/'.$pageId)->with('error', $request->input('addUserName'.$i).' is already added to this security profile');
                 } else {
 
                     if ($request->input('addUserPermissions'.$i) == "view") {
@@ -307,11 +318,6 @@ class SecurityProfilesController extends Controller
                 $securityProfileUsers = SecurityProfileUsers::find($request->input('securityProfileUserId'.$j))->delete();
             }
         }
-
-        $secProfile->updated_at = NOW();
-        $secProfile->profile_type = $profileType;
-        $secProfile->profile_name = $request->input('securityProfileName');
-        $secProfile->save();
 
         if (Auth::user()->cant('editSecurityProfile', $secProfile)) {
             return redirect('/codes/'.$code->id.'/editPage')->with('success', $secProfile->profile_name.': Security Profile Added Successfully');

@@ -52,7 +52,7 @@
                                             <p class="p-0">OR</p>
                                         </div>
                                         <div class="container p-0 mr-0 makeSP">
-                                            <a href="/public/index.php/securityProfilePage/create/{{$code->id}}" class="btn btn-primary @canany(['fullControl', 'masterUserPage'], $page) @elsecanany(['viewAndUpdate'], $page) {{"disabled"}} @endcanany">Make a New Security Profile</a>
+                                            <a href="/public/index.php/securityProfilePage/create/{{$page->id}}" class="btn btn-primary @canany(['fullControl', 'masterUserPage'], $page) @elsecanany(['viewAndUpdate'], $page) {{"disabled"}} @endcanany">Make a New Security Profile</a>
                                         </div>
                                     </div>
                                 </div>
@@ -261,6 +261,12 @@
                     </div>
                 </form>
             @endcanany
+
+            {{-- @can('fullControl', $page)
+                <div>
+                    <a href="/public/index.php/codes/{{$code->id}}/createPage">Add a Page</a>
+                </div>
+            @endcan --}}
         @endforeach
 
         @can('masterUser', $code)

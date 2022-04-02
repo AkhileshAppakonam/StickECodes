@@ -28,15 +28,15 @@ Route::get('/createCode','CodesController@create'); // Generating User QR Code P
 Route::get('/pages/{userName}/{codeName}', 'CodesController@showPublicQRCodePage')->withoutMiddleware(['auth']); // Showing Public QR Code Pages
 
 Route::get('/securityProfilePage', 'SecurityProfilesController@index');
-Route::get('/securityProfilePage/{secProfile}/editSecurityProfile/{code?}', 'SecurityProfilesController@show');
-Route::get('/securityProfilePage/create/{code?}', 'SecurityProfilesController@create');
+Route::get('/securityProfilePage/{secProfile}/editSecurityProfile/{page?}', 'SecurityProfilesController@show');
+Route::get('/securityProfilePage/create/{page?}', 'SecurityProfilesController@create');
 
 Route::get('/codes/{code}/createPage', 'PagesController@create');
 
 // Form Requests
 Route::post('/codes/{code}/{pageId}/editPage', 'CodesController@edit');
 Route::post('/codes/delete', 'CodesController@delete');
-Route::post('/securityProfilePage/{secProfile}/editSecurityProfile/{code?}', 'SecurityProfilesController@edit');
+Route::post('/securityProfilePage/{secProfile}/editSecurityProfile/{page?}', 'SecurityProfilesController@edit');
 Route::post('/securityProfiles/deleteSecurityProfile', 'SecurityProfilesController@delete');
 Route::post('/codes/lookUp', 'CodesController@codeLookUp')->withoutMiddleware(['auth']);
 

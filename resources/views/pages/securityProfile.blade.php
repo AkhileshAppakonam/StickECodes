@@ -22,7 +22,7 @@
                                     <div class="container p-4" onclick="securityProfileHeader(this)">
                                         <h3>{{$securityProfile -> profile_name}}:</h3>
                                         @if (($count = $securityProfile->codes->count()) > 0)
-                                            <p>{{$count}} Linked @if ($count>1) {{"Codes"}} @else {{"Code"}} @endif with {{$securityProfile->security_profile_users->count()}} User Permissions</p>
+                                            <p>{{$count}} Linked @if ($count > 1) {{"Codes"}} @else {{"Code"}} @endif with {{$securityProfile->security_profile_users->count()}} User Permissions</p>
                                         @else
                                             <p>No Codes Currently Linked</p>
                                         @endif
