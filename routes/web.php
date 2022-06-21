@@ -33,6 +33,9 @@ Route::get('/securityProfilePage/create/{page?}', 'SecurityProfilesController@cr
 
 Route::get('/codes/{code}/createPage', 'PagesController@create');
 
+Route::get('/keys', 'KeysController@show');
+Route::get('/keys/create', 'KeysController@create');
+
 // Form Requests
 Route::post('/codes/{code}/{pageId}/editPage', 'CodesController@edit');
 Route::post('/codes/delete', 'CodesController@delete');
